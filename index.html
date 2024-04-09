@@ -4,23 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibek joshi potfillo website </title>
+    
     <style>
         *{
             margin: 0;
        padding: 0;     
         }
 body{
-    background-color:rgb(6, 6, 39) ;
-    color: :white;
+    background-color:rgb(10, 10, 52) ;
+    color:rgb(213, 204, 204);
 }
-    </style>
+nav{
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    height: 85px;
+    background-color:rgb(36, 36, 127) ;
+}
+nav ul{
+    display: flex;
+    justify-content:center ;
+}
+nav ul li{
+    list-style: none;
+    margin: 0 23px;
+}
+.left{
+   font-size:1.5rem ; 
+}
+
+.firstSection{
+    display: flex;
+    justify-content: space-around;
+    margin: 80px 0;
+}
+.rightSection > div{
+    width: 80%;  
+}
+.purple{
+   color:rgb(152, 24, 237) ; 
+}
+.leftSection{
+font-size: 3rem;}
+margin:30px 0;
+   </style>
 </head>
 <body>
     <header>
         <nav>
-           <div> class="left"></div>
-           <div> class="right"</div> 
+           <div class="left">Bibek's Portfolio</div>
+           <div class="right">
+            <ul>
+                <li>Home</li>
+                <Li>About</Li>
+                <Li>Servives</Li>
+                <li>Projects</li>
+                <li>Contacts</li>
+            </ul>
+           </div> 
         </nav>
     </header>
+    <main>
+        <section class="firstSection">
+            <div class="leftSection">
+               Hi, My name is <span class="purple">Bibek joshi</span>
+               <div>and I am a Graphic Gesigner</div>
+            </div>
+<div class="rightSection">
+<img src="png.png" alt="">
+        </div>
+        </Section>
+    </main>
 </body>
 </html>

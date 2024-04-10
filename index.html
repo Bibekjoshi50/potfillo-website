@@ -29,6 +29,20 @@ nav ul li{
     list-style: none;
     margin: 0 23px;
 }
+nav ul lia{
+    text-decoration: none;
+    color: rgb(238, 235, 235);
+}
+nav ul li a:hover{
+   color: rgb(153, 153, 226); 
+   font: size 1.04rem; ;
+}
+main hr{
+    border: 0;
+    background: #9c97f1;
+    height: 1.2px;
+    margin: 40px 84px;
+}
 .left{
    font-size:1.5rem ; 
 }
@@ -36,17 +50,22 @@ nav ul li{
 .firstSection{
     display: flex;
     justify-content: space-around;
-    margin: 80px 0;
+    margin: 140px 0;
 }
-.rightSection > div{
+.rightSection > img{
     width: 80%;  
 }
 .purple{
-   color:rgb(152, 24, 237) ; 
-}
+color: rgb(170, 107, 228);}
 .leftSection{
 font-size: 3rem;}
-margin:30px 0;
+#element{
+color: rgb(115, 199, 26);
+}
+.secondsection
+   max-width: 80vw; 
+   margin: auto;
+}
    </style>
 </head>
 <body>
@@ -55,11 +74,11 @@ margin:30px 0;
            <div class="left">Bibek's Portfolio</div>
            <div class="right">
             <ul>
-                <li>Home</li>
-                <Li>About</Li>
-                <Li>Servives</Li>
-                <li>Projects</li>
-                <li>Contacts</li>
+               <a href="/"><li>Home</li></a>
+               <a href="/"><Li>About</Li></a>
+               <a href="/"><Li>Servives</Li></a>
+               <a href="/"><li>Projects</li></a>
+               <a href="/"><li>Contacts</li></a>
             </ul>
            </div> 
         </nav>
@@ -68,12 +87,24 @@ margin:30px 0;
         <section class="firstSection">
             <div class="leftSection">
                Hi, My name is <span class="purple">Bibek joshi</span>
-               <div>and I am a Graphic Gesigner</div>
+               <div>and I am a Graphic Designer</div>
+               <span id="element"></span>
             </div>
 <div class="rightSection">
 <img src="png.png" alt="">
         </div>
         </Section>
+        <hr>
+        <section class="secondsection" </section>
+            <h1>Past Experiences</h1>
     </main>
-</body>
+    
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+    var typed = new Typed('#element', {
+      strings: ['Web Developer', 'Graphic Designer', 'Web Designer','Video Editor'],
+      typeSpeed: 50,
+    });
+  </script>
+    </body>
 </html>

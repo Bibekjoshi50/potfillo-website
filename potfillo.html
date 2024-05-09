@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <marquee behavior="scroll" direction="left">Welcome to my website!
+        </marquee>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        section {
+            padding: 50px 20px;
+            background-color: #fff;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        section h2 {
+            color: #333;
+        }
+
+        .project {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .project h3 {
+            color: #333;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        @media screen and (min-width: 768px) {
+            .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+
+            .left,
+            .right {
+                width: 48%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Welcome to my portfolio! I am passionate in graphic designing . I am an IT student at Tribhuwan university. I am beginer at web developing 
+            and software developing. I am also learning wordpress and logo designing. I an passionate at website developing. 
+        </p>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="container">
+            <div class="project">
+                <h3>Project 1</h3>
+                <img src="d:\potfillo website\graphic.png" alt="Project 1 Image" style="width: 100%;">
+                <p>Welcome to my portfolio! I am passionate in graphic designing . I am an IT student at Tribhuwan university. I am beginer at web developing 
+                    and software developing. I am also learning wordpress and logo designing. I an passionate at website developing.</p>
+            </div>
+            <div class="project">
+                
+            </div>
+            <!-- Add more projects as needed -->
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p> bebikjoshi118@gmail.com <br>
+        bebikjoshi1@gmail.com</p>
+    
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Bibek Joshi </p>
+    </footer>
+</body>
+</html>

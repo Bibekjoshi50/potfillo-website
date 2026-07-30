@@ -1,46 +1,32 @@
-# 🌐 Bibek Joshi - Personal Portfolio Website
+# 🌐 Bibek Joshi Portfolio
 
-Welcome to my personal portfolio website! This project showcases my education, technical skills, projects, experience, research, certifications, and achievements. It serves as my professional online presence and demonstrates my passion for software development, web technologies, and continuous learning.
+Welcome to the official source code of my personal portfolio website.
 
-## 🔗 Live Website
+This portfolio showcases my education, technical skills, projects, experience, research, certifications, and achievements. It serves as my professional online presence and reflects my journey as a BSc CSIT student and aspiring software developer.
 
-🌍 https://www.bibekjoshi50.com.np/
+## 🚀 Live Website
 
----
-
-## 📖 About
-
-I am **Bibek Joshi**, a BSc CSIT student at **Siddhanath Science Campus, Tribhuvan University**, with interests in:
-
-- 💻 Web Development
-- 🎨 UI/UX Design
-- 📊 Data Structures & Algorithms
-- 🤖 Artificial Intelligence
-
-- 🔍 Research and Technology
-
-This portfolio highlights my journey, skills, and the projects I have built.
+👉 https://www.bibekjoshi50.com.np/
 
 ---
 
 ## ✨ Features
 
-- Responsive Design
-- Modern User Interface
-- About Me Section
-- Technical Skills
-- Project Portfolio
-- Experience Timeline
+- Modern and Responsive Design
+- About Me
+- Skills & Technologies
+- Projects Showcase
+- Experience
 - Research & Publications
-- Blog Section
+- Blog
 - Contact Information
-- Social Media Links
 - SEO Optimized
-- Fast Loading Performance
+- Mobile Friendly
+- Fast Loading
 
 ---
 
-## 🛠️ Built With
+## 🛠️ Technologies Used
 
 - HTML5
 - CSS3
@@ -50,11 +36,10 @@ This portfolio highlights my journey, skills, and the projects I have built.
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```
-portfolio/
-│
+Portfolio/
 ├── index.html
 ├── style.css
 ├── script.js
@@ -65,68 +50,44 @@ portfolio/
 
 ---
 
-## 🚀 Getting Started
-
-### Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/portfolio.git
-```
-
-### Open the project
-
-```bash
-cd portfolio
-```
-
-Open `index.html` in your browser.
-
----
-
-## 📸 Website Preview
+## 📸 Preview
 
 > Add a screenshot of your homepage here.
 
-```
-images/portfolio-preview.png
+```md
+![Portfolio Preview](images/portfolio-preview.png)
 ```
 
 ---
 
-## 🎯 Future Improvements
+## 💻 Run Locally
 
-- Dark Mode
-- Project Filtering
-- Animated Components
-- Blog CMS
-- Contact Form Backend
-- Multi-language Support
-- Performance Optimization
+Clone the repository:
+
+```bash
+git clone https://github.com/bibekjoshi50/portfolio.git
+```
+
+Open `index.html` in your preferred web browser.
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 About Me
 
 **Bibek Joshi**
 
 BSc CSIT Student  
-Siddhanath Science Campus  
-Tribhuvan University  
+Siddhanath Science Campus, Tribhuvan University  
 Mahendranagar, Kanchanpur, Nepal
 
 ---
 
-## 📬 Connect With Me
+## 📬 Contact
 
-🌐 Website: https://www.bibekjoshi50.com.np/
-
-💼 LinkedIn: https://www.linkedin.com/in/bibekjoshi50
-
-🐙 GitHub: https://github.com/bibekjoshi50
-
-📘 Facebook: https://www.facebook.com/bibekjoshi50
-
-📧 Email: bibekjoshi118@gmail.com
+- 🌐 Website: https://www.bibekjoshi50.com.np/
+- 📧 Email: bibekjoshi118@gmail.com
+- 💼 LinkedIn: https://www.linkedin.com/in/bibekjoshi50
+- 🐙 GitHub: https://github.com/bibekjoshi50
 
 ---
 
@@ -136,8 +97,4 @@ This project is licensed under the MIT License.
 
 ---
 
-## ⭐ Support
-
-If you found this project useful, please consider giving it a ⭐ on GitHub. It helps support my work and encourages future improvements.
-
-Thank you for visiting my portfolio! 😊
+⭐ If you like this portfolio, consider giving this repository a star!

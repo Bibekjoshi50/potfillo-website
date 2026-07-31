@@ -939,8 +939,13 @@ background:#0F172A;
 }
 
 .social-links a:hover {
-    color:#3B82F6;
+    color:#fff;
+    background:#3B82F6;
+    border-color:#3B82F6;
+    transform:translateY(-8px) scale(1.08);
+    box-shadow:0 10px 25px rgba(59,130,246,.5);
 }
+
 .footer hr{
     border:none;
     height:1px;

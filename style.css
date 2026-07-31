@@ -42,11 +42,18 @@ nav{
     border-bottom: 1px solid rgba(19, 41, 28, 0.443);
     backdrop-filter: blur(15px); 
     margin-bottom: 2rem;
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: flex;
     padding:1rem;
+    background: #b0a2a2; 
+    z-index: 1000
+    
+
 
 }
 .logo a{

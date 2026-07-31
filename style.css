@@ -49,11 +49,16 @@ nav{
     padding:1rem;
 
 }
-.logo{
+.logo a{
     font-size: 1.8rem;
     font-weight: 700;
     color:#38bdf8;
     letter-spacing: 1px;
+    text-decoration: none;
+    
+}
+.logo a:hover{
+    color:#5ac8ff;
 }
 .nav-links{
     display: flex;

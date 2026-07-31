@@ -31,8 +31,8 @@
     box-sizing: border-box;
 }
 body{
-    background-color:rgb(55, 21, 21) ;
-    color:rgb(253, 248, 248);
+    background:#0F172A;
+    color:#FFFFFF;
 } 
 
 nav{
@@ -50,7 +50,7 @@ nav{
     align-items: center;
     justify-content: flex;
     padding:1rem;
-    background: #b0a2a2; 
+    background: #111827; 
     z-index: 1000
     
 
@@ -59,7 +59,7 @@ nav{
 .logo a{
     font-size: 1.8rem;
     font-weight: 700;
-    color:#38bdf8;
+    color:#3B82F6;
     letter-spacing: 1px;
     text-decoration: none;
     
@@ -78,12 +78,13 @@ nav{
    font-size: 1.05rem;
    font-weight: 500;
    text-decoration: none;
-   color: #e2e8f0;
-   transition: 0.3s;
+   color:#FFFFFF;
+   transition: 3s;
 }
 .nav-links li a:hover{
-    color: #38bdf8;
-    text-shadow: 0 0 10px #38bdf8;
+    color:#3B82F6;
+    /* text-shadow: 0 0 10px #932292; */
+     /* box-shadow: 0 0 20px #3B82F6; */
 
 }
 .btns{
@@ -159,7 +160,7 @@ color: rgb(115, 199, 26);
 .hero{
     width: 100%;
     min-height: 100vh;
-    padding: 100px 10%;
+    padding: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -278,7 +279,7 @@ color: rgb(115, 199, 26);
     justify-content:center;
     align-items:center;
     gap:70px;
-    background:#fff;
+     background:#111827;
 }
 
 .about-image{
@@ -306,10 +307,11 @@ color: rgb(115, 199, 26);
 .about-content h2{
     font-size:42px;
     margin:10px 0 20px;
+    color:#fff;
 }
 
 .about-content p{
-    color:#555;
+    color:#CBD5E1;
     line-height:1.8;
     margin-bottom:18px;
     text-align:justify;
@@ -325,7 +327,7 @@ color: rgb(115, 199, 26);
 .card{
     flex:1;
     min-width:180px;
-    background:#f8f9ff;
+    background:#1E293B;
     padding:20px;
     border-radius:15px;
     text-align:center;
@@ -339,12 +341,12 @@ color: rgb(115, 199, 26);
 
 .card h3{
     margin-bottom:10px;
-    color:#222;
+    color:#fff;
 }
 
 .card p{
     margin:0;
-    color:#666;
+     color:#CBD5E1;
 }
 
 .education-title{
@@ -439,21 +441,22 @@ color: rgb(115, 199, 26);
 
 .projects{
     padding:100px 10%;
-    background:#f8f9fc;
+       background:#0F172A;
 }
 
 .section-subtitle{
-    color:#4f46e5;
+    color:#3B82F6;
     font-weight:600;
 }
 
 .projects h2{
     font-size:42px;
     margin:10px 0;
+    color:#fff;
 }
 
 .section-description{
-    color:#666;
+    color:#CBD5E1;
     max-width:700px;
     margin-bottom:50px;
     line-height:1.8;
@@ -462,6 +465,7 @@ color: rgb(115, 199, 26);
 .project-heading{
     margin:40px 0 25px;
     font-size:28px;
+     color:#fff;
 }
 
 .project-container,
@@ -473,8 +477,8 @@ color: rgb(115, 199, 26);
 
 .project-card,
 .certificate-card{
-    background:#fff;
-    border-radius:15px;
+  background:#1E293B;
+  border-radius:15px;
     overflow:hidden;
     box-shadow:0 5px 20px rgba(0,0,0,.08);
     transition:.3s;
@@ -495,6 +499,7 @@ color: rgb(115, 199, 26);
 .project-card h3,
 .certificate-card h4{
     margin:20px;
+    color:#fff;
 }
 
 .project-card p,
@@ -509,8 +514,8 @@ color: rgb(115, 199, 26);
 
 .project-tech span{
     display:inline-block;
-    background:#eef2ff;
-    color:#4f46e5;
+    background:#3B82F6;
+    color:#fff;
     padding:6px 12px;
     margin:5px;
     border-radius:20px;

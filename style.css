@@ -39,6 +39,8 @@ nav{
     margin-bottom: 2rem;
 
     display: flex;
+    align-items: center;
+    justify-content: flex;
 
 }
 .logo{
@@ -68,22 +70,26 @@ nav{
 .btns{
     display: flex;
 
+
 }
 .btn{
     padding:0.5rem 1.5 rem;
     border: radius 30px;
     font-weight:600;
-    font-size: 1.rem;
+    /* font-size: 1.rem; */
     background: #38bdf8;
     color:#0f172a;
     box-shadow: 0 0 15px #38bdf8;
-    border:rouhded;
+    border:none;
     cursor: pointer;
+    
     transition: 0.3s;
+    
 }
 .btn:hover{
     background:#0aa9f3;
     box-shadow: 0 0 15px #0aa9f3;
+    
 
 }
 

@@ -505,7 +505,7 @@ color: rgb(115, 199, 26);
 .project-card p,
 .certificate-card p{
     margin:0 20px 20px;
-    color:#666;
+    color:#CBD5E1;
 }
 
 .project-tech{
@@ -548,22 +548,23 @@ color: rgb(115, 199, 26);
 
 .blog{
     padding:100px 10%;
-    background:#ffffff;
+    background:#111827;
 }
 
 .blog h2{
     font-size:42px;
     margin:10px 0;
+    color:#fff;
 }
 
 .section-subtitle{
-    color:#4f46e5;
+    color:#3B82F6;
     font-weight:600;
 }
 
 .section-description{
     max-width:700px;
-    color:#666;
+    color:#CBD5E1;
     line-height:1.8;
     margin-bottom:50px;
 }
@@ -575,7 +576,7 @@ color: rgb(115, 199, 26);
 }
 
 .blog-card{
-    background:#fff;
+    background:#1E293B;
     border-radius:15px;
     overflow:hidden;
     box-shadow:0 5px 20px rgba(0,0,0,.08);
@@ -597,7 +598,7 @@ color: rgb(115, 199, 26);
 }
 
 .blog-date{
-    color:#4f46e5;
+    color:#3B82F6;
     font-size:14px;
     font-weight:600;
 }
@@ -608,20 +609,20 @@ color: rgb(115, 199, 26);
 }
 
 .blog-content p{
-    color:#666;
+    color:#CBD5E1;
     line-height:1.7;
     margin-bottom:20px;
 }
 
 .read-more{
     text-decoration:none;
-    color:#4f46e5;
+    color:#3B82F6;
     font-weight:600;
     transition:.3s;
 }
 
 .read-more:hover{
-    color:#312e81;
+    color:#60A5FA;
 }
 
 .blog-button{
@@ -632,7 +633,7 @@ color: rgb(115, 199, 26);
 .blog-button a{
     display:inline-block;
     padding:14px 35px;
-    background:#4f46e5;
+    background:#3B82F6;
     color:#fff;
     text-decoration:none;
     border-radius:30px;
@@ -640,12 +641,12 @@ color: rgb(115, 199, 26);
 }
 
 .blog-button a:hover{
-    background:#312e81;
+    background:#2563EB;
 }
 
 .footer {
-    background: #111;
-    color: #fff;
+background:#0F172A;
+    color:#CBD5E1;
     text-align: center;
     padding: 40px 20px;
 }
@@ -653,20 +654,33 @@ color: rgb(115, 199, 26);
 .footer h3 {
     margin-bottom: 10px;
     font-size: 28px;
+        color:#FFFFFF;
+
 }
 
 .footer p {
     margin: 10px 0;
-    color: #ccc;
+    color:#CBD5E1;
 }
 
 .social-links a {
-    color: #00bfff;
+    color:#CBD5E1;
     text-decoration: none;
     margin: 0 8px;
     transition: 0.3s;
 }
 
 .social-links a:hover {
-    color: #fff;
+    color:#3B82F6;
+}
+.footer hr{
+    border:none;
+    height:1px;
+    background:#334155;
+    margin:40px 0 20px;
+}
+.copyright{
+    text-align:center;
+    color:#94A3B8;
+    font-size:15px;
 }

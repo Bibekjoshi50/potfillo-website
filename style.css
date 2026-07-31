@@ -87,43 +87,6 @@ nav{
      /* box-shadow: 0 0 20px #3B82F6; */
 
 }
-/* Hide menu icon on desktop */
-
-.menu-toggle{
-    display:none;
-    font-size:30px;
-    color:white;
-    cursor:pointer;
-}
-@media(max-width:768px){
-
-    .menu-toggle{
-        display:block;
-    }
-
-    nav ul{
-        position:absolute;
-        top:80px;
-        left:0;
-        width:100%;
-        background:#111827;
-
-        display:none;
-        flex-direction:column;
-        align-items:center;
-
-        padding:20px 0;
-    }
-
-    nav ul.active{
-        display:flex;
-    }
-
-    nav ul li{
-        margin:15px 0;
-    }
-
-}
 .btns{
     /* display: flex; */
     margin-left: auto;

@@ -14,39 +14,30 @@
         <link rel="stylesheet" href="style.css">
 </head>
 <body>
-        <nav>
+        <nav class="navbar">
            <div class="logo">
             <a href="index.html">Bibek's Portfolio </a>
            </div>
 
-    <!-- <div class="menu-toggle" id="menu-toggle">
-        ☰ -->
-    </div>
-           <ul class="nav-links">
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+           <ul class="nav-links" id="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#blog">Blog</a></li>
             
-
             </ul>
           <div class="btns">
-            <div class="btn">Contact</div>
+            <a href="#contact" class="nav-btn">Contact</a>
           </div>
         </nav>
         
        
     <main>
-        <section class="firstSection">
-            <div class="leftSection">
-               Hi, My name is <span class="purple">Bibek joshi</span>
-               <div>and I am an IT Enthusiast</div>
-               <span id="element"></span>
-            </div>
-<div class="rightSection">
-<!-- <img src="bj1.png" alt="image" class="profile-image"> -->
-        </div>
-        </Section>
         <section id="home" class="hero">
 
         <div class="hero-left">
@@ -54,6 +45,8 @@
             <h1>Hi, My name is <span>Bibek Joshi</span></h1>
 
             <h2>BSc CSIT Student & Front-End Developer</h2>
+
+            <p class="typed-line">I am an <span id="element"></span></p>
 
             <p>
                 I build responsive websites, create modern UI designs,
@@ -63,7 +56,7 @@
 
             <a href="#contact" class="btn">Hire Me</a>
 
-            <a href="resume.pdf" class="btn">Download CV</a>
+            <a href="resume.pdf" class="btn-secondary">Download CV</a>
 
         </div>
 
@@ -388,7 +381,7 @@
       typeSpeed: 50,
     });
   </script>
-  <footer class="footer">
+  <footer class="footer" id="contact">
   <div class="container">
     <h3>Bibek Joshi</h3>
     <p>

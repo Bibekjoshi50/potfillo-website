@@ -1,34 +1,13 @@
-/* @media(max-width:768px){
-
-.navbar{
-
-    padding:15px 6%;
-}
-
-.nav-links{
-
-    display:none;
-}
-
-.btn{
-
-    display:none;
-}
-
-.logo{
-
-    font-size:24px;
-}
-
-}
-  *{
-            margin: 0;
-       padding: 0;     
-        }*/
-        * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+#home, #about, #projects, #blog, #contact{
+    scroll-margin-top: 80px;
 }
 body{
     background:#0F172A;
@@ -37,10 +16,9 @@ body{
 
 nav{
     width: 100%;
-    padding:1rem 5%;
-    background:rgba(255, 255, 255, 0.5);
+    padding: 1rem 5%;
     border-bottom: 1px solid rgba(19, 41, 28, 0.443);
-    backdrop-filter: blur(15px); 
+    backdrop-filter: blur(15px);
     margin-bottom: 2rem;
     position: fixed;
     top: 0;
@@ -48,14 +26,41 @@ nav{
     height: 70px;
     display: flex;
     align-items: center;
-    justify-content: flex;
-    padding:1rem;
-    background: #111827; 
-    z-index: 1000
-    
-
-
+    justify-content: space-between;
+    background: #111827;
+    z-index: 1000;
 }
+
+/* Hamburger button - hidden on desktop, shown on mobile */
+.hamburger{
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger span{
+    width: 26px;
+    height: 3px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.hamburger.active span:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2){
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
 .logo a{
     font-size: 1.8rem;
     font-weight: 700;
@@ -87,32 +92,68 @@ nav{
      /* box-shadow: 0 0 20px #3B82F6; */
 
 }
+
 .btns{
-    /* display: flex; */
     margin-left: auto;
-
-
 }
-.btn{
-    margin-top:20px;
-    padding:0.5rem 1.5 rem;
-    border: radius 30px;
-    font-weight:600;
-    /* font-size: 1.rem; */
+.nav-btn{
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
     background: #38bdf8;
-    color:#0f172a;
+    color: #0f172a;
     box-shadow: 0 0 15px #38bdf8;
-    border:none;
+    border: none;
     cursor: pointer;
-    align-items: right;
+    text-decoration: none;
     transition: 0.3s;
-    
 }
-.btn:hover{
+.nav-btn:hover{
     background:#0aa9f3;
     box-shadow: 0 0 15px #0aa9f3;
-    
+}
 
+/* ================= NAV RESPONSIVE (MOBILE) ================= */
+@media (max-width: 768px){
+
+    nav{
+        padding: 1rem 5%;
+    }
+
+    .hamburger{
+        display: flex;
+    }
+
+    .nav-links{
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 70%;
+        max-width: 300px;
+        height: calc(100vh - 70px);
+        margin-left: 0;
+        background: #111827;
+        border-left: 1px solid rgba(59,130,246,0.2);
+        padding-top: 3rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+    }
+
+    .nav-links.active{
+        right: 0;
+    }
+
+    .btns{
+        margin-left: 0;
+    }
+
+    .logo a{
+        font-size: 1.4rem;
+    }
 }
 
 main hr{
@@ -167,32 +208,32 @@ color: rgb(115, 199, 26);
     gap: 50px;
 }
 
-.hero-content{
+.hero-left{
     flex: 1;
 }
 
-.hero-content h3{
+.hero-left h3{
     font-size: 25px;
     color: #666;
     margin-bottom: 10px;
 }
 
-.hero-content h1{
+.hero-left h1{
     font-size: 60px;
     margin-bottom: 15px;
 }
 
-.hero-content span{
+.hero-left span{
     color: #4f46e5;
 }
 
-.hero-content h2{
+.hero-left h2{
     font-size: 30px;
     color: #444;
     margin-bottom: 20px;
 }
 
-.hero-content p{
+.hero-left p{
     font-size: 18px;
     color: #666;
     line-height: 1.8;
@@ -232,13 +273,13 @@ color: rgb(115, 199, 26);
     color: white;
 }
 
-.hero-image{
+.hero-right{
     flex: 1;
     display: flex;
     justify-content: center;
 }
 
-.hero-image img{
+.hero-right img{
     width: 350px;
     border-radius: 50%;
 }
@@ -250,11 +291,11 @@ color: rgb(115, 199, 26);
         padding: 120px 20px 60px;
     }
 
-    .hero-content h1{
+    .hero-left h1{
         font-size: 40px;
     }
 
-    .hero-content h2{
+    .hero-left h2{
         font-size: 22px;
     }
 
@@ -264,7 +305,7 @@ color: rgb(115, 199, 26);
     gap: 20px;
 }
 
-    .hero-image img{
+    .hero-right img{
         width: 250px;
     }
 }

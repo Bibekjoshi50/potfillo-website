@@ -1,12 +1,18 @@
-<script>
+// ================= MOBILE NAV TOGGLE =================
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
 
-const menu = document.getElementById("menu-toggle");
-const navLinks = document.getElementById("nav-links");
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
 
-menu.addEventListener("click", function(){
-
-    navLinks.classList.toggle("active")
-
-})
-
-</script>
+  // Close the menu automatically when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+}

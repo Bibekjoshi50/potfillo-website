@@ -1,0 +1,152 @@
+
+  :root {
+    --bg: #0B1622;
+    --surface: #0E2436;
+    --border: #1E4A63;
+    --text: #DCE8EF;
+    --text-muted: #7FA0B3;
+    --accent: #2FE0C6;
+    --accent-2: #3FA9F5;
+    --font-display: Georgia, 'Times New Roman', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'Courier New', monospace;
+  }
+ 
+  .post {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.7;
+  }
+ 
+  .post-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+ 
+  .post-eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+ 
+  .post-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.15;
+    margin: 0 0 16px;
+    color: #fff;
+  }
+ 
+  .post-meta {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+ 
+  .post-dot {
+    margin: 0 8px;
+    color: var(--border);
+  }
+ 
+  .post-hero {
+    margin: 0 0 32px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+ 
+  .post-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+ 
+  .post-lede {
+    font-size: 19px;
+    color: var(--text);
+    font-weight: 500;
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+    margin: 0 0 40px;
+  }
+ 
+  .post-section {
+    margin-bottom: 36px;
+  }
+ 
+  .post-section h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: #fff;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin: 0 0 16px;
+  }
+ 
+  .post-section p {
+    margin: 0 0 16px;
+    color: var(--text);
+    font-size: 16px;
+  }
+ 
+  .post-list {
+    margin: 0;
+    padding-left: 20px;
+  }
+ 
+  .post-list li {
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+ 
+  .post-list--numbered li::marker {
+    color: var(--accent);
+    font-weight: 700;
+  }
+ 
+  .post-list:not(.post-list--numbered) li::marker {
+    color: var(--accent);
+  }
+ 
+  .post-list strong {
+    color: var(--accent-2);
+  }
+ 
+  .post-footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+ 
+  .post-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+ 
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+  }
+ 
+  @media (max-width: 600px) {
+    .post {
+      padding: 32px 16px 56px;
+    }
+    .post-lede {
+      font-size: 17px;
+    }
+  }

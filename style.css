@@ -162,58 +162,38 @@ main hr{
     height: 1.2px;
     margin: 40px 84px;
 }
-.left{
-   font-size:1.5rem ; 
-}
 
-.firstSection{
-    display: flex;
-    justify-content: space-around;
-    margin: 140px 0;
-}
-.rightSection > img{
-    width: 80%;  
-}
-.purple{
-color: rgb(170, 107, 228);}
-
-.leftSection{
-font-size: 3rem;}
 #element{
-color: rgb(115, 199, 26);
+    color: rgb(115, 199, 26);
 }
-.secondsection{
-   max-width: 80vw; 
-   margin: auto;
-   height: 80vh;
-}
-.secondsection h1{
-    font: size 1.9rem;
-}
-.secondsection box{
-    background-color: white;
-    width: 80vw;
-    height: 2px;
-    margin: 56px 0;
-}
+
 /* ================= HOME SECTION ================= */
 
 .hero{
     width: 100%;
     min-height: 100vh;
-    padding: 120px;
+    padding: 120px 5% 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 50px;
+    flex-wrap: wrap;
+    overflow: hidden;
 }
+
+/* --size drives every child below so the whole graphic scales together.
+   Overridden per breakpoint instead of hard-coding pixels per element. */
 .hero-image{
+    --size: 500px;
     position:relative;
-    width:500px;
-    height:500px;
+    width:var(--size);
+    height:var(--size);
+    max-width: 100%;
     display:flex;
     justify-content:center;
     align-items:center;
+    flex-shrink: 0;
+    margin: 0 auto;
 }
 
 /* ================= Glow ================= */
@@ -221,8 +201,8 @@ color: rgb(115, 199, 26);
 .glow{
 
     position:absolute;
-    width:320px;
-    height:320px;
+    width:calc(var(--size) * 0.64);
+    height:calc(var(--size) * 0.64);
 
     background:#4338ca;
 
@@ -241,8 +221,8 @@ color: rgb(115, 199, 26);
 
     position:absolute;
 
-    width:470px;
-    height:470px;
+    width:calc(var(--size) * 0.94);
+    height:calc(var(--size) * 0.94);
 
     border-radius:50%;
 
@@ -257,7 +237,9 @@ color: rgb(115, 199, 26);
 
 .hero-image img{
 
-    width:280px;
+    width:calc(var(--size) * 0.56);
+    height:auto;
+    max-width: 100%;
 
     position:relative;
 
@@ -280,8 +262,8 @@ color: rgb(115, 199, 26);
 
     position:absolute;
 
-    width:90px;
-    height:90px;
+    width:calc(var(--size) * 0.18);
+    height:calc(var(--size) * 0.18);
 
     background:rgba(255,255,255,.06);
 
@@ -299,9 +281,15 @@ color: rgb(115, 199, 26);
 
     align-items:center;
 
-    font-size:30px;
+    font-size:clamp(9px, calc(var(--size) * 0.026), 15px);
 
     font-weight:bold;
+
+    text-align:center;
+
+    line-height:1.1;
+
+    padding: 4px;
 
     z-index:20;
 
@@ -317,28 +305,28 @@ color: rgb(115, 199, 26);
     border-color:#4f46e5;
 }
 
-/* Position */
+/* Position - percentage based so badges stay inside .hero-image at any size */
 
 .html{
-    top:-20px;
-    left:30px;
+    top:2%;
+    left:4%;
 }
 
 .js{
-    top:50px;
-    right:-10px;
+    top:14%;
+    right:2%;
     animation-delay:1s;
 }
 
 .css{
-    bottom:10px;
-    left:50px;
+    bottom:12%;
+    left:8%;
     animation-delay:2s;
 }
 
 .git{
-    bottom:30px;
-    right:-20px;
+    bottom:4%;
+    right:0%;
     animation-delay:3s;
 }
 
@@ -410,15 +398,10 @@ transform:translateY(0px);
     flex: 1;
 }
 
-.hero-left h3{
-    font-size: 25px;
-    color: #666;
-    margin-bottom: 10px;
-}
-
 .hero-left h1{
-    font-size: 60px;
+    font-size: clamp(32px, 5vw, 60px);
     margin-bottom: 15px;
+    line-height: 1.15;
 }
 
 .hero-left span{
@@ -426,53 +409,25 @@ transform:translateY(0px);
 }
 
 .hero-left h2{
-    font-size: 30px;
-    color: #444;
+    font-size: clamp(18px, 2.6vw, 30px);
+    color: #CBD5E1;
     margin-bottom: 20px;
 }
 
 .hero-left p{
     font-size: 18px;
-    color: #666;
+    color: #94A3B8;
     line-height: 1.8;
     max-width: 600px;
     margin-bottom: 30px;
 }
 
-.hero-buttons{
-    display: flex;
-    gap: 20px;
+.hero-left .btn,
+.hero-left .btn-secondary{
+    margin-bottom: 10px;
+    display: inline-block;
 }
-.tech{
 
-    position:absolute;
-
-    width:90px;
-    height:90px;
-
-    border-radius:50%;   /* Makes it a perfect circle */
-
-    background:rgba(255,255,255,.08);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    backdrop-filter:blur(12px);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:white;
-
-    font-size:24px;
-    font-weight:600;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.3);
-
-    animation:cardFloat 3s ease-in-out infinite;
-
-    z-index:20;
-}
 .btn{
     padding: 12px 28px;
     background: #4f46e5;
@@ -500,40 +455,29 @@ transform:translateY(0px);
     color: white;
 }
 
-.hero-right{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.hero-right img{
-    width: 350px;
-    border-radius: 50%;
-}
 @media (max-width:768px){
 
     .hero{
         flex-direction: column-reverse;
         text-align: center;
-        padding: 120px 20px 60px;
+        padding: 110px 20px 60px;
+        gap: 30px;
     }
 
-    .hero-left h1{
-        font-size: 40px;
+    .hero-left p{
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .hero-left h2{
-        font-size: 22px;
+    .hero-image{
+        --size: 320px;
     }
-
-    .hero-buttons{
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
 }
 
-    .hero-right img{
-        width: 250px;
+@media (max-width:420px){
+
+    .hero-image{
+        --size: 250px;
     }
 }
 
@@ -567,7 +511,7 @@ transform:translateY(0px);
 }
 
 .section-subtitle{
-    color:#4f46e5;
+    color:#3B82F6;
     font-size:18px;
     font-weight:600;
 }
@@ -712,11 +656,6 @@ transform:translateY(0px);
        background:#0F172A;
 }
 
-.section-subtitle{
-    color:#3B82F6;
-    font-weight:600;
-}
-
 .projects h2{
     font-size:42px;
     margin:10px 0;
@@ -823,11 +762,6 @@ transform:translateY(0px);
     font-size:42px;
     margin:10px 0;
     color:#fff;
-}
-
-.section-subtitle{
-    color:#3B82F6;
-    font-weight:600;
 }
 
 .section-description{
@@ -956,4 +890,41 @@ background:#0F172A;
     text-align:center;
     color:#94A3B8;
     font-size:15px;
+}
+/* ================= GLOBAL SMALL-SCREEN FIXES ================= */
+/* Prevents horizontal scrolling / overflow on narrow phones (320-480px) */
+
+html, body{
+    overflow-x: hidden;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 480px){
+
+    .about,
+    .projects,
+    .blog{
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .project-container,
+    .certificate-container,
+    .blog-container{
+        grid-template-columns: 1fr;
+    }
+
+    main hr{
+        margin: 40px 24px;
+    }
+
+    .about-content h2,
+    .projects h2,
+    .blog h2{
+        font-size: 30px;
+    }
 }

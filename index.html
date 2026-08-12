@@ -81,7 +81,21 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#blog">Blog</a></li>
+            <li class="dropdown">
+                <a href="#blog" class="dropdown-toggle">
+                    Blog <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#blog" data-category="all">All</a></li>
+                    <li><a href="#blog" data-category="Technology">Technology</a></li>
+                    <li><a href="#blog" data-category="Cybersecurity">Cybersecurity</a></li>
+                    <li><a href="#blog" data-category="AI">AI</a></li>
+                    <li><a href="#blog" data-category="Web Development">Web Development</a></li>
+                    <li><a href="#blog" data-category="Finance">Finance</a></li>
+                    <li><a href="#blog" data-category="Cryptocurrency">Cryptocurrency</a></li>
+                    <li><a href="#blog" data-category="Research">Research</a></li>
+                </ul>
+            </li>
             <div class="btns">
             <a href="#contact" class="nav-btn">Contact</a>
           </div>
@@ -371,14 +385,14 @@
 
         <!-- Blog Card 1 -->
 
-        <div class="blog-card">
+        <div class="blog-card" data-category="Research">
 
             <img src="images/setopati.png" alt="Cyber security awareness blog cover" width="400" height="220" loading="lazy">
 
             <div class="blog-content">
 
                 <span class="blog-date">
-                    March 18, 2026 • Technology
+                    March 18, 2026 • Research
                 </span>
 
                 <h3>साइबर सुरक्षा: विश्वासको खेलमा नेपाली युवा!
@@ -398,7 +412,7 @@
 
         <!-- Blog Card 2 -->
 
-        <div class="blog-card">
+        <div class="blog-card" data-category="Cybersecurity">
 
             <img src="images/cyberimg.png" alt="Cybersecurity in the Digital Age
             " width="400" height="220" loading="lazy">
@@ -426,7 +440,7 @@
 
         <!-- Blog Card 3 -->
 
-        <div class="blog-card">
+        <div class="blog-card" data-category="Cryptocurrency">
 
             <img src="images/cryptocurrency.png" alt="क्रिप्टोकरेन्सी: विश्वका लागि अवसर, नेपालका लागि अन्योल " width="400" height="220" loading="lazy">
 
@@ -452,8 +466,12 @@
 
     </div>
 
+    <p class="no-posts-message" id="noPostsMessage">
+        No posts in this category yet — check back soon!
+    </p>
+
     <div class="blog-button">
-        <a href="#">View All Articles</a>
+        <a href="blog.html">View All Articles</a>
     </div>
     
 

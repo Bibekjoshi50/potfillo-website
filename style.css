@@ -93,6 +93,63 @@ nav{
 
 }
 
+/* ================= BLOG DROPDOWN (SUBCATEGORY MENU) ================= */
+.dropdown{
+    position: relative;
+}
+.dropdown-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+}
+.dropdown-toggle i{
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+.dropdown.active .dropdown-toggle i{
+    transform: rotate(180deg);
+}
+.dropdown-menu{
+    list-style: none;
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 0;
+    min-width: 190px;
+    background: #111827;
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 10px;
+    padding: 0.5rem 0;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: 0.25s ease;
+    z-index: 1002;
+}
+.dropdown-menu li a{
+    display: block;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    color: #FFFFFF;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.dropdown-menu li a:hover{
+    background: rgba(59,130,246,0.15);
+    color: #3B82F6;
+}
+
+/* Desktop: show on hover */
+@media (min-width: 769px){
+    .dropdown:hover .dropdown-menu{
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
 .btns{
     margin-left: auto;
 }
@@ -153,6 +210,41 @@ nav{
 
     .logo a{
         font-size: 1.4rem;
+    }
+
+    /* Dropdown becomes an inline expandable panel on mobile */
+    .dropdown{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dropdown-menu{
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: rgba(59,130,246,0.06);
+        max-height: 0;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .dropdown.active .dropdown-menu{
+        max-height: 400px;
+        padding: 0.5rem 0;
+        margin-top: 0.8rem;
+        overflow-y: auto;
+    }
+
+    .dropdown-menu li a{
+        text-align: center;
+        white-space: normal;
     }
 }
 
@@ -804,6 +896,18 @@ transform:translateY(0px);
     gap:30px;
 }
 
+.no-posts-message{
+    display: none;
+    text-align: center;
+    color: #94A3B8;
+    font-size: 1.05rem;
+    padding: 40px 0;
+}
+
+.no-posts-message.show{
+    display: block;
+}
+
 .blog-card{
     background:#1E293B;
     border-radius:15px;
@@ -871,6 +975,93 @@ transform:translateY(0px);
 
 .blog-button a:hover{
     background:#2563EB;
+}
+
+/*================ ALL ARTICLES PAGE (blog.html) ================*/
+
+.all-blog-page{
+    padding: 140px 10% 100px;
+    background: #111827;
+    min-height: 100vh;
+}
+
+.all-blog-header{
+    margin-bottom: 40px;
+}
+
+.all-blog-header h1{
+    font-size: 42px;
+    margin: 10px 0;
+    color: #fff;
+}
+
+/* Category filter bar */
+.category-filter{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 45px;
+}
+
+.category-btn{
+    padding: 0.55rem 1.3rem;
+    border-radius: 30px;
+    border: 1px solid rgba(59,130,246,0.35);
+    background: transparent;
+    color: #CBD5E1;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.category-btn:hover{
+    border-color: #3B82F6;
+    color: #fff;
+}
+
+.category-btn.active{
+    background: #3B82F6;
+    border-color: #3B82F6;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(59,130,246,0.4);
+}
+
+/* Demo / placeholder cards for categories without real posts yet */
+.blog-card{
+    position: relative;
+}
+
+.demo-badge{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(15,23,42,0.85);
+    color: #94A3B8;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(148,163,184,0.3);
+    z-index: 2;
+}
+
+.blog-card-icon{
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.2rem;
+    color: #fff;
+    background: linear-gradient(135deg, #1E293B, #3B82F6 150%);
+}
+
+.read-more.disabled{
+    color: #64748B;
+    pointer-events: none;
+    cursor: default;
 }
 
 .footer {

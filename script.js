@@ -1,3 +1,9 @@
+// ================= FOOTER: AUTO-UPDATE COPYRIGHT YEAR =================
+const yearEl = document.getElementById('year');
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
+
 // ================= MOBILE NAV TOGGLE =================
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');

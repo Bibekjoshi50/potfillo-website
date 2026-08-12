@@ -1064,51 +1064,209 @@ transform:translateY(0px);
     cursor: default;
 }
 
+/*================ FOOTER (MODERN) ================*/
+
 .footer {
-background:#0F172A;
-    color:#CBD5E1;
-    text-align: center;
-    padding: 40px 20px;
+    position: relative;
+    background: #0F172A;
+    color: #CBD5E1;
+    padding: 70px 8% 30px;
+    border-top: 1px solid rgba(59,130,246,0.15);
+    overflow: hidden;
 }
 
-.footer h3 {
-    margin-bottom: 10px;
-    font-size: 28px;
-        color:#FFFFFF;
-
+/* soft glow accent, matches the hero's glow treatment */
+.footer::before{
+    content: "";
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(59,130,246,0.18), transparent 70%);
+    pointer-events: none;
 }
 
-.footer p {
-    margin: 10px 0;
-    color:#CBD5E1;
+.footer .container{
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-.social-links a {
-    color:#CBD5E1;
+.footer-top{
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 40px;
+    text-align: left;
+    padding-bottom: 40px;
+}
+
+.footer-brand h3 {
+    margin-bottom: 12px;
+    font-size: 26px;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+}
+
+.footer-brand p {
+    margin: 0 0 22px;
+    color: #94A3B8;
+    line-height: 1.7;
+    max-width: 320px;
+}
+
+.footer-social{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.social-icon{
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(148,163,184,0.25);
+    color: #CBD5E1;
+    font-size: 16px;
     text-decoration: none;
-    margin: 0 8px;
     transition: 0.3s;
 }
 
-.social-links a:hover {
-    color:#fff;
-    background:#3B82F6;
-    border-color:#3B82F6;
-    transform:translateY(-8px) scale(1.08);
-    box-shadow:0 10px 25px rgba(59,130,246,.5);
+.social-icon:hover{
+    color: #fff;
+    background: #3B82F6;
+    border-color: #3B82F6;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(59,130,246,.5);
+}
+
+.footer-heading{
+    color: #FFFFFF;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.footer-links ul{
+    list-style: none;
+}
+
+.footer-links li{
+    margin-bottom: 12px;
+}
+
+.footer-links a{
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.25s;
+}
+
+.footer-links a:hover{
+    color: #3B82F6;
+    padding-left: 4px;
+}
+
+.footer-contact p{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 16px;
+    color: #94A3B8;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.footer-contact p i{
+    color: #3B82F6;
+    margin-top: 3px;
+}
+
+.footer-contact a{
+    color: #94A3B8;
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+.footer-contact a:hover{
+    color: #3B82F6;
 }
 
 .footer hr{
-    border:none;
-    height:1px;
-    background:#334155;
-    margin:40px 0 20px;
+    border: none;
+    height: 1px;
+    background: rgba(148,163,184,0.15);
+    margin: 0 0 24px;
 }
+
+.footer-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
 .copyright{
-    text-align:center;
-    color:#94A3B8;
-    font-size:15px;
+    color: #64748B;
+    font-size: 14px;
 }
+
+.back-to-top{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(148,163,184,0.25);
+    transition: 0.3s;
+}
+
+.back-to-top:hover{
+    color: #fff;
+    border-color: #3B82F6;
+    background: rgba(59,130,246,0.15);
+}
+
+@media (max-width: 768px){
+    .footer{
+        padding: 60px 6% 25px;
+        text-align: center;
+    }
+
+    .footer-top{
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: center;
+    }
+
+    .footer-brand p{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer-social{
+        justify-content: center;
+    }
+
+    .footer-contact p{
+        justify-content: center;
+    }
+
+    .footer-bottom{
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
 /* ================= GLOBAL SMALL-SCREEN FIXES ================= */
 /* Prevents horizontal scrolling / overflow on narrow phones (320-480px) */
 

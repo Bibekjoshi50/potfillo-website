@@ -579,22 +579,24 @@ transform:translateY(0px);
 
 .marquee-track {
   display: flex;
+  align-items: center;
   width: max-content;
   animation: scroll 15s linear infinite;
 }
 
-.marquee-track span {
-  padding: 0 20px;
-  white-space: nowrap;
-  color: #4f8cff;
-  font-weight: 600;
-  font-size: 20px;
+.marquee-track img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  margin: 0 25px;
+
 }
 
 @keyframes scroll {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }

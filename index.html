@@ -449,8 +449,105 @@
 
     </div>
 
-    <div class="blog-button">
-        <a href="experience.html">View Photo Gallery</a>
+    <h3 class="gallery-heading">Gallery</h3>
+
+    <p class="section-description">
+        Moments from workshops, community events, and sessions I've
+        attended or helped run. Tap any photo to view it larger.
+    </p>
+
+    <div class="gallery-container" id="galleryContainer">
+
+        <button class="gallery-card" data-index="0" data-title="CFC ID card Distribution" data-tag="Community Event">
+            <img src="img/cfciddistribution.jpg" alt="Bibek Joshi at an CFC ID card Distribution" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>CFC ID Card Distribution</h4>
+                <span>Community Event / Code For Change</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="1" data-title="Figma 2023" data-tag="Community Event">
+            <img src="img/figma2023.jpg" alt="Bibek Joshi at Figma 2023 workshop" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>Figma 2023</h4>
+                <span>Community Event /SNSC IT Club</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="2" data-title="SNSC IT Club Event" data-tag="Campus Club">
+            <img src="img/gallery-snsc-event.jpg" alt="Bibek Joshi managing an SNSC IT Club event" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>SNSC IT Club Event</h4>
+                <span>Campus Club</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="3" data-title="Workshop" data-tag="Event">
+            <img src="images/gallery-04.jpg" alt="Bibek Joshi at a workshop" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>Workshop</h4>
+                <span>Event</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="4" data-title="Workshop" data-tag="Event">
+            <img src="images/gallery-05.jpg" alt="Bibek Joshi at a workshop" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>Workshop</h4>
+                <span>Event</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="5" data-title="Workshop" data-tag="Event">
+            <img src="images/gallery-06.jpg" alt="Bibek Joshi at a workshop" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>Workshop</h4>
+                <span>Event</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="6" data-title="Workshop" data-tag="Event">
+            <img src="images/gallery-07.jpg" alt="Bibek Joshi at a workshop" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>Workshop</h4>
+                <span>Event</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="7" data-title="Workshop" data-tag="Event">
+            <img src="images/gallery-08.jpg" alt="Bibek Joshi at a workshop" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>Workshop</h4>
+                <span>Event</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="8" data-title="Workshop" data-tag="Event">
+            <img src="images/gallery-09.jpg" alt="Bibek Joshi at a workshop" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>Workshop</h4>
+                <span>Event</span>
+            </div>
+        </button>
+
+        <button class="gallery-card" data-index="9" data-title="Workshop" data-tag="Event">
+            <img src="images/gallery-10.jpg" alt="Bibek Joshi at a workshop" width="400" height="220" loading="lazy">
+            <span class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-caption">
+                <h4>Workshop</h4>
+                <span>Event</span>
+            </div>
+        </button>
+
     </div>
 
 </section>
@@ -671,6 +768,32 @@
 
        
     <hr>
+
+    <!-- ================= GALLERY LIGHTBOX ================= -->
+
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImage">
+            <div class="lightbox-caption">
+                <h4 id="lightboxTitle"></h4>
+                <span id="lightboxTag"></span>
+            </div>
+            <span class="lightbox-counter" id="lightboxCounter"></span>
+        </div>
+
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+
     </main>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
@@ -733,6 +856,7 @@
   </div>
 </footer>
    <script src="script.js"></script>
+   <script src="gallery-lightbox.js"></script>
 
     </body>
 </html>

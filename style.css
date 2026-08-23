@@ -1049,17 +1049,27 @@ transform:translateY(0px);
 }
 
 .gallery-card{
+    position:relative;
+    display:block;
+    width:100%;
     background:#1E293B;
     border:1px solid rgba(255,255,255,0.06);
     border-radius:16px;
     overflow:hidden;
     box-shadow:0 5px 20px rgba(0,0,0,.15);
     transition:.3s;
+    padding:0;
+    cursor:pointer;
+    font:inherit;
+    text-align:left;
+    color:inherit;
 }
 
-.gallery-card:hover{
+.gallery-card:hover,
+.gallery-card:focus-visible{
     transform:translateY(-8px);
-    box-shadow:0 12px 30px rgba(59,130,246,0.18);
+    box-shadow:0 12px 30px rgba(59,130,246,0.25);
+    outline:none;
 }
 
 .gallery-card img{
@@ -1067,6 +1077,36 @@ transform:translateY(0px);
     height:200px;
     object-fit:cover;
     display:block;
+    transition:.4s;
+}
+
+.gallery-card:hover img{
+    transform:scale(1.06);
+}
+
+.gallery-zoom{
+    position:absolute;
+    top:14px;
+    right:14px;
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(15,23,42,0.7);
+    backdrop-filter:blur(4px);
+    color:#fff;
+    border-radius:50%;
+    font-size:14px;
+    opacity:0;
+    transform:translateY(-6px);
+    transition:.25s;
+}
+
+.gallery-card:hover .gallery-zoom,
+.gallery-card:focus-visible .gallery-zoom{
+    opacity:1;
+    transform:translateY(0);
 }
 
 .gallery-caption{
@@ -1082,6 +1122,145 @@ transform:translateY(0px);
 .gallery-caption span{
     color:#94A3B8;
     font-size:13px;
+}
+
+/* ================= LIGHTBOX ================= */
+
+.lightbox-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(6,10,20,0.92);
+    backdrop-filter:blur(6px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    padding:20px;
+    z-index:2000;
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+}
+
+.lightbox-overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.lightbox-content{
+    position:relative;
+    max-width:min(900px,90vw);
+    max-height:85vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.lightbox-content img{
+    max-width:100%;
+    max-height:70vh;
+    border-radius:14px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    object-fit:contain;
+    background:#1E293B;
+}
+
+.lightbox-caption{
+    text-align:center;
+    margin-top:16px;
+}
+
+.lightbox-caption h4{
+    color:#fff;
+    font-size:18px;
+    margin-bottom:4px;
+}
+
+.lightbox-caption span{
+    color:#94A3B8;
+    font-size:13px;
+}
+
+.lightbox-counter{
+    position:absolute;
+    top:-36px;
+    right:0;
+    color:#94A3B8;
+    font-size:13px;
+    letter-spacing:.5px;
+}
+
+.lightbox-close{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    color:#fff;
+    border-radius:50%;
+    font-size:18px;
+    cursor:pointer;
+    transition:.25s;
+    z-index:2001;
+}
+
+.lightbox-close:hover{
+    background:#3B82F6;
+    border-color:#3B82F6;
+    transform:rotate(90deg);
+}
+
+.lightbox-nav{
+    flex-shrink:0;
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    color:#fff;
+    border-radius:50%;
+    font-size:18px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.lightbox-nav:hover{
+    background:#3B82F6;
+    border-color:#3B82F6;
+    transform:scale(1.08);
+}
+
+@media(max-width:768px){
+    .lightbox-overlay{
+        gap:8px;
+        padding:16px;
+    }
+
+    .lightbox-nav{
+        width:42px;
+        height:42px;
+        font-size:15px;
+    }
+
+    .lightbox-close{
+        top:12px;
+        right:12px;
+        width:38px;
+        height:38px;
+        font-size:15px;
+    }
+
+    .lightbox-counter{
+        top:-30px;
+        font-size:12px;
+    }
 }
 
 .project-tech span{

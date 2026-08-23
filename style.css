@@ -6,7 +6,7 @@
 html{
     scroll-behavior: smooth;
 }
-#home, #about, #projects, #blog, #contact{
+#home, #about, #skills, #experience, #projects, #blog, #contact{
     scroll-margin-top: 80px;
 }
 body{

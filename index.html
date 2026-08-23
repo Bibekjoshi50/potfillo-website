@@ -78,11 +78,11 @@
     <span></span>
   </button>
            <ul class="nav-links" id="nav-links">
-            <li><a href="index.html#home" class="active-link">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#skills">Skills</a></li>
-            <li><a href="index.html#experience">Experience</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="#home" class="active-link">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li class="dropdown">
                 <a href="blog.html" class="dropdown-toggle">
                     Blog <i class="fa-solid fa-chevron-down"></i>
@@ -173,7 +173,7 @@
 </div>
 
 
-    <!-- ================= ABOUT TEASER ================= -->
+    <!-- ================= ABOUT ================= -->
 
 <section id="about" class="about">
 
@@ -197,15 +197,72 @@
         <p>
             My interests include Front-End Development, UI/UX Design,
             Cybersecurity, Artificial Intelligence, Research, and Open Source.
+            I enjoy continuously improving my knowledge through academic
+            projects, personal learning, and practical experience.
         </p>
 
-        <a href="about.html" class="about-btn">Learn More About Me</a>
+        <div class="about-cards">
+
+            <div class="card">
+                <h3>🎓 Education</h3>
+                <p>BSc CSIT Student</p>
+            </div>
+
+            <div class="card">
+                <h3>📍 Location</h3>
+                <p>Mahendranagar, Kanchanpur, Nepal</p>
+            </div>
+
+            <div class="card">
+                <h3>💡 Interests</h3>
+                <p>Research, Web Development & UI/UX</p>
+            </div>
+
+        </div>
+
+        <h3 class="education-title">Education</h3>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="circle"></div>
+
+                <div class="timeline-content">
+                    <h4>BSc CSIT</h4>
+                    <p> <b>Siddhanath Science Campus</b></p>
+                    <small>Tribhuvan University | Currently Studying</small>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="circle"></div>
+
+                <div class="timeline-content">
+                    <h4>+2 Science</h4>
+                    <p> <b>Radiant Secondary School</b></p>
+                    <small>Mahendranagar, Kanchanpur</small>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="circle"></div>
+
+                <div class="timeline-content">
+                    <h4>SEE</h4>
+                    <p> <b>Shree Purna Secondary School</b></p>
+                    <small>Airy, Banskheda, Kanchanpur</small>
+                </div>
+            </div>
+
+        </div>
+
+        <a href="https://www.linkedin.com/in/bibekjoshi50/" class="about-btn">Let's Connect</a>
 
     </div>
 
 </section>
 
-<!-- ================= SKILLS TEASER ================= -->
+<!-- ================= SKILLS ================= -->
 
 <section id="skills" class="projects">
 
@@ -244,6 +301,16 @@
         </div>
 
         <div class="skill-card">
+            <div class="skill-card-icon"><i class="fa-brands fa-git-alt"></i></div>
+            <h3>Tools & Platforms</h3>
+            <div class="skill-tags">
+                <span>Git</span>
+                <span>GitHub</span>
+                <span>VS Code</span>
+            </div>
+        </div>
+
+        <div class="skill-card">
             <div class="skill-card-icon"><i class="fa-solid fa-palette"></i></div>
             <h3>Design</h3>
             <div class="skill-tags">
@@ -253,15 +320,31 @@
             </div>
         </div>
 
-    </div>
+        <div class="skill-card">
+            <div class="skill-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>Cybersecurity Awareness</h3>
+            <div class="skill-tags">
+                <span>Security Fundamentals</span>
+                <span>Safe Web Practices</span>
+            </div>
+        </div>
 
-    <div class="blog-button">
-        <a href="skills.html">View All Skills</a>
+        <div class="skill-card">
+            <div class="skill-card-icon"><i class="fa-solid fa-people-group"></i></div>
+            <h3>Research & Soft Skills</h3>
+            <div class="skill-tags">
+                <span>Research Writing</span>
+                <span>Problem Solving</span>
+                <span>Teamwork</span>
+                <span>Communication</span>
+            </div>
+        </div>
+
     </div>
 
 </section>
 
-<!-- ================= EXPERIENCE TEASER ================= -->
+<!-- ================= EXPERIENCE ================= -->
 
 <section id="experience" class="projects">
 
@@ -287,8 +370,14 @@
                 <p class="experience-desc">
                     Planned and coordinated club events and technical
                     programs, handling logistics, scheduling, and
-                    on-ground execution.
+                    on-ground execution to make sure sessions ran smoothly
+                    from start to finish.
                 </p>
+                <div class="experience-tags">
+                    <span>Event Planning</span>
+                    <span>Coordination</span>
+                    <span>Leadership</span>
+                </div>
             </div>
         </div>
 
@@ -302,21 +391,71 @@
                 <p class="experience-org">Code for Change Nepal</p>
                 <p class="experience-desc">
                     Led public relations and outreach efforts, managing
-                    communication with partners and promoting the
-                    organization's initiatives.
+                    communication with partners and the community, and
+                    promoting the organization's initiatives across
+                    different channels.
                 </p>
+                <div class="experience-tags">
+                    <span>Public Relations</span>
+                    <span>Outreach</span>
+                    <span>Communication</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-card">
+            <div class="experience-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div class="experience-body">
+                <div class="experience-header">
+                    <h3>Computer Teacher</h3>
+                    <span class="experience-duration">School</span>
+                </div>
+                <p class="experience-org">International Public School, Mahendranagar</p>
+                <p class="experience-desc">
+                    Taught computer fundamentals and basic programming
+                    concepts to students, simplifying technical topics
+                    into clear, practical lessons and hands-on exercises.
+                </p>
+                <div class="experience-tags">
+                    <span>Teaching</span>
+                    <span>Computer Science</span>
+                    <span>Mentoring</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-card">
+            <div class="experience-icon"><i class="fa-solid fa-people-group"></i></div>
+            <div class="experience-body">
+                <div class="experience-header">
+                    <h3>Student & Community Member</h3>
+                    <span class="experience-duration">Ongoing</span>
+                </div>
+                <p class="experience-org">AWS Students Community &bull; GitHub Field Day &amp; more</p>
+                <p class="experience-desc">
+                    Active participant in tech communities and events such
+                    as the AWS Students Community and GitHub Field Day,
+                    engaging in workshops, hackathons, and networking
+                    sessions to keep learning and growing alongside other
+                    developers.
+                </p>
+                <div class="experience-tags">
+                    <span>Community</span>
+                    <span>Networking</span>
+                    <span>Continuous Learning</span>
+                </div>
             </div>
         </div>
 
     </div>
 
     <div class="blog-button">
-        <a href="experience.html">View Full Experience & Gallery</a>
+        <a href="experience.html">View Photo Gallery</a>
     </div>
 
 </section>
 
-<!-- ================= PROJECTS TEASER ================= -->
+<!-- ================= PROJECTS ================= -->
 
 <section id="projects" class="projects">
 
@@ -327,6 +466,8 @@
         Here are some of my projects and certificates that reflect my learning,
         practical experience, and continuous professional development.
     </p>
+
+    <h3 class="project-heading">Projects</h3>
 
     <div class="project-container">
 
@@ -377,8 +518,42 @@
 
     </div>
 
-    <div class="blog-button">
-        <a href="projects.html">View All Projects & Certificates</a>
+    <!-- Certificates -->
+
+    <h3 class="project-heading">Certificates</h3>
+
+    <div class="certificate-container">
+
+        <div class="certificate-card">
+
+            <img src="images/softwarefday.jpg" alt="Software Freedom Day 2024 participation certificate" width="400" height="220" loading="lazy">
+
+            <h4>Software Freedom Day 2024</h4>
+
+            <p>Participation Certificate</p>
+
+        </div>
+
+        <div class="certificate-card">
+
+            <img src="images/uiux.jpg" alt="UI UX event participation certificate" width="400" height="220" loading="lazy">
+
+            <h4>UI UX </h4>
+
+            <p>Participation Certificate</p>
+
+        </div>
+
+        <div class="certificate-card">
+
+            <img src="images/aws.jpg" alt="AWS Community Event participation certificate" width="400" height="220" loading="lazy">
+
+            <h4>AWS Community Event</h4>
+
+            <p>Participation Certificate</p>
+
+        </div>
+
     </div>
 
 </section>

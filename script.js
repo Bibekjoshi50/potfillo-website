@@ -81,6 +81,17 @@ function filterBlogCards(category) {
   }
 }
 
+// ================= AUTO-FILTER BLOG PAGE FROM ?category= LINK =================
+// Lets nav links on other pages (e.g. blog.html?category=AI) open
+// the blog listing pre-filtered to that category.
+if (document.querySelector('.blog-card')) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('category');
+  if (categoryParam) {
+    filterBlogCards(categoryParam);
+  }
+}
+
 const categoryButtons = document.querySelectorAll(".category-btn");
 
 categoryButtons.forEach(button => {

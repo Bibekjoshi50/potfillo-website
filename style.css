@@ -92,6 +92,9 @@ nav{
      /* box-shadow: 0 0 20px #3B82F6; */
 
 }
+.nav-links li a.active-link{
+    color:#3B82F6;
+}
 
 /* ================= BLOG DROPDOWN (SUBCATEGORY MENU) ================= */
 .dropdown{
@@ -838,6 +841,60 @@ transform:translateY(0px);
 
 .project-tech{
     margin:0 20px 20px;
+}
+
+/* ================= SKILLS PAGE ================= */
+
+.skills-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    margin-top:20px;
+}
+
+.skill-card{
+    background:#1E293B;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.skill-card:hover{
+    transform:translateY(-8px);
+}
+
+.skill-card-icon{
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#3B82F6;
+    color:#fff;
+    border-radius:12px;
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.skill-card h3{
+    color:#fff;
+    margin-bottom:12px;
+}
+
+.skill-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.skill-tags span{
+    display:inline-block;
+    background:#3B82F6;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:14px;
 }
 
 .project-tech span{

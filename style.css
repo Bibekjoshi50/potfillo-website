@@ -1713,9 +1713,6 @@ img{
         padding-right: 6%;
     }
 
-    .project-container,
-    .certificate-container,
-    .gallery-container,
     .blog-container{
         grid-template-columns: 1fr;
     }
@@ -1732,4 +1729,177 @@ img{
     .blog h2{
         font-size: 30px;
     }
+}
+
+/* ================= HORIZONTAL CAROUSELS ================= */
+/* Gallery, Projects and Certificates scroll sideways instead of wrapping
+   into a grid. Native scroll + scroll-snap does the heavy lifting; script.js
+   adds the arrow buttons and the scroll-into-view reveal on top. */
+
+.carousel{
+    position: relative;
+}
+
+.gallery-container,
+.project-container,
+.certificate-container{
+    display: flex;
+    gap: 22px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 12px 4px 26px;
+    scrollbar-width: thin;
+    scrollbar-color: #3B82F6 rgba(255, 255, 255, 0.06);
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Styled scrollbar (WebKit) */
+.gallery-container::-webkit-scrollbar,
+.project-container::-webkit-scrollbar,
+.certificate-container::-webkit-scrollbar{
+    height: 8px;
+}
+.gallery-container::-webkit-scrollbar-track,
+.project-container::-webkit-scrollbar-track,
+.certificate-container::-webkit-scrollbar-track{
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+}
+.gallery-container::-webkit-scrollbar-thumb,
+.project-container::-webkit-scrollbar-thumb,
+.certificate-container::-webkit-scrollbar-thumb{
+    background: linear-gradient(90deg, #3B82F6, #4f46e5);
+    border-radius: 20px;
+}
+
+/* Cards become fixed-width slides that snap into place */
+.gallery-container .gallery-card{
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+}
+.project-container .project-card{
+    flex: 0 0 340px;
+    scroll-snap-align: start;
+}
+.certificate-container .certificate-card{
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+}
+
+/* Edge fades hint that there's more to scroll (hidden at the very ends) */
+.carousel::before,
+.carousel::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 26px;
+    width: 64px;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+.carousel::before{
+    left: 0;
+    background: linear-gradient(90deg, #0F172A, transparent);
+}
+.carousel::after{
+    right: 0;
+    background: linear-gradient(270deg, #0F172A, transparent);
+}
+.carousel.has-overflow::before,
+.carousel.has-overflow::after{ opacity: 1; }
+.carousel.at-start::before{ opacity: 0; }
+.carousel.at-end::after{ opacity: 0; }
+
+/* Arrow buttons (injected by script.js) */
+.carousel-arrow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.82);
+    border: 1px solid rgba(59, 130, 246, 0.45);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 15;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease, background .25s ease, transform .25s ease, border-color .25s ease;
+}
+.carousel.has-overflow .carousel-arrow{
+    opacity: .55;
+    pointer-events: auto;
+}
+.carousel.has-overflow:hover .carousel-arrow,
+.carousel-arrow:focus-visible{
+    opacity: 1;
+}
+.carousel-arrow:hover{
+    background: #3B82F6;
+    border-color: #3B82F6;
+    transform: translateY(-50%) scale(1.1);
+}
+.carousel-arrow:disabled{
+    opacity: 0 !important;
+    pointer-events: none;
+}
+.carousel-prev{ left: 6px; }
+.carousel-next{ right: 6px; }
+
+/* Make certificate cards feel zoomable, like the gallery */
+.certificate-card{
+    position: relative;
+    cursor: zoom-in;
+}
+.certificate-card img{
+    transition: transform .4s ease;
+}
+.certificate-card:hover img{
+    transform: scale(1.05);
+}
+.certificate-card:hover .gallery-zoom,
+.certificate-card:focus-visible .gallery-zoom{
+    opacity: 1;
+    transform: translateY(0);
+}
+.certificate-card:focus-visible{
+    outline: none;
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.25);
+}
+
+/* Staggered reveal as cards scroll into view (script.js toggles .in-view).
+   Uses the independent `translate` property so the hover lift (transform)
+   keeps working once a card has appeared. */
+@media (prefers-reduced-motion: no-preference){
+    .reveal-card{
+        opacity: 0;
+        translate: 0 28px;
+        transition: opacity .6s ease, translate .6s ease;
+    }
+    .reveal-card.in-view{
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+/* Carousel tweaks for phones: near-full-width slides, no arrows (swipe) */
+@media (max-width: 600px){
+    .gallery-container .gallery-card{ flex-basis: 78%; }
+    .project-container .project-card{ flex-basis: 84%; }
+    .certificate-container .certificate-card{ flex-basis: 80%; }
+
+    .carousel-arrow{ display: none; }
+    .carousel::before,
+    .carousel::after{ width: 40px; }
 }

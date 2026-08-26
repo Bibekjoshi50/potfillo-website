@@ -1,0 +1,234 @@
+```html id="p2t1fh"
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: #111;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .logout {
+            background: white;
+            color: #111;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+        }
+
+        .card button {
+            padding: 10px 18px;
+            border: none;
+            background: #111;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="header">
+
+        <h1>Admin Dashboard</h1>
+
+        <button
+            class="logout"
+            id="logoutButton">
+
+            Logout
+
+        </button>
+
+    </div>
+
+
+    <div class="container">
+
+
+        <div class="welcome">
+
+            <h2>Welcome, Bibek 👋</h2>
+
+            <p id="userEmail">
+                Loading account...
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h2>📝</h2>
+
+                <h3>Create Article</h3>
+
+                <p>
+                    Write and publish a new article.
+                </p>
+
+                <button
+                    onclick="location.href='create-article.html'">
+
+                    Create Article
+
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>📚</h2>
+
+                <h3>Articles</h3>
+
+                <p>
+                    Manage your published articles.
+                </p>
+
+                <button
+                    onclick="alert('Article management coming next!')">
+
+                    View Articles
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- Supabase Library Configuration -->
+
+    <script src="supabase.js"></script>
+
+
+    <script>
+
+        // Check whether user is logged in
+
+        async function checkUser() {
+
+            const {
+                data: {
+                    session
+                }
+            } = await supabaseClient.auth.getSession();
+
+
+            // If no session, return to login
+
+            if (!session) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            // Show logged-in email
+
+            document.getElementById("userEmail")
+                .textContent =
+                "Logged in as: " +
+                session.user.email;
+
+        }
+
+
+        checkUser();
+
+
+        // Logout
+
+        document.getElementById("logoutButton")
+            .addEventListener("click", async function() {
+
+                await supabaseClient.auth.signOut();
+
+                window.location.href =
+                    "login.html";
+
+            });
+
+    </script>
+
+
+</body>
+
+</html>
+```

@@ -1,0 +1,718 @@
+```html id="z2q5v8"
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Create Article | Admin</title>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+
+        .header {
+
+            background: #111;
+            color: white;
+
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+
+        .back {
+
+            color: white;
+            text-decoration: none;
+
+        }
+
+
+        .container {
+
+            max-width: 900px;
+
+            margin: 40px auto;
+
+            padding: 20px;
+
+        }
+
+
+        .form-container {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 22px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: 600;
+
+        }
+
+
+        input,
+        textarea,
+        select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 15px;
+
+        }
+
+
+        textarea {
+
+            min-height: 250px;
+
+            resize: vertical;
+
+        }
+
+
+        .buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 25px;
+
+        }
+
+
+        button {
+
+            padding: 12px 20px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+        }
+
+
+        .draft {
+
+            background: #ddd;
+
+            color: #111;
+
+        }
+
+
+        .publish {
+
+            background: #111;
+
+            color: white;
+
+        }
+
+
+        button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+        }
+
+
+        #message {
+
+            margin-top: 20px;
+
+            font-weight: 600;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="header">
+
+        <h1>Create Article</h1>
+
+        <a
+            href="dashboard.html"
+            class="back">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+
+
+    <div class="container">
+
+
+        <div class="form-container">
+
+
+            <form id="articleForm">
+
+
+                <!-- Title -->
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Article Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Enter article title"
+                        required>
+
+                </div>
+
+
+
+                <!-- Category -->
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        required>
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Technology">
+                            Technology
+                        </option>
+
+                        <option value="AI">
+                            AI
+                        </option>
+
+                        <option value="Web Development">
+                            Web Development
+                        </option>
+
+                        <option value="Cybersecurity">
+                            Cybersecurity
+                        </option>
+
+                        <option value="Finance">
+                            Finance
+                        </option>
+
+                        <option value="Web3">
+                            Web3 & Blockchain
+                        </option>
+
+                        <option value="Research">
+                            Research
+                        </option>
+
+                        <option value="Notes">
+                            Notes
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Slug -->
+
+                <div class="form-group">
+
+                    <label for="slug">
+                        Slug
+                    </label>
+
+                    <input
+                        type="text"
+                        id="slug"
+                        placeholder="example-my-article">
+
+                </div>
+
+
+
+                <!-- Excerpt -->
+
+                <div class="form-group">
+
+                    <label for="excerpt">
+                        Short Description
+                    </label>
+
+                    <textarea
+                        id="excerpt"
+                        placeholder="Write a short description..."
+                        style="min-height:100px;"
+                        required></textarea>
+
+                </div>
+
+
+
+                <!-- Image -->
+
+                <div class="form-group">
+
+                    <label for="image">
+                        Featured Image URL
+                    </label>
+
+                    <input
+                        type="url"
+                        id="image"
+                        placeholder="https://example.com/image.jpg">
+
+                </div>
+
+
+
+                <!-- Content -->
+
+                <div class="form-group">
+
+                    <label for="content">
+                        Article Content
+                    </label>
+
+                    <textarea
+                        id="content"
+                        placeholder="Write your article here..."
+                        required></textarea>
+
+                </div>
+
+
+
+                <!-- Tags -->
+
+                <div class="form-group">
+
+                    <label for="tags">
+                        Tags
+                    </label>
+
+                    <input
+                        type="text"
+                        id="tags"
+                        placeholder="AI, Technology, Programming">
+
+                </div>
+
+
+
+                <!-- Buttons -->
+
+                <div class="buttons">
+
+                    <button
+                        type="button"
+                        class="draft"
+                        id="draftButton">
+
+                        Save Draft
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="publish"
+                        id="publishButton">
+
+                        Publish Article
+
+                    </button>
+
+                </div>
+
+
+                <div id="message"></div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Supabase configuration -->
+
+    <script src="supabase.js"></script>
+
+
+
+    <script>
+
+
+        // Check login
+
+        async function checkUser() {
+
+            const {
+                data: {
+                    session
+                }
+            } = await supabaseClient.auth.getSession();
+
+
+            if (!session) {
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+        }
+
+
+        checkUser();
+
+
+
+        // Create slug automatically
+
+        const titleInput =
+            document.getElementById("title");
+
+        const slugInput =
+            document.getElementById("slug");
+
+
+        titleInput.addEventListener(
+            "input",
+            function() {
+
+                slugInput.value =
+                    titleInput.value
+                    .toLowerCase()
+                    .trim()
+                    .replace(/[^a-z0-9\s-]/g, "")
+                    .replace(/\s+/g, "-");
+
+            }
+        );
+
+
+
+        // Get article data
+
+        function getArticleData(publishedStatus) {
+
+            const title =
+                document.getElementById("title")
+                .value.trim();
+
+
+            const slug =
+                document.getElementById("slug")
+                .value.trim();
+
+
+            const category =
+                document.getElementById("category")
+                .value;
+
+
+            const excerpt =
+                document.getElementById("excerpt")
+                .value.trim();
+
+
+            const image =
+                document.getElementById("image")
+                .value.trim();
+
+
+            const content =
+                document.getElementById("content")
+                .value.trim();
+
+
+            const tagsText =
+                document.getElementById("tags")
+                .value;
+
+
+            const tags =
+                tagsText
+                .split(",")
+                .map(tag => tag.trim())
+                .filter(tag => tag !== "");
+
+
+            return {
+
+                title: title,
+
+                slug: slug,
+
+                category: category,
+
+                excerpt: excerpt,
+
+                content: content,
+
+                image_url: image || null,
+
+                tags: tags,
+
+                author: "Bibek Joshi",
+
+                published: publishedStatus
+
+            };
+
+        }
+
+
+
+        // Publish Article
+
+        document.getElementById("articleForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    const button =
+                        document.getElementById(
+                            "publishButton"
+                        );
+
+
+                    button.disabled = true;
+
+                    button.textContent =
+                        "Publishing...";
+
+
+                    const article =
+                        getArticleData(true);
+
+
+                    const {
+                        data,
+                        error
+                    } = await supabaseClient
+                        .from("articles")
+                        .insert([article]);
+
+
+                    if (error) {
+
+                        console.error(error);
+
+                        document.getElementById(
+                            "message"
+                        ).textContent =
+                            "❌ " + error.message;
+
+                        button.disabled = false;
+
+                        button.textContent =
+                            "Publish Article";
+
+                        return;
+
+                    }
+
+
+                    document.getElementById(
+                        "message"
+                    ).textContent =
+                        "✅ Article published successfully!";
+
+
+                    document.getElementById(
+                        "articleForm"
+                    ).reset();
+
+
+                    button.disabled = false;
+
+                    button.textContent =
+                        "Publish Article";
+
+                }
+            );
+
+
+
+        // Save Draft
+
+        document.getElementById("draftButton")
+            .addEventListener(
+                "click",
+                async function() {
+
+
+                    const button = this;
+
+
+                    button.disabled = true;
+
+                    button.textContent =
+                        "Saving...";
+
+
+                    const article =
+                        getArticleData(false);
+
+
+                    if (!article.title ||
+                        !article.slug ||
+                        !article.category ||
+                        !article.content) {
+
+                        document.getElementById(
+                            "message"
+                        ).textContent =
+                            "❌ Please fill in Title, Category and Content.";
+
+                        button.disabled = false;
+
+                        button.textContent =
+                            "Save Draft";
+
+                        return;
+
+                    }
+
+
+                    const {
+                        data,
+                        error
+                    } = await supabaseClient
+                        .from("articles")
+                        .insert([article]);
+
+
+                    if (error) {
+
+                        console.error(error);
+
+                        document.getElementById(
+                            "message"
+                        ).textContent =
+                            "❌ " + error.message;
+
+                        button.disabled = false;
+
+                        button.textContent =
+                            "Save Draft";
+
+                        return;
+
+                    }
+
+
+                    document.getElementById(
+                        "message"
+                    ).textContent =
+                        "✅ Draft saved successfully!";
+
+
+                    document.getElementById(
+                        "articleForm"
+                    ).reset();
+
+
+                    button.disabled = false;
+
+                    button.textContent =
+                        "Save Draft";
+
+                }
+            );
+
+
+    </script>
+
+
+</body>
+
+</html>
+```

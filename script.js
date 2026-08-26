@@ -112,3 +112,88 @@ categoryButtons.forEach(button => {
     });
 
 });
+
+// ================= HORIZONTAL CAROUSELS + CARD REVEAL =================
+// Turns the gallery / projects / certificate rows into swipeable sliders:
+// flanks each row with prev/next arrows, keeps the edge fades in sync with
+// the scroll position, and reveals each card as it scrolls into view.
+(function () {
+  const rows = document.querySelectorAll(
+    '.gallery-container, .project-container, .certificate-container'
+  );
+  if (!rows.length) return;
+
+  const reduceMotion =
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  rows.forEach(row => {
+    // Skip if somehow already enhanced
+    if (row.parentElement && row.parentElement.classList.contains('carousel')) return;
+
+    // --- wrap the row so we can flank it with arrow buttons + edge fades ---
+    const carousel = document.createElement('div');
+    carousel.className = 'carousel';
+    row.parentNode.insertBefore(carousel, row);
+    carousel.appendChild(row);
+
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.className = 'carousel-arrow carousel-prev';
+    prev.setAttribute('aria-label', 'Scroll left');
+    prev.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'carousel-arrow carousel-next';
+    next.setAttribute('aria-label', 'Scroll right');
+    next.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+
+    carousel.appendChild(prev);
+    carousel.appendChild(next);
+
+    const step = () => Math.max(row.clientWidth * 0.85, 240);
+    prev.addEventListener('click', () =>
+      row.scrollBy({ left: -step(), behavior: 'smooth' })
+    );
+    next.addEventListener('click', () =>
+      row.scrollBy({ left: step(), behavior: 'smooth' })
+    );
+
+    function updateArrows() {
+      const max = row.scrollWidth - row.clientWidth - 1;
+      const scrollable = row.scrollWidth > row.clientWidth + 4;
+      carousel.classList.toggle('has-overflow', scrollable);
+      carousel.classList.toggle('at-start', row.scrollLeft <= 0);
+      carousel.classList.toggle('at-end', row.scrollLeft >= max);
+      prev.disabled = row.scrollLeft <= 0;
+      next.disabled = row.scrollLeft >= max;
+    }
+    row.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    // Images can change the scroll width once they load
+    row.querySelectorAll('img').forEach(img => {
+      if (!img.complete) img.addEventListener('load', updateArrows, { once: true });
+    });
+    updateArrows();
+
+    // --- staggered reveal as each card scrolls into view ---
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      const cards = Array.from(row.children);
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      cards.forEach((card, i) => {
+        card.classList.add('reveal-card');
+        card.style.transitionDelay = Math.min(i * 70, 420) + 'ms';
+        io.observe(card);
+      });
+    }
+  });
+})();

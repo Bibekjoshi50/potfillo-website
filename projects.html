@@ -178,6 +178,31 @@
 
 </section>
 
+    <!-- ================= CERTIFICATE LIGHTBOX ================= -->
+
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous certificate">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImage">
+            <div class="lightbox-caption">
+                <h4 id="lightboxTitle"></h4>
+                <span id="lightboxTag"></span>
+            </div>
+            <span class="lightbox-counter" id="lightboxCounter"></span>
+        </div>
+
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next certificate">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+
     <hr>
     </main>
 
@@ -235,6 +260,7 @@
   </div>
 </footer>
    <script src="script.js"></script>
+   <script src="gallery-lightbox.js"></script>
 
     </body>
 </html>

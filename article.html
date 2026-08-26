@@ -11,16 +11,92 @@
 
     <meta name="robots" content="index, follow">
 
+    <!-- Dynamic SEO -->
     <title>Article | Bibek Joshi</title>
 
-    <link rel="icon" type="image/jpeg" href="image.jpg">
+    <meta id="metaDescription"
+          name="description"
+          content="Articles by Bibek Joshi about technology, cybersecurity, AI, web development, finance and research.">
+
+    <link id="canonicalUrl"
+          rel="canonical"
+          href="https://www.bibekjoshi50.com.np/article.html">
+
+
+    <!-- Open Graph -->
+
+    <meta property="og:type" content="article">
+
+    <meta id="ogTitle"
+          property="og:title"
+          content="Article | Bibek Joshi">
+
+    <meta id="ogDescription"
+          property="og:description"
+          content="">
+
+    <meta id="ogImage"
+          property="og:image"
+          content="">
+
+    <meta id="ogUrl"
+          property="og:url"
+          content="">
+
+    <meta property="og:site_name"
+          content="Bibek Joshi">
+
+
+    <!-- X / Twitter -->
+
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta id="twitterTitle"
+          name="twitter:title"
+          content="">
+
+    <meta id="twitterDescription"
+          name="twitter:description"
+          content="">
+
+    <meta id="twitterImage"
+          name="twitter:image"
+          content="">
+
+
+    <!-- Article Schema -->
+
+    <script id="articleSchema"
+            type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article"
+    }
+    </script>
+
+
+    <!-- Favicon -->
+
+    <link rel="icon"
+          type="image/jpeg"
+          href="image.jpg">
+
+
+    <!-- Font Awesome -->
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="style.css">
+
 
     <!-- Supabase -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
@@ -28,451 +104,1478 @@
 
 <body>
 
-    <!-- NAVBAR -->
 
-    <nav class="navbar">
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
-        <div class="logo">
-            <a href="index.html">
-                Bibek's Portfolio
+<nav class="navbar">
+
+    <div class="logo">
+
+        <a href="index.html">
+            Bibek's Portfolio
+        </a>
+
+    </div>
+
+
+    <button class="hamburger"
+            id="hamburger"
+            aria-label="Toggle menu">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+
+    <ul class="nav-links"
+        id="nav-links">
+
+        <li>
+            <a href="index.html#home">
+                Home
             </a>
+        </li>
+
+        <li>
+            <a href="index.html#about">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="index.html#skills">
+                Skills
+            </a>
+        </li>
+
+        <li>
+            <a href="index.html#experience">
+                Experience
+            </a>
+        </li>
+
+        <li>
+            <a href="index.html#projects">
+                Projects
+            </a>
+        </li>
+
+        <li>
+            <a href="blog.html">
+                Blog
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN ARTICLE
+===================================================== -->
+
+<main class="article-page">
+
+
+    <!-- Loading -->
+
+    <div id="articleLoading"
+         class="article-loading">
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        <p>
+            Loading article...
+        </p>
+
+    </div>
+
+
+
+    <!-- Article -->
+
+    <article id="articleContent"
+             class="single-article"
+             style="display:none;">
+
+
+        <!-- =================================================
+             ARTICLE HEADER
+        ================================================= -->
+
+        <header class="article-header">
+
+
+            <!-- Category -->
+
+            <a id="articleCategory"
+               href="blog.html"
+               class="article-category">
+
+            </a>
+
+
+            <!-- Title -->
+
+            <h1 id="articleTitle">
+
+            </h1>
+
+
+            <!-- Excerpt -->
+
+            <p id="articleExcerpt"
+               class="article-excerpt">
+
+            </p>
+
+
+            <!-- Meta -->
+
+            <div class="article-meta">
+
+
+                <!-- Author -->
+
+                <span>
+
+                    <i class="fa-regular fa-user"></i>
+
+                    By
+
+                    <a href="about.html"
+                       id="articleAuthor"
+                       class="article-author-link">
+
+                        Bibek Joshi
+
+                    </a>
+
+                </span>
+
+
+                <!-- Published -->
+
+                <span>
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    <span id="articleDate">
+                    </span>
+
+                </span>
+
+
+                <!-- Updated -->
+
+                <span id="updatedDateContainer">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Updated
+
+                    <span id="articleUpdatedDate">
+                    </span>
+
+                </span>
+
+
+                <!-- Reading time -->
+
+                <span>
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    <span id="articleReadTime">
+                    </span>
+
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             FEATURED IMAGE
+        ================================================= -->
+
+        <div id="articleImageContainer"
+             class="article-image-container"
+             style="display:none;">
+
+            <img id="articleImage"
+                 src=""
+                 alt=""
+                 loading="eager">
+
         </div>
 
-        <button class="hamburger"
-                id="hamburger"
-                aria-label="Toggle menu">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </button>
 
 
-        <ul class="nav-links" id="nav-links">
+        <!-- =================================================
+             ARTICLE BODY
+        ================================================= -->
 
-            <li>
-                <a href="index.html#home">
-                    Home
+        <div id="articleBody"
+             class="article-body">
+
+        </div>
+
+
+
+        <!-- =================================================
+             TAGS
+        ================================================= -->
+
+        <div id="articleTags"
+             class="article-tags"
+             style="display:none;">
+
+            <strong>
+                Tags:
+            </strong>
+
+            <div id="tagList">
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SHARE
+        ================================================= -->
+
+        <section class="article-share">
+
+            <h3>
+                Share this article
+            </h3>
+
+
+            <div class="share-buttons">
+
+
+                <!-- Facebook -->
+
+                <a id="facebookShare"
+                   href="#"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="share-btn facebook-share">
+
+                    <i class="fa-brands fa-facebook-f"></i>
+
+                    Facebook
+
                 </a>
-            </li>
 
-            <li>
-                <a href="index.html#about">
-                    About
+
+
+                <!-- X -->
+
+                <a id="twitterShare"
+                   href="#"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="share-btn twitter-share">
+
+                    <i class="fa-brands fa-x-twitter"></i>
+
+                    X
+
                 </a>
-            </li>
 
-            <li>
-                <a href="index.html#skills">
-                    Skills
+
+
+                <!-- LinkedIn -->
+
+                <a id="linkedinShare"
+                   href="#"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="share-btn linkedin-share">
+
+                    <i class="fa-brands fa-linkedin-in"></i>
+
+                    LinkedIn
+
                 </a>
-            </li>
 
-            <li>
-                <a href="index.html#experience">
-                    Experience
+
+
+                <!-- WhatsApp -->
+
+                <a id="whatsappShare"
+                   href="#"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="share-btn whatsapp-share">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    WhatsApp
+
                 </a>
-            </li>
-
-            <li>
-                <a href="index.html#projects">
-                    Projects
-                </a>
-            </li>
-
-            <li>
-                <a href="blog.html">
-                    Blog
-                </a>
-            </li>
-
-        </ul>
-
-    </nav>
 
 
-    <!-- ARTICLE -->
 
-    <main>
+                <!-- Copy -->
 
-        <article class="single-article">
+                <button id="copyLinkButton"
+                        class="share-btn copy-share">
 
-            <div id="articleLoading">
+                    <i class="fa-solid fa-link"></i>
+
+                    Copy Link
+
+                </button>
+
+            </div>
+
+
+            <p id="copyMessage"
+               class="copy-message"
+               style="display:none;">
+
+                Link copied!
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RELATED ARTICLES
+        ================================================= -->
+
+        <section class="related-articles">
+
+            <h2>
+                Related Articles
+            </h2>
+
+            <div id="relatedArticlesContainer"
+                 class="related-articles-grid">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ARTICLE FOOTER
+        ================================================= -->
+
+        <div class="article-footer">
+
+            <a href="blog.html"
+               class="read-more">
+
+                ← Back to Articles
+
+            </a>
+
+        </div>
+
+
+    </article>
+
+
+
+    <!-- =====================================================
+         ERROR
+    ===================================================== -->
+
+    <div id="articleError"
+         class="article-error"
+         style="display:none;">
+
+        <h1>
+            Article Not Found
+        </h1>
+
+        <p>
+            Sorry, this article could not be found.
+        </p>
+
+        <a href="blog.html"
+           class="read-more">
+
+            ← Back to Blog
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-top">
+
+
+            <div class="footer-brand">
+
+                <h3>
+                    Bibek Joshi
+                </h3>
 
                 <p>
-                    Loading article...
+                    CSIT Student | Programmer | UI/UX Designer |
+                    Front-End Developer | Research Enthusiast
                 </p>
 
             </div>
 
 
-            <div id="articleContent"
-                 style="display:none;">
 
-                <div class="article-header">
+            <div class="footer-links">
 
-                    <span id="articleCategory"
-                          class="blog-date">
+                <h4 class="footer-heading">
+                    Quick Links
+                </h4>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="about.html">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="projects.html">
+                            Projects
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="blog.html">
+                            Blog
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="footer-contact">
+
+                <h4 class="footer-heading">
+                    Get In Touch
+                </h4>
+
+                <p>
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    Mahendranagar, Kanchanpur, Nepal
+
+                </p>
+
+
+                <p>
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <a href="mailto:bebikjoshi118@gmail.com">
+
+                        bebikjoshi118@gmail.com
+
+                    </a>
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <hr>
+
+
+        <div class="footer-bottom">
+
+            <p class="copyright">
+
+                © <span id="year"></span>
+                Bibek Joshi. All Rights Reserved.
+
+            </p>
+
+
+            <a href="blog.html"
+               class="back-to-top">
+
+                Back to Blog
+
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="supabase.js"></script>
+
+<script src="script.js"></script>
+
+
+<script>
+
+async function loadArticle() {
+
+
+    const loading =
+        document.getElementById(
+            "articleLoading"
+        );
+
+
+    const content =
+        document.getElementById(
+            "articleContent"
+        );
+
+
+    const errorBox =
+        document.getElementById(
+            "articleError"
+        );
+
+
+    /* =================================================
+       GET SLUG
+    ================================================= */
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const slug =
+        urlParams.get("slug");
+
+
+    console.log(
+        "Article slug:",
+        slug
+    );
+
+
+    if (!slug) {
+
+        loading.style.display =
+            "none";
+
+        errorBox.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       GET ARTICLE
+    ================================================= */
+
+    const {
+        data: article,
+        error
+    } = await supabaseClient
+
+        .from("articles")
+
+        .select("*")
+
+        .eq("slug", slug)
+
+        .eq("published", true)
+
+        .single();
+
+
+
+    if (error || !article) {
+
+        console.error(
+            "Article loading error:",
+            error
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        errorBox.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       BASIC DATA
+    ================================================= */
+
+    const articleURL =
+        window.location.href;
+
+
+    const description =
+        article.excerpt ||
+        article.title;
+
+
+
+    /* =================================================
+       SEO TITLE
+    ================================================= */
+
+    document.title =
+        article.title +
+        " | Bibek Joshi";
+
+
+
+    /* =================================================
+       META DESCRIPTION
+    ================================================= */
+
+    document
+        .getElementById(
+            "metaDescription"
+        )
+        .setAttribute(
+            "content",
+            description
+        );
+
+
+
+    /* =================================================
+       CANONICAL
+    ================================================= */
+
+    document
+        .getElementById(
+            "canonicalUrl"
+        )
+        .setAttribute(
+            "href",
+            articleURL
+        );
+
+
+
+    /* =================================================
+       OPEN GRAPH
+    ================================================= */
+
+    document
+        .getElementById(
+            "ogTitle"
+        )
+        .setAttribute(
+            "content",
+            article.title
+        );
+
+
+    document
+        .getElementById(
+            "ogDescription"
+        )
+        .setAttribute(
+            "content",
+            description
+        );
+
+
+    document
+        .getElementById(
+            "ogUrl"
+        )
+        .setAttribute(
+            "content",
+            articleURL
+        );
+
+
+
+    /* =================================================
+       TWITTER
+    ================================================= */
+
+    document
+        .getElementById(
+            "twitterTitle"
+        )
+        .setAttribute(
+            "content",
+            article.title
+        );
+
+
+    document
+        .getElementById(
+            "twitterDescription"
+        )
+        .setAttribute(
+            "content",
+            description
+        );
+
+
+
+    /* =================================================
+       TITLE
+    ================================================= */
+
+    document
+        .getElementById(
+            "articleTitle"
+        )
+        .textContent =
+        article.title;
+
+
+
+    /* =================================================
+       EXCERPT
+    ================================================= */
+
+    document
+        .getElementById(
+            "articleExcerpt"
+        )
+        .textContent =
+        article.excerpt || "";
+
+
+
+    /* =================================================
+       CATEGORY
+    ================================================= */
+
+    const category =
+        document.getElementById(
+            "articleCategory"
+        );
+
+
+    category.textContent =
+        article.category;
+
+
+    category.href =
+        "blog.html#" +
+        encodeURIComponent(
+            article.category
+        );
+
+
+
+    /* =================================================
+       AUTHOR
+    ================================================= */
+
+    document
+        .getElementById(
+            "articleAuthor"
+        )
+        .textContent =
+        article.author ||
+        "Bibek Joshi";
+
+
+
+    /* =================================================
+       PUBLISHED DATE
+    ================================================= */
+
+    const publishedDate =
+        new Date(
+            article.created_at
+        );
+
+
+    const formattedPublishedDate =
+        publishedDate.toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
+
+
+    document
+        .getElementById(
+            "articleDate"
+        )
+        .textContent =
+        formattedPublishedDate;
+
+
+
+    /* =================================================
+       UPDATED DATE
+    ================================================= */
+
+    const updatedDateContainer =
+        document.getElementById(
+            "updatedDateContainer"
+        );
+
+
+    if (
+        article.updated_at &&
+        article.updated_at !==
+        article.created_at
+    ) {
+
+
+        const updatedDate =
+            new Date(
+                article.updated_at
+            );
+
+
+        document
+            .getElementById(
+                "articleUpdatedDate"
+            )
+            .textContent =
+            updatedDate.toLocaleDateString(
+                "en-US",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
+            );
+
+
+    } else {
+
+        updatedDateContainer.style.display =
+            "none";
+
+    }
+
+
+
+    /* =================================================
+       FEATURED IMAGE
+    ================================================= */
+
+    if (article.image_url) {
+
+
+        const image =
+            document.getElementById(
+                "articleImage"
+            );
+
+
+        image.src =
+            article.image_url;
+
+
+        image.alt =
+            article.title;
+
+
+        document
+            .getElementById(
+                "ogImage"
+            )
+            .setAttribute(
+                "content",
+                article.image_url
+            );
+
+
+        document
+            .getElementById(
+                "twitterImage"
+            )
+            .setAttribute(
+                "content",
+                article.image_url
+            );
+
+
+        document
+            .getElementById(
+                "articleImageContainer"
+            )
+            .style.display =
+            "block";
+
+    }
+
+
+
+    /* =================================================
+       ARTICLE CONTENT
+    ================================================= */
+
+    const articleBody =
+        document.getElementById(
+            "articleBody"
+        );
+
+
+    articleBody.innerHTML =
+        article.content;
+
+
+
+    /* =================================================
+       READING TIME
+    ================================================= */
+
+    const temporaryDiv =
+        document.createElement(
+            "div"
+        );
+
+
+    temporaryDiv.innerHTML =
+        article.content || "";
+
+
+    const plainText =
+        temporaryDiv.textContent ||
+        temporaryDiv.innerText ||
+        "";
+
+
+    const words =
+        plainText
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean)
+            .length;
+
+
+    const wordsPerMinute =
+        200;
+
+
+    const readingTime =
+        Math.max(
+            1,
+            Math.ceil(
+                words /
+                wordsPerMinute
+            )
+        );
+
+
+    document
+        .getElementById(
+            "articleReadTime"
+        )
+        .textContent =
+        readingTime +
+        " min read";
+
+
+
+    /* =================================================
+       TAGS
+    ================================================= */
+
+    if (
+        article.tags &&
+        article.tags.length > 0
+    ) {
+
+
+        const tagContainer =
+            document.getElementById(
+                "tagList"
+            );
+
+
+        article.tags.forEach(
+            tag => {
+
+
+                const tagElement =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                tagElement.className =
+                    "article-tag";
+
+
+                tagElement.textContent =
+                    tag;
+
+
+                tagContainer.appendChild(
+                    tagElement
+                );
+
+            }
+        );
+
+
+        document
+            .getElementById(
+                "articleTags"
+            )
+            .style.display =
+            "block";
+
+    }
+
+
+
+    /* =================================================
+       SHARE BUTTONS
+    ================================================= */
+
+    const encodedURL =
+        encodeURIComponent(
+            articleURL
+        );
+
+
+    const encodedTitle =
+        encodeURIComponent(
+            article.title
+        );
+
+
+
+    /* Facebook */
+
+    document
+        .getElementById(
+            "facebookShare"
+        )
+        .href =
+        "https://www.facebook.com/sharer/sharer.php?u=" +
+        encodedURL;
+
+
+
+    /* X */
+
+    document
+        .getElementById(
+            "twitterShare"
+        )
+        .href =
+        "https://twitter.com/intent/tweet?url=" +
+        encodedURL +
+        "&text=" +
+        encodedTitle;
+
+
+
+    /* LinkedIn */
+
+    document
+        .getElementById(
+            "linkedinShare"
+        )
+        .href =
+        "https://www.linkedin.com/sharing/share-offsite/?url=" +
+        encodedURL;
+
+
+
+    /* WhatsApp */
+
+    document
+        .getElementById(
+            "whatsappShare"
+        )
+        .href =
+        "https://api.whatsapp.com/send?text=" +
+        encodedTitle +
+        "%20" +
+        encodedURL;
+
+
+
+    /* =================================================
+       COPY LINK
+    ================================================= */
+
+    document
+        .getElementById(
+            "copyLinkButton"
+        )
+        .addEventListener(
+            "click",
+            async () => {
+
+
+                try {
+
+
+                    await navigator.clipboard
+                        .writeText(
+                            articleURL
+                        );
+
+
+                    const message =
+                        document
+                            .getElementById(
+                                "copyMessage"
+                            );
+
+
+                    message.style.display =
+                        "block";
+
+
+                    setTimeout(
+                        () => {
+
+                            message.style.display =
+                                "none";
+
+                        },
+                        2000
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Copy failed:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+
+
+    /* =================================================
+       ARTICLE SCHEMA
+    ================================================= */
+
+    const schema = {
+
+        "@context":
+            "https://schema.org",
+
+        "@type":
+            "Article",
+
+        "headline":
+            article.title,
+
+        "description":
+            description,
+
+        "author": {
+
+            "@type":
+                "Person",
+
+            "name":
+                article.author ||
+                "Bibek Joshi",
+
+            "url":
+                "https://www.bibekjoshi50.com.np/about.html"
+
+        },
+
+        "publisher": {
+
+            "@type":
+                "Person",
+
+            "name":
+                "Bibek Joshi"
+
+        },
+
+        "datePublished":
+            article.created_at,
+
+        "dateModified":
+            article.updated_at ||
+            article.created_at,
+
+        "mainEntityOfPage": {
+
+            "@type":
+                "WebPage",
+
+            "@id":
+                articleURL
+
+        }
+
+    };
+
+
+    if (article.image_url) {
+
+        schema.image =
+            [article.image_url];
+
+    }
+
+
+    document
+        .getElementById(
+            "articleSchema"
+        )
+        .textContent =
+        JSON.stringify(
+            schema
+        );
+
+
+
+    /* =================================================
+       RELATED ARTICLES
+    ================================================= */
+
+    await loadRelatedArticles(
+        article.category,
+        article.id
+    );
+
+
+
+    /* =================================================
+       SHOW ARTICLE
+    ================================================= */
+
+    loading.style.display =
+        "none";
+
+
+    content.style.display =
+        "block";
+
+}
+
+
+
+/* =====================================================
+   RELATED ARTICLES
+===================================================== */
+
+async function loadRelatedArticles(
+    category,
+    currentArticleId
+) {
+
+
+    const container =
+        document.getElementById(
+            "relatedArticlesContainer"
+        );
+
+
+    const {
+        data: related,
+        error
+    } = await supabaseClient
+
+        .from("articles")
+
+        .select(
+            "id,title,slug,excerpt,image_url,created_at,category"
+        )
+
+        .eq(
+            "published",
+            true
+        )
+
+        .eq(
+            "category",
+            category
+        )
+
+        .neq(
+            "id",
+            currentArticleId
+        )
+
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        )
+
+        .limit(3);
+
+
+
+    if (
+        error ||
+        !related ||
+        related.length === 0
+    ) {
+
+        container.innerHTML =
+            "<p>No related articles yet.</p>";
+
+        return;
+
+    }
+
+
+
+    related.forEach(
+        article => {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "related-card";
+
+
+            const image =
+                article.image_url
+                    ? `
+                        <img
+                            src="${article.image_url}"
+                            alt="${article.title}"
+                            loading="lazy">
+                      `
+                    : `
+                        <div class="related-placeholder">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                      `;
+
+
+            card.innerHTML = `
+
+                ${image}
+
+                <div class="related-card-content">
+
+                    <span>
+                        ${article.category}
                     </span>
 
-                    <h1 id="articleTitle">
-                    </h1>
+                    <h3>
+                        ${article.title}
+                    </h3>
 
-                    <p id="articleExcerpt">
+                    <p>
+                        ${article.excerpt || ""}
                     </p>
 
-                    <p id="articleAuthor">
-                    </p>
-
-                </div>
-
-
-                <div id="articleImageContainer">
-
-                    <img id="articleImage"
-                         src=""
-                         alt=""
-                         style="display:none; max-width:100%; height:auto;">
-
-                </div>
-
-
-                <div id="articleBody"
-                     class="article-body">
-                </div>
-
-
-                <div class="article-footer">
-
-                    <a href="blog.html"
-                       class="read-more">
-
-                        ← Back to Articles
-
+                    <a href="article.html?slug=${encodeURIComponent(article.slug)}">
+                        Read Article →
                     </a>
 
                 </div>
 
-            </div>
+            `;
 
 
-            <div id="articleError"
-                 style="display:none;">
-
-                <h1>
-                    Article Not Found
-                </h1>
-
-                <p>
-                    Sorry, this article could not be found.
-                </p>
-
-                <a href="blog.html"
-                   class="read-more">
-
-                    ← Back to Blog
-
-                </a>
-
-            </div>
-
-        </article>
-
-    </main>
-
-
-    <!-- FOOTER -->
-
-    <footer class="footer"
-            id="contact">
-
-        <div class="container">
-
-            <div class="footer-top">
-
-                <div class="footer-brand">
-
-                    <h3>
-                        Bibek Joshi
-                    </h3>
-
-                    <p>
-                        CSIT Student | Programmer | UI/UX Designer |
-                        Front-End Developer | Research Enthusiast
-                    </p>
-
-                </div>
-
-
-                <div class="footer-links">
-
-                    <h4 class="footer-heading">
-                        Quick Links
-                    </h4>
-
-                    <ul>
-
-                        <li>
-                            <a href="index.html">
-                                Home
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="blog.html">
-                                Blog
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-                <div class="footer-contact">
-
-                    <h4 class="footer-heading">
-                        Get In Touch
-                    </h4>
-
-                    <p>
-                        <i class="fa-solid fa-location-dot"></i>
-                        Mahendranagar, Kanchanpur, Nepal
-                    </p>
-
-                    <p>
-                        <i class="fa-solid fa-envelope"></i>
-
-                        <a href="mailto:bebikjoshi118@gmail.com">
-                            bebikjoshi118@gmail.com
-                        </a>
-
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <hr>
-
-
-            <div class="footer-bottom">
-
-                <p class="copyright">
-
-                    © <span id="year"></span>
-                    Bibek Joshi. All Rights Reserved.
-
-                </p>
-
-                <a href="blog.html"
-                   class="back-to-top">
-
-                    Back to Blog
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <!-- SUPABASE -->
-
-    <script src="supabase.js"></script>
-
-    <script src="script.js"></script>
-
-
-    <script>
-
-        async function loadArticle() {
-
-            const loading =
-                document.getElementById(
-                    "articleLoading"
-                );
-
-            const content =
-                document.getElementById(
-                    "articleContent"
-                );
-
-            const errorBox =
-                document.getElementById(
-                    "articleError"
-                );
-
-
-            // Get slug from URL
-
-            const urlParams =
-                new URLSearchParams(
-                    window.location.search
-                );
-
-            const slug =
-                urlParams.get("slug");
-
-
-            console.log(
-                "Article slug:",
-                slug
+            container.appendChild(
+                card
             );
 
-
-            if (!slug) {
-
-                loading.style.display =
-                    "none";
-
-                errorBox.style.display =
-                    "block";
-
-                return;
-
-            }
-
-
-            // Get article from Supabase
-
-            const {
-                data: article,
-                error
-            } = await supabaseClient
-
-                .from("articles")
-
-                .select("*")
-
-                .eq("slug", slug)
-
-                .eq("published", true)
-
-                .single();
-
-
-            if (error || !article) {
-
-                console.error(
-                    "Article loading error:",
-                    error
-                );
-
-                loading.style.display =
-                    "none";
-
-                errorBox.style.display =
-                    "block";
-
-                return;
-
-            }
-
-
-            // Page title
-
-            document.title =
-                article.title +
-                " | Bibek Joshi";
-
-
-            // Category
-
-            document.getElementById(
-                "articleCategory"
-            ).textContent =
-                article.category;
-
-
-            // Title
-
-            document.getElementById(
-                "articleTitle"
-            ).textContent =
-                article.title;
-
-
-            // Excerpt
-
-            document.getElementById(
-                "articleExcerpt"
-            ).textContent =
-                article.excerpt || "";
-
-
-            // Author
-
-            document.getElementById(
-                "articleAuthor"
-            ).textContent =
-                "By " +
-                (article.author ||
-                 "Bibek Joshi");
-
-
-            // Image
-
-            if (article.image_url) {
-
-                const image =
-                    document.getElementById(
-                        "articleImage"
-                    );
-
-                image.src =
-                    article.image_url;
-
-                image.alt =
-                    article.title;
-
-                image.style.display =
-                    "block";
-
-            }
-
-
-            // Article content
-
-            document.getElementById(
-                "articleBody"
-            ).innerHTML =
-                article.content;
-
-
-            // Show article
-
-            loading.style.display =
-                "none";
-
-            content.style.display =
-                "block";
-
         }
+    );
+
+}
 
 
-        loadArticle();
+
+/* =====================================================
+   LOAD
+===================================================== */
+
+loadArticle();
 
 
-        // Footer year
 
-        const year =
-            document.getElementById(
-                "year"
-            );
+/* Footer year */
 
-        if (year) {
+const year =
+    document.getElementById(
+        "year"
+    );
 
-            year.textContent =
-                new Date().getFullYear();
 
-        }
+if (year) {
 
-    </script>
+    year.textContent =
+        new Date().getFullYear();
+
+}
+
+</script>
+
 
 </body>
 

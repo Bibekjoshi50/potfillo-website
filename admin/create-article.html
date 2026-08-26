@@ -1,3 +1,6 @@
+# create-article.html
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,48 +21,30 @@
 
 </head>
 
-
 <body class="admin-page">
-
 
 <header class="admin-header">
 
     <div>
-
         <h1>
-
             <i class="fa-solid fa-pen-to-square"></i>
-
             Create Article
-
         </h1>
 
         <p>
             Write and publish a new article.
         </p>
-
     </div>
-
 
     <div class="header-buttons">
 
-        <a
-            href="admin.html"
-            class="btn">
-
+        <a href="admin.html" class="btn">
             <i class="fa-solid fa-arrow-left"></i>
-
             Dashboard
-
         </a>
 
-
-        <a
-            href="articles.html"
-            class="btn">
-
+        <a href="articles.html" class="btn">
             Articles
-
         </a>
 
     </div>
@@ -69,13 +54,9 @@
 
 <main class="editor-container">
 
-
-<form id="articleForm"
-      class="article-editor">
-
+<form id="articleForm" class="article-editor">
 
     <div class="editor-main">
-
 
         <!-- Title -->
 
@@ -156,12 +137,10 @@
 
         </div>
 
-
     </div>
 
 
     <aside class="editor-sidebar">
-
 
         <!-- Category -->
 
@@ -171,9 +150,7 @@
                 Category
             </label>
 
-            <select
-                id="category"
-                required>
+            <select id="category" required>
 
                 <option value="">
                     Select Category
@@ -259,7 +236,6 @@
                 SEO
             </h3>
 
-
             <div class="form-group">
 
                 <label for="seo_title">
@@ -299,7 +275,7 @@
                 <input
                     type="text"
                     id="seo_keywords"
-                    placeholder="cybersecurity, Nepal, technology"
+                    placeholder="gold price, investment, finance"
                 >
 
             </div>
@@ -345,22 +321,43 @@
 
         </div>
 
-
     </aside>
 
-
 </form>
-
 
 </main>
 
 
+<!-- Supabase Library -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="./supabase.js"></script>
+
+<!-- IMPORTANT:
+     create-article.html is inside /admin/
+     supabase.js is in the main portfolio folder.
+-->
+
+<script src="../supabase.js"></script>
 
 
 <script>
+
+    // ==========================================
+    // CHECK SUPABASE CONNECTION
+    // ==========================================
+
+    if (!window.supabaseClient) {
+
+        console.error(
+            "Supabase client was not found."
+        );
+
+        document.getElementById("message").textContent =
+            "❌ Supabase connection could not be loaded.";
+
+    }
+
 
     // ==========================================
     // AUTH CHECK
@@ -368,20 +365,45 @@
 
     async function checkAuth() {
 
-        const {
-            data: {
-                session
+        try {
+
+            if (!window.supabaseClient) {
+                return;
             }
-        } =
-            await window.supabaseClient
-                .auth
-                .getSession();
+
+            const {
+                data: {
+                    session
+                },
+                error
+            } = await window.supabaseClient.auth.getSession();
 
 
-        if (!session) {
+            if (error) {
 
-            window.location.href =
-                "login.html";
+                console.error(
+                    "Authentication error:",
+                    error
+                );
+
+                return;
+
+            }
+
+
+            if (!session) {
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Auth check failed:",
+                error
+            );
 
         }
 
@@ -406,9 +428,7 @@
         "input",
         () => {
 
-            if (
-                !slugInput.dataset.edited
-            ) {
+            if (!slugInput.dataset.edited) {
 
                 slugInput.value =
                     titleInput.value
@@ -468,12 +488,31 @@
                     );
 
 
+                // Check Supabase
+
+                if (!window.supabaseClient) {
+
+                    message.textContent =
+                        "❌ Supabase is not connected.";
+
+                    message.className =
+                        "editor-message error";
+
+                    return;
+
+                }
+
+
                 button.disabled = true;
 
                 button.innerHTML =
                     `<i class="fa-solid fa-spinner fa-spin"></i>
                      Publishing...`;
 
+
+                // ==========================================
+                // ARTICLE DATA
+                // ==========================================
 
                 const article = {
 
@@ -485,76 +524,62 @@
 
                     category:
                         document
-                            .getElementById(
-                                "category"
-                            )
+                            .getElementById("category")
                             .value,
 
                     excerpt:
                         document
-                            .getElementById(
-                                "excerpt"
-                            )
+                            .getElementById("excerpt")
                             .value
                             .trim(),
 
                     content:
                         document
-                            .getElementById(
-                                "content"
-                            )
+                            .getElementById("content")
                             .value,
 
                     image_url:
                         document
-                            .getElementById(
-                                "image_url"
-                            )
+                            .getElementById("image_url")
                             .value
                             .trim() || null,
 
                     author:
                         document
-                            .getElementById(
-                                "author"
-                            )
+                            .getElementById("author")
                             .value
                             .trim() ||
                         "Bibek Joshi",
 
                     seo_title:
                         document
-                            .getElementById(
-                                "seo_title"
-                            )
+                            .getElementById("seo_title")
                             .value
                             .trim() || null,
 
                     seo_description:
                         document
-                            .getElementById(
-                                "seo_description"
-                            )
+                            .getElementById("seo_description")
                             .value
                             .trim() || null,
 
                     seo_keywords:
                         document
-                            .getElementById(
-                                "seo_keywords"
-                            )
+                            .getElementById("seo_keywords")
                             .value
                             .trim() || null,
 
                     published:
                         document
-                            .getElementById(
-                                "published"
-                            )
+                            .getElementById("published")
                             .checked
 
                 };
 
+
+                // ==========================================
+                // INSERT ARTICLE
+                // ==========================================
 
                 try {
 
@@ -572,6 +597,7 @@
                     if (error) {
 
                         console.error(
+                            "Supabase error:",
                             error
                         );
 
@@ -589,6 +615,12 @@
                     }
 
 
+                    console.log(
+                        "Article created:",
+                        data
+                    );
+
+
                     message.textContent =
                         "✅ Article published successfully!";
 
@@ -596,30 +628,42 @@
                         "editor-message success";
 
 
-                    setTimeout(() => {
+                    setTimeout(
+                        () => {
 
-                        window.location.href =
-                            "articles.html";
+                            window.location.href =
+                                "articles.html";
 
-                    }, 1000);
+                        },
+                        1000
+                    );
 
 
                 } catch (error) {
 
                     console.error(
+                        "Publishing error:",
                         error
                     );
 
+
                     message.textContent =
-                        "❌ Something went wrong.";
+                        "❌ " +
+                        (error.message ||
+                         "Something went wrong.");
 
                     message.className =
                         "editor-message error";
+
 
                     resetButton();
 
                 }
 
+
+                // ==========================================
+                // RESET BUTTON
+                // ==========================================
 
                 function resetButton() {
 
@@ -636,7 +680,7 @@
 
 </script>
 
-
 </body>
 
 </html>
+```

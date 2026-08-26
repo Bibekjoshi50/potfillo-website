@@ -1903,3 +1903,220 @@ img{
     .carousel::before,
     .carousel::after{ width: 40px; }
 }
+/* =====================================================
+   SINGLE ARTICLE PAGE
+   ===================================================== */
+
+.single-article {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 140px 25px 80px;
+    box-sizing: border-box;
+}
+
+/* Loading */
+#articleLoading {
+    text-align: center;
+    padding: 80px 20px;
+    font-size: 18px;
+}
+
+/* Article header */
+.article-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#articleCategory {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#articleTitle {
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 0 auto 25px;
+    max-width: 850px;
+    font-weight: 800;
+}
+
+#articleExcerpt {
+    max-width: 750px;
+    margin: 0 auto 20px;
+    font-size: 19px;
+    line-height: 1.7;
+    opacity: 0.8;
+}
+
+#articleAuthor {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Article image */
+#articleImageContainer {
+    width: 100%;
+    margin: 35px 0 50px;
+}
+
+#articleImage {
+    display: block;
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+/* Article body */
+.article-body {
+    max-width: 780px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.9;
+}
+
+/* Paragraphs */
+.article-body p {
+    margin: 0 0 25px;
+}
+
+/* Headings */
+.article-body h2 {
+    font-size: 30px;
+    margin: 50px 0 20px;
+    line-height: 1.3;
+}
+
+.article-body h3 {
+    font-size: 24px;
+    margin: 40px 0 15px;
+    line-height: 1.4;
+}
+
+.article-body h4 {
+    font-size: 20px;
+    margin: 30px 0 15px;
+}
+
+/* Lists */
+.article-body ul,
+.article-body ol {
+    margin: 20px 0 30px;
+    padding-left: 30px;
+}
+
+.article-body li {
+    margin-bottom: 10px;
+}
+
+/* Links */
+.article-body a {
+    text-decoration: underline;
+}
+
+/* Images inside article */
+.article-body img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 35px auto;
+    border-radius: 12px;
+}
+
+/* Blockquotes */
+.article-body blockquote {
+    margin: 35px 0;
+    padding: 20px 25px;
+    border-left: 4px solid currentColor;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Code */
+.article-body pre {
+    overflow-x: auto;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px 0;
+}
+
+.article-body code {
+    font-family: monospace;
+}
+
+/* Article footer */
+.article-footer {
+    max-width: 780px;
+    margin: 70px auto 0;
+    padding-top: 30px;
+    border-top: 1px solid rgba(128, 128, 128, 0.25);
+}
+
+/* Back button */
+.article-footer .read-more {
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* Article not found */
+#articleError {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+#articleError h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+
+/* =====================================================
+   FOOTER FIX FOR ARTICLE PAGE
+   ===================================================== */
+
+.single-article + .footer {
+    margin-top: 0;
+}
+
+
+/* =====================================================
+   MOBILE ARTICLE
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .single-article {
+        padding: 110px 18px 50px;
+    }
+
+    #articleTitle {
+        font-size: 34px;
+    }
+
+    #articleExcerpt {
+        font-size: 17px;
+    }
+
+    .article-body {
+        font-size: 17px;
+        line-height: 1.8;
+    }
+
+    .article-body h2 {
+        font-size: 27px;
+        margin-top: 40px;
+    }
+
+    .article-body h3 {
+        font-size: 22px;
+    }
+
+    #articleImage {
+        max-height: 350px;
+        border-radius: 10px;
+    }
+
+}

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Article | Bibek Joshi</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="admin.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- IMPORTANT: supabase.js is outside admin folder -->
+    <script src="../supabase.js"></script>
+
+</head>
+
+
+<body class="admin-page">
+
+
+<header class="admin-header">
+
+    <div>
+
+        <h1>
+            <i class="fa-solid fa-pen-to-square"></i>
+            Edit Article
+        </h1>
+
+        <p>
+            Update your article.
+        </p>
+
+    </div>
+
+
+    <div class="header-buttons">
+
+        <a href="admin.html" class="btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Dashboard
+        </a>
+
+        <a href="articles.html" class="btn">
+            Articles
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="editor-container">
+
+
+<form id="articleForm"
+      class="article-editor">
+
+
+    <!-- =========================
+         MAIN EDITOR
+    ========================== -->
+
+    <div class="editor-main">
+
+
+        <!-- TITLE -->
+
+        <div class="form-group">
+
+            <label for="title">
+                Article Title
+            </label>
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Article title"
+                required>
+
+        </div>
+
+
+        <!-- SLUG -->
+
+        <div class="form-group">
+
+            <label for="slug">
+                URL Slug
+            </label>
+
+            <input
+                type="text"
+                id="slug"
+                placeholder="article-title"
+                required>
+
+        </div>
+
+
+        <!-- EXCERPT -->
+
+        <div class="form-group">
+
+            <label for="excerpt">
+                Excerpt
+            </label>
+
+            <textarea
+                id="excerpt"
+                rows="4"
+                placeholder="Short description">
+            </textarea>
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="form-group">
+
+            <label for="content">
+                Article Content
+            </label>
+
+            <textarea
+                id="content"
+                rows="20"
+                placeholder="Write article content..."
+                required>
+            </textarea>
+
+            <small>
+                HTML formatting is supported.
+            </small>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="editor-sidebar">
+
+
+        <!-- CATEGORY -->
+
+        <div class="form-group">
+
+            <label for="category">
+                Category
+            </label>
+
+            <select
+                id="category"
+                required>
+
+                <option value="">
+                    Select Category
+                </option>
+
+                <option value="Technology">
+                    Technology
+                </option>
+
+                <option value="Cybersecurity">
+                    Cybersecurity
+                </option>
+
+                <option value="AI">
+                    AI
+                </option>
+
+                <option value="Web Development">
+                    Web Development
+                </option>
+
+                <option value="Finance">
+                    Finance
+                </option>
+
+                <option value="BSc CSIT Notes">
+                    BSc CSIT Notes
+                </option>
+
+                <option value="web3 & Blockchain">
+                    Web3 & Blockchain
+                </option>
+
+                <option value="Research">
+                    Research
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- IMAGE -->
+
+        <div class="form-group">
+
+            <label for="image_url">
+                Featured Image URL
+            </label>
+
+            <input
+                type="url"
+                id="image_url"
+                placeholder="https://...">
+
+        </div>
+
+
+        <!-- AUTHOR -->
+
+        <div class="form-group">
+
+            <label for="author">
+                Author
+            </label>
+
+            <input
+                type="text"
+                id="author"
+                value="Bibek Joshi">
+
+        </div>
+
+
+        <!-- =========================
+             SEO
+        ========================== -->
+
+        <div class="seo-box">
+
+            <h3>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                SEO
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="seo_title">
+                    SEO Title
+                </label>
+
+                <input
+                    type="text"
+                    id="seo_title">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="seo_description">
+                    SEO Description
+                </label>
+
+                <textarea
+                    id="seo_description"
+                    rows="5">
+                </textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="seo_keywords">
+                    Keywords
+                </label>
+
+                <input
+                    type="text"
+                    id="seo_keywords">
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             UPDATE
+        ========================== -->
+
+        <div class="publish-box">
+
+            <label class="publish-toggle">
+
+                <input
+                    type="checkbox"
+                    id="published">
+
+                <span>
+                    Published
+                </span>
+
+            </label>
+
+
+            <button
+                type="submit"
+                id="updateBtn"
+                class="btn primary full-width">
+
+                <i class="fa-solid fa-save"></i>
+
+                Update Article
+
+            </button>
+
+
+            <div
+                id="message"
+                class="editor-message">
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+</form>
+
+
+</main>
+
+
+<script>
+
+
+// ==========================================
+// GET ARTICLE ID FROM URL
+// ==========================================
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const articleId =
+    params.get("id");
+
+
+if (!articleId) {
+
+    alert(
+        "Article ID not found."
+    );
+
+    window.location.href =
+        "articles.html";
+
+}
+
+
+// ==========================================
+// AUTH CHECK
+// ==========================================
+
+async function checkAuth() {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await window.supabaseClient
+                .auth
+                .getSession();
+
+
+        if (error) {
+
+            console.error(error);
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        if (!data.session) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        loadArticle();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+// ==========================================
+// LOAD ARTICLE
+// ==========================================
+
+async function loadArticle() {
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await window.supabaseClient
+                .from("articles")
+                .select("*")
+                .eq(
+                    "id",
+                    articleId
+                )
+                .single();
+
+
+        if (error) {
+
+            console.error(error);
+
+            message.textContent =
+                "❌ " +
+                error.message;
+
+            message.className =
+                "editor-message error";
+
+            return;
+
+        }
+
+
+        // Fill existing article data
+
+        document.getElementById(
+            "title"
+        ).value =
+            data.title || "";
+
+
+        document.getElementById(
+            "slug"
+        ).value =
+            data.slug || "";
+
+
+        document.getElementById(
+            "excerpt"
+        ).value =
+            data.excerpt || "";
+
+
+        document.getElementById(
+            "content"
+        ).value =
+            data.content || "";
+
+
+        document.getElementById(
+            "category"
+        ).value =
+            data.category || "";
+
+
+        document.getElementById(
+            "image_url"
+        ).value =
+            data.image_url || "";
+
+
+        document.getElementById(
+            "author"
+        ).value =
+            data.author || "Bibek Joshi";
+
+
+        document.getElementById(
+            "seo_title"
+        ).value =
+            data.seo_title || "";
+
+
+        document.getElementById(
+            "seo_description"
+        ).value =
+            data.seo_description || "";
+
+
+        document.getElementById(
+            "seo_keywords"
+        ).value =
+            data.seo_keywords || "";
+
+
+        document.getElementById(
+            "published"
+        ).checked =
+            data.published === true;
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "❌ Could not load article.";
+
+        message.className =
+            "editor-message error";
+
+    }
+
+}
+
+
+// ==========================================
+// UPDATE ARTICLE
+// ==========================================
+
+document
+    .getElementById("articleForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const button =
+                document.getElementById(
+                    "updateBtn"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            button.disabled =
+                true;
+
+
+            button.innerHTML =
+                `<i class="fa-solid fa-spinner fa-spin"></i>
+                 Updating...`;
+
+
+            const updatedArticle = {
+
+                title:
+                    document
+                        .getElementById("title")
+                        .value
+                        .trim(),
+
+                slug:
+                    document
+                        .getElementById("slug")
+                        .value
+                        .trim(),
+
+                category:
+                    document
+                        .getElementById("category")
+                        .value,
+
+                excerpt:
+                    document
+                        .getElementById("excerpt")
+                        .value
+                        .trim(),
+
+                content:
+                    document
+                        .getElementById("content")
+                        .value,
+
+                image_url:
+                    document
+                        .getElementById("image_url")
+                        .value
+                        .trim() || null,
+
+                author:
+                    document
+                        .getElementById("author")
+                        .value
+                        .trim() ||
+                    "Bibek Joshi",
+
+                seo_title:
+                    document
+                        .getElementById("seo_title")
+                        .value
+                        .trim() || null,
+
+                seo_description:
+                    document
+                        .getElementById("seo_description")
+                        .value
+                        .trim() || null,
+
+                seo_keywords:
+                    document
+                        .getElementById("seo_keywords")
+                        .value
+                        .trim() || null,
+
+                published:
+                    document
+                        .getElementById("published")
+                        .checked
+
+            };
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await window.supabaseClient
+                        .from("articles")
+                        .update(
+                            updatedArticle
+                        )
+                        .eq(
+                            "id",
+                            articleId
+                        );
+
+
+                if (error) {
+
+                    console.error(error);
+
+                    message.textContent =
+                        "❌ " +
+                        error.message;
+
+                    message.className =
+                        "editor-message error";
+
+
+                    button.disabled =
+                        false;
+
+
+                    button.innerHTML =
+                        `<i class="fa-solid fa-save"></i>
+                         Update Article`;
+
+                    return;
+
+                }
+
+
+                message.textContent =
+                    "✅ Article updated successfully!";
+
+                message.className =
+                    "editor-message success";
+
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "articles.html";
+
+                    },
+                    1000
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "❌ Something went wrong.";
+
+                message.className =
+                    "editor-message error";
+
+
+                button.disabled =
+                    false;
+
+
+                button.innerHTML =
+                    `<i class="fa-solid fa-save"></i>
+                     Update Article`;
+
+            }
+
+        }
+    );
+
+
+// ==========================================
+// START
+// ==========================================
+
+checkAuth();
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Bibek Joshi</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+       
+
+    <link rel="stylesheet"
+          href="admin.css">
+             <script src="../supabase.js"></script>
+
+</head>
+
+
+<body class="admin-page">
+
+<header class="admin-header">
+
+    <div>
+
+        <h1>
+            <i class="fa-solid fa-gauge-high"></i>
+
+            Admin Dashboard
+        </h1>
+
+        <p>
+            Manage your website articles.
+        </p>
+
+    </div>
+
+
+    <div class="header-buttons">
+
+        <a
+            href="../blog.html"
+            target="_blank"
+            class="btn">
+
+            <i class="fa-solid fa-globe"></i>
+
+            View Website
+
+        </a>
+
+
+        <button
+            id="logoutBtn"
+            class="btn danger">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="dashboard-container">
+
+
+    <section class="welcome-card">
+
+        <div>
+
+            <h2>
+                Welcome, Bibek 👋
+            </h2>
+
+            <p>
+                Manage your articles and publish new content.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="dashboard-grid">
+
+
+        <!-- Create Article -->
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-card-icon">
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+            </div>
+
+            <h3>
+                Create Article
+            </h3>
+
+            <p>
+                Write and publish a new article.
+            </p>
+
+            <a
+                href="create-article.html"
+                class="btn primary">
+
+                Create Article
+
+            </a>
+
+        </div>
+
+
+        <!-- Manage Articles -->
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-card-icon">
+
+                <i class="fa-solid fa-newspaper"></i>
+
+            </div>
+
+            <h3>
+                Articles
+            </h3>
+
+            <p>
+                View, edit and delete your articles.
+            </p>
+
+            <a
+                href="articles.html"
+                class="btn primary">
+
+                View Articles
+
+            </a>
+
+        </div>
+
+
+        <!-- Website -->
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-card-icon">
+
+                <i class="fa-solid fa-globe"></i>
+
+            </div>
+
+            <h3>
+                Website
+            </h3>
+
+            <p>
+                Visit your public portfolio and blog.
+            </p>
+
+            <a
+                href="../index.html"
+                target="_blank"
+                class="btn">
+
+                Open Website
+
+            </a>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="./supabase.js"></script>
+
+
+<script>
+
+    async function checkLogin() {
+
+        const {
+            data: {
+                session
+            }
+        } =
+            await window.supabaseClient
+                .auth
+                .getSession();
+
+
+        if (!session) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    }
+
+
+    checkLogin();
+
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            async () => {
+
+                await window.supabaseClient
+                    .auth
+                    .signOut();
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+</script>
+
+</body>
+
+</html>

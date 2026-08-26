@@ -1,139 +1,876 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Login</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <!-- Supabase Library -->
+    <title>Admin Login | Bibek Joshi</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Shared Supabase configuration -->
+    <script src="../supabase.js"></script>
+
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+
+        * {
             margin: 0;
-        }
-
-        .login-box {
-            width: 350px;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 7px;
-            font-weight: bold;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 18px;
+            padding: 0;
             box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 6px;
         }
 
-        button {
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #3b82f6 0%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    #8b5cf6 0%,
+                    transparent 35%
+                ),
+                #0f172a;
+
+            padding: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* Decorative background circles */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            width: 350px;
+
+            height: 350px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(59, 130, 246, 0.18);
+
+            top: -120px;
+
+            right: -100px;
+
+            filter: blur(10px);
+
+        }
+
+
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 300px;
+
+            height: 300px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(139, 92, 246, 0.18);
+
+            bottom: -120px;
+
+            left: -100px;
+
+            filter: blur(10px);
+
+        }
+
+
+        /* Main login wrapper */
+
+        .login-wrapper {
+
             width: 100%;
-            padding: 12px;
-            background: #111;
+
+            max-width: 950px;
+
+            min-height: 560px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.15);
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            backdrop-filter: blur(20px);
+
+            -webkit-backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0, 0, 0, 0.35);
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* Graphic side */
+
+        .login-graphic {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            padding: 50px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(37, 99, 235, 0.95),
+                    rgba(124, 58, 237, 0.95)
+                );
+
             color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
+
+            overflow: hidden;
+
         }
 
-        button:hover {
-            background: #333;
+
+        .login-graphic::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+
+            height: 280px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.2);
+
+            top: -100px;
+
+            right: -80px;
+
         }
 
-        #message {
+
+        .login-graphic::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+
+            height: 220px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            bottom: -90px;
+
+            left: -70px;
+
+        }
+
+
+        .graphic-icon {
+
+            width: 120px;
+
+            height: 120px;
+
+            border-radius: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 52px;
+
+            background:
+                rgba(255,255,255,0.15);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.2);
+
+            margin-bottom: 30px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .login-graphic h2 {
+
+            font-size: 32px;
+
+            margin-bottom: 12px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .login-graphic p {
+
             text-align: center;
-            margin-top: 15px;
+
+            line-height: 1.7;
+
+            max-width: 350px;
+
+            color:
+                rgba(255,255,255,0.85);
+
+            position: relative;
+
+            z-index: 2;
+
         }
+
+
+        .security-badge {
+
+            margin-top: 30px;
+
+            padding: 10px 18px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255,255,255,0.12);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.2);
+
+            font-size: 13px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* Form side */
+
+        .login-form-area {
+
+            background:
+                rgba(255,255,255,0.97);
+
+            padding: 55px;
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+        }
+
+
+        .login-header {
+
+            margin-bottom: 32px;
+
+        }
+
+
+        .login-header .small-title {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            color: #6366f1;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .login-header h1 {
+
+            font-size: 34px;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .login-header p {
+
+            color: #6b7280;
+
+            font-size: 15px;
+
+        }
+
+
+        /* Form */
+
+        .form-group {
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: 600;
+
+            font-size: 14px;
+
+            color: #374151;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .input-wrapper i {
+
+            position: absolute;
+
+            left: 16px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #9ca3af;
+
+            font-size: 16px;
+
+        }
+
+
+        .input-wrapper input {
+
+            width: 100%;
+
+            height: 52px;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding:
+                0 16px 0 46px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.25s;
+
+            background: #f9fafb;
+
+        }
+
+
+        .input-wrapper input:focus {
+
+            border-color: #6366f1;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(99,102,241,0.10);
+
+        }
+
+
+        /* Login button */
+
+        .login-btn {
+
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+
+            box-shadow:
+                0 10px 25px
+                rgba(79,70,229,0.25);
+
+        }
+
+
+        .login-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 15px 30px
+                rgba(79,70,229,0.35);
+
+        }
+
+
+        .login-btn:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        .login-message {
+
+            min-height: 22px;
+
+            margin-top: 18px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .back-link {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+        }
+
+
+        .back-link a {
+
+            color: #6366f1;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .back-link a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 750px) {
+
+            body {
+
+                overflow: auto;
+
+            }
+
+
+            .login-wrapper {
+
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+
+            }
+
+
+            .login-graphic {
+
+                min-height: 300px;
+
+                padding: 35px 25px;
+
+            }
+
+
+            .graphic-icon {
+
+                width: 85px;
+
+                height: 85px;
+
+                font-size: 36px;
+
+                margin-bottom: 20px;
+
+            }
+
+
+            .login-graphic h2 {
+
+                font-size: 25px;
+
+            }
+
+
+            .login-form-area {
+
+                padding: 40px 28px;
+
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .login-wrapper {
+
+                border-radius: 18px;
+
+            }
+
+
+            .login-form-area {
+
+                padding: 32px 22px;
+
+            }
+
+
+            .login-header h1 {
+
+                font-size: 28px;
+
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <div class="login-box">
 
-        <h1>Admin Login</h1>
+<div class="login-wrapper">
 
-        <form id="loginForm">
 
-            <label>Email</label>
+    <!-- LEFT GRAPHIC -->
 
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                required
-            >
+    <div class="login-graphic">
 
-            <label>Password</label>
+        <div class="graphic-icon">
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                required
-            >
+            <i class="fa-solid fa-shield-halved"></i>
 
-            <button type="submit">
-                Login
-            </button>
+        </div>
 
-        </form>
 
-        <p id="message"></p>
+        <h2>
+            Bibek Joshi
+        </h2>
+
+
+        <p>
+            Welcome to your private
+            content management dashboard.
+            Manage articles, publish content
+            and keep your portfolio updated.
+        </p>
+
+
+        <div class="security-badge">
+
+            <i class="fa-solid fa-lock"></i>
+
+            Secure Admin Area
+
+        </div>
 
     </div>
 
 
-    <!-- Your Supabase configuration -->
-    <script src="supabase.js"></script>
+    <!-- RIGHT LOGIN -->
+
+    <div class="login-form-area">
 
 
-    <script>
+        <div class="login-header">
 
-        const loginForm = document.getElementById("loginForm");
-        const message = document.getElementById("message");
+            <div class="small-title">
+                Administrator
+            </div>
 
+            <h1>
+                Admin Login
+            </h1>
 
-        loginForm.addEventListener("submit", async function(event) {
+            <p>
+                Sign in to manage your articles
+            </p>
 
-            event.preventDefault();
-
-            const email =
-                document.getElementById("email").value;
-
-            const password =
-                document.getElementById("password").value;
-
-
-            message.textContent = "Logging in...";
+        </div>
 
 
-            const { data, error } =
-                await supabaseClient.auth.signInWithPassword({
+        <form id="loginForm">
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginButton">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                &nbsp; Login
+
+            </button>
+
+
+            <p
+                id="loginMessage"
+                class="login-message">
+            </p>
+
+
+        </form>
+
+
+        <div class="back-link">
+
+            <a href="../index.html">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Portfolio
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+const loginForm =
+    document.getElementById("loginForm");
+
+
+const loginButton =
+    document.getElementById("loginButton");
+
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+
+
+loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const email =
+            document.getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+            document.getElementById("password")
+            .value;
+
+
+        loginButton.disabled = true;
+
+
+        loginButton.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
+
+
+        loginMessage.textContent = "";
+
+
+        try {
+
+
+            const {
+                data,
+                error
+            } =
+                await window.supabaseClient
+                .auth
+                .signInWithPassword({
 
                     email: email,
 
@@ -144,28 +881,78 @@
 
             if (error) {
 
-                message.textContent =
+                console.error(
+                    "Login error:",
+                    error
+                );
+
+
+                loginMessage.textContent =
                     "❌ " + error.message;
 
+
+                loginButton.disabled =
+                    false;
+
+
+                loginButton.innerHTML =
+                    '<i class="fa-solid fa-right-to-bracket"></i> &nbsp; Login';
+
+
                 return;
+
             }
 
 
-            message.textContent =
+            console.log(
+                "Login successful:",
+                data
+            );
+
+
+            loginMessage.textContent =
                 "✅ Login successful!";
 
 
-            setTimeout(function() {
+            loginButton.innerHTML =
+                '<i class="fa-solid fa-check"></i> Logged in';
+
+
+            setTimeout(() => {
 
                 window.location.href =
-                    "dashboard.html";
+                    "admin.html";
 
-            }, 1000);
+            }, 700);
 
-        });
 
-    </script>
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+
+            loginMessage.textContent =
+                "❌ Something went wrong.";
+
+
+            loginButton.disabled =
+                false;
+
+
+            loginButton.innerHTML =
+                '<i class="fa-solid fa-right-to-bracket"></i> &nbsp; Login';
+
+        }
+
+    }
+);
+
+</script>
+
 
 </body>
+
 </html>
 ```

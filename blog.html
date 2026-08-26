@@ -15,6 +15,7 @@
         <link rel="icon" type="image/jpeg" href="image.jpg">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
         <nav class="navbar">
@@ -38,15 +39,15 @@
                     Blog <i class="fa-solid fa-chevron-down"></i>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#blog" data-category="all">All</a></li>
-                    <li><a href="#blog" data-category="Technology">Technology</a></li>
-                    <li><a href="#blog" data-category="Cybersecurity">Cybersecurity</a></li>
-                    <li><a href="#blog" data-category="AI">AI</a></li>
-                    <li><a href="#blog" data-category="Web Development">Web Development</a></li>
-                    <li><a href="#blog" data-category="Finance">Finance</a></li>
-                    <li><a href="#blog" data-category="web3 & Blockchain">Web3 & Blockchain</a></li>
-                    <li><a href="#blog" data-category="Research">Research</a></li>
-                </ul>
+    <li><a href="#blog" data-category="all">All</a></li>
+    <li><a href="#blog" data-category="Technology">Technology</a></li>
+    <li><a href="#blog" data-category="Cybersecurity">Cybersecurity</a></li>
+    <li><a href="#blog" data-category="AI">AI</a></li>
+    <li><a href="#blog" data-category="Web Development">Web Development</a></li>
+    <li><a href="#blog" data-category="Finance">Finance</a></li>
+    <li><a href="#blog" data-category="Web3 & Blockchain">Web3 & Blockchain</a></li>
+    <li><a href="#blog" data-category="Research">Research</a></li>
+</ul>
             </li>
             <div class="btns">
             <a href="#contact" class="nav-btn">Contact</a>
@@ -70,17 +71,16 @@
 
     <!-- Category Filter Bar -->
     <div class="category-filter">
-        <button class="category-btn active" data-category="all">All</button>
-        <button class="category-btn" data-category="Technology">Technology</button>
-        <button class="category-btn" data-category="Cybersecurity">Cybersecurity</button>
-        <button class="category-btn" data-category="AI">AI</button>
-        <button class="category-btn" data-category="Web Development">Web Development</button>
-        <button class="category-btn" data-category="Finance">Finance</button>
-        <button class="category-btn" data-category="BSc CSIT Notes">BSc CSIT Notes</button>
-        <button class="category-btn" data-category="web3 & Blockchain">web3 & Blockchain</button>
-        <button class="category-btn" data-category="Research">Research</button>
-    </div>
-
+    <button class="category-btn active" data-category="all">All</button>
+    <button class="category-btn" data-category="Technology">Technology</button>
+    <button class="category-btn" data-category="Cybersecurity">Cybersecurity</button>
+    <button class="category-btn" data-category="AI">AI</button>
+    <button class="category-btn" data-category="Web Development">Web Development</button>
+    <button class="category-btn" data-category="Finance">Finance</button>
+    <button class="category-btn" data-category="BSc CSIT Notes">BSc CSIT Notes</button>
+    <button class="category-btn" data-category="Web3 & Blockchain">Web3 & Blockchain</button>
+    <button class="category-btn" data-category="Research">Research</button>
+</div>
     <div class="blog-container">
 
         <!-- ===== RESEARCH (real post) ===== -->
@@ -406,6 +406,8 @@ Evolution of the Internet, Data Ownership, Privacy, and Decentralization </h3>
   </div>
 </footer>
    <script src="script.js"></script>
+   <script src="supabase.js"></script>
+<script src="blog-supabase.js"></script>
 
     </body>
 </html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Bibek Joshi">
+
+    <meta name="robots" content="index, follow">
+
+    <title>Article | Bibek Joshi</title>
+
+    <link rel="icon" type="image/jpeg" href="image.jpg">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <a href="index.html">
+                Bibek's Portfolio
+            </a>
+        </div>
+
+        <button class="hamburger"
+                id="hamburger"
+                aria-label="Toggle menu">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+        <ul class="nav-links" id="nav-links">
+
+            <li>
+                <a href="index.html#home">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#about">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#skills">
+                    Skills
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#experience">
+                    Experience
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#projects">
+                    Projects
+                </a>
+            </li>
+
+            <li>
+                <a href="blog.html">
+                    Blog
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ARTICLE -->
+
+    <main>
+
+        <article class="single-article">
+
+            <div id="articleLoading">
+
+                <p>
+                    Loading article...
+                </p>
+
+            </div>
+
+
+            <div id="articleContent"
+                 style="display:none;">
+
+                <div class="article-header">
+
+                    <span id="articleCategory"
+                          class="blog-date">
+                    </span>
+
+                    <h1 id="articleTitle">
+                    </h1>
+
+                    <p id="articleExcerpt">
+                    </p>
+
+                    <p id="articleAuthor">
+                    </p>
+
+                </div>
+
+
+                <div id="articleImageContainer">
+
+                    <img id="articleImage"
+                         src=""
+                         alt=""
+                         style="display:none; max-width:100%; height:auto;">
+
+                </div>
+
+
+                <div id="articleBody"
+                     class="article-body">
+                </div>
+
+
+                <div class="article-footer">
+
+                    <a href="blog.html"
+                       class="read-more">
+
+                        ← Back to Articles
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div id="articleError"
+                 style="display:none;">
+
+                <h1>
+                    Article Not Found
+                </h1>
+
+                <p>
+                    Sorry, this article could not be found.
+                </p>
+
+                <a href="blog.html"
+                   class="read-more">
+
+                    ← Back to Blog
+
+                </a>
+
+            </div>
+
+        </article>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer"
+            id="contact">
+
+        <div class="container">
+
+            <div class="footer-top">
+
+                <div class="footer-brand">
+
+                    <h3>
+                        Bibek Joshi
+                    </h3>
+
+                    <p>
+                        CSIT Student | Programmer | UI/UX Designer |
+                        Front-End Developer | Research Enthusiast
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <h4 class="footer-heading">
+                        Quick Links
+                    </h4>
+
+                    <ul>
+
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="blog.html">
+                                Blog
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-contact">
+
+                    <h4 class="footer-heading">
+                        Get In Touch
+                    </h4>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Mahendranagar, Kanchanpur, Nepal
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <a href="mailto:bebikjoshi118@gmail.com">
+                            bebikjoshi118@gmail.com
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="footer-bottom">
+
+                <p class="copyright">
+
+                    © <span id="year"></span>
+                    Bibek Joshi. All Rights Reserved.
+
+                </p>
+
+                <a href="blog.html"
+                   class="back-to-top">
+
+                    Back to Blog
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- SUPABASE -->
+
+    <script src="supabase.js"></script>
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        async function loadArticle() {
+
+            const loading =
+                document.getElementById(
+                    "articleLoading"
+                );
+
+            const content =
+                document.getElementById(
+                    "articleContent"
+                );
+
+            const errorBox =
+                document.getElementById(
+                    "articleError"
+                );
+
+
+            // Get slug from URL
+
+            const urlParams =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            const slug =
+                urlParams.get("slug");
+
+
+            console.log(
+                "Article slug:",
+                slug
+            );
+
+
+            if (!slug) {
+
+                loading.style.display =
+                    "none";
+
+                errorBox.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            // Get article from Supabase
+
+            const {
+                data: article,
+                error
+            } = await supabaseClient
+
+                .from("articles")
+
+                .select("*")
+
+                .eq("slug", slug)
+
+                .eq("published", true)
+
+                .single();
+
+
+            if (error || !article) {
+
+                console.error(
+                    "Article loading error:",
+                    error
+                );
+
+                loading.style.display =
+                    "none";
+
+                errorBox.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            // Page title
+
+            document.title =
+                article.title +
+                " | Bibek Joshi";
+
+
+            // Category
+
+            document.getElementById(
+                "articleCategory"
+            ).textContent =
+                article.category;
+
+
+            // Title
+
+            document.getElementById(
+                "articleTitle"
+            ).textContent =
+                article.title;
+
+
+            // Excerpt
+
+            document.getElementById(
+                "articleExcerpt"
+            ).textContent =
+                article.excerpt || "";
+
+
+            // Author
+
+            document.getElementById(
+                "articleAuthor"
+            ).textContent =
+                "By " +
+                (article.author ||
+                 "Bibek Joshi");
+
+
+            // Image
+
+            if (article.image_url) {
+
+                const image =
+                    document.getElementById(
+                        "articleImage"
+                    );
+
+                image.src =
+                    article.image_url;
+
+                image.alt =
+                    article.title;
+
+                image.style.display =
+                    "block";
+
+            }
+
+
+            // Article content
+
+            document.getElementById(
+                "articleBody"
+            ).innerHTML =
+                article.content;
+
+
+            // Show article
+
+            loading.style.display =
+                "none";
+
+            content.style.display =
+                "block";
+
+        }
+
+
+        loadArticle();
+
+
+        // Footer year
+
+        const year =
+            document.getElementById(
+                "year"
+            );
+
+        if (year) {
+
+            year.textContent =
+                new Date().getFullYear();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

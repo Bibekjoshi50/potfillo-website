@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Articles | Bibek Joshi</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="admin.css">
+
+</head>
+
+<body class="admin-page">
+
+<header class="admin-header">
+
+    <div>
+        <h1>
+            <i class="fa-solid fa-newspaper"></i>
+            Articles
+        </h1>
+        <p>
+            View, edit and delete your articles.
+        </p>
+    </div>
+
+    <div class="header-buttons">
+
+        <a href="admin.html" class="btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Dashboard
+        </a>
+
+        <a href="create-article.html" class="btn primary">
+            <i class="fa-solid fa-plus"></i>
+            New Article
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="articles-page">
+
+    <div id="articlesRoot">
+        <div class="loading">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Loading articles...
+        </div>
+    </div>
+
+</main>
+
+
+<!-- ==========================================
+     DELETE CONFIRMATION MODAL
+========================================== -->
+
+<div id="deleteModal" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(17,24,39,0.55); align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fff; border-radius:14px; max-width:420px; width:100%; padding:28px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,.3);">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size:34px; color:#dc2626; margin-bottom:14px;"></i>
+        <h2 style="margin:0 0 10px;">Delete Article?</h2>
+        <p style="color:#6b7280; margin:0 0 22px;" id="deleteModalText">
+            Are you sure you want to permanently delete this article? This action cannot be undone.
+        </p>
+        <div style="display:flex; gap:10px; justify-content:center;">
+            <button id="deleteCancelBtn" class="btn">Cancel</button>
+            <button id="deleteConfirmBtn" class="btn danger">
+                <i class="fa-solid fa-trash"></i>
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ==========================================
+     TOASTS
+========================================== -->
+
+<div id="toastWrap" style="position:fixed; bottom:22px; right:22px; z-index:3000; display:flex; flex-direction:column; gap:10px;"></div>
+
+
+<script src="admin-safety.js"></script>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Shared Supabase configuration (same relative path as the other admin pages) -->
+<script src="../supabase.js"></script>
+
+
+<script>
+
+    // ==========================================
+    // STATE
+    // ==========================================
+
+    var allArticles = [];
+    var pendingDeleteId = null;
+
+    var root = document.getElementById("articlesRoot");
+
+
+    // ==========================================
+    // TOAST
+    // ==========================================
+
+    function showToast(message, isError) {
+        var wrap = document.getElementById("toastWrap");
+        var t = document.createElement("div");
+        t.style.cssText =
+            "background:" + (isError ? "#dc2626" : "#111827") + ";color:#fff;" +
+            "padding:12px 18px;border-radius:10px;font-size:14px;font-weight:600;" +
+            "box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transform:translateY(10px);" +
+            "transition:.25s;max-width:320px;";
+        t.textContent = (isError ? "✕ " : "✓ ") + message;
+        wrap.appendChild(t);
+        requestAnimationFrame(function () {
+            t.style.opacity = "1";
+            t.style.transform = "translateY(0)";
+        });
+        setTimeout(function () {
+            t.style.opacity = "0";
+            t.style.transform = "translateY(10px)";
+            setTimeout(function () { t.remove(); }, 250);
+        }, 2800);
+    }
+
+
+    // ==========================================
+    // ESCAPING HELPERS (never trust article content in HTML)
+    // ==========================================
+
+    function escapeHtml(str) {
+        return String(str == null ? "" : str).replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+    }
+
+    function escapeAttribute(str) {
+        return escapeHtml(str);
+    }
+
+
+    // ==========================================
+    // AUTH CHECK
+    // ==========================================
+
+    async function checkAuth() {
+        try {
+            if (!window.supabaseClient) {
+                console.error("Supabase client was not found.");
+                renderError("Unable to connect. Please refresh the page.");
+                return false;
+            }
+
+            var result = await window.supabaseClient.auth.getSession();
+            var session = result.data ? result.data.session : null;
+            var error = result.error;
+
+            if (error) {
+                console.error("Authentication error:", error);
+                window.location.href = "login.html";
+                return false;
+            }
+
+            if (!session) {
+                window.location.href = "login.html";
+                return false;
+            }
+
+            return true;
+
+        } catch (error) {
+            console.error("Auth check failed:", error);
+            window.location.href = "login.html";
+            return false;
+        }
+    }
+
+
+    // ==========================================
+    // LOAD ARTICLES
+    // ==========================================
+
+    async function loadArticles() {
+        root.innerHTML =
+            '<div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading articles...</div>';
+
+        try {
+            // Prefer newest-first by created_at. If that column doesn't
+            // exist on this table, fall back to unordered rather than
+            // showing an error for something cosmetic.
+            var response = await window.supabaseClient
+                .from("articles")
+                .select("*")
+                .order("created_at", { ascending: false });
+
+            if (response.error) {
+                console.warn("Ordered query failed, retrying without order():", response.error);
+                response = await window.supabaseClient.from("articles").select("*");
+            }
+
+            if (response.error) {
+                console.error("Failed to load articles:", response.error);
+                renderError("Unable to load articles.");
+                return;
+            }
+
+            allArticles = response.data || [];
+            renderArticles(allArticles);
+
+        } catch (error) {
+            console.error("Unexpected error loading articles:", error);
+            renderError("Please check your internet connection and try again.");
+        }
+    }
+
+
+    // ==========================================
+    // RENDER: ERROR STATE
+    // ==========================================
+
+    function renderError(message) {
+        root.innerHTML =
+            '<div class="error-box">' +
+            '<i class="fa-solid fa-triangle-exclamation"></i>&nbsp; ' +
+            escapeHtml(message) +
+            '</div>' +
+            '<button class="btn primary" id="retryBtn"><i class="fa-solid fa-rotate-right"></i> Try Again</button>';
+
+        var retryBtn = document.getElementById("retryBtn");
+        if (retryBtn) retryBtn.addEventListener("click", loadArticles);
+    }
+
+
+    // ==========================================
+    // RENDER: EMPTY STATE
+    // ==========================================
+
+    function renderEmpty() {
+        root.innerHTML =
+            '<div class="no-articles">' +
+            '<i class="fa-solid fa-inbox"></i>' +
+            '<h2>No articles yet</h2>' +
+            '<p>Create your first article and start publishing.</p>' +
+            '<a href="create-article.html" class="btn primary"><i class="fa-solid fa-plus"></i> Create Article</a>' +
+            '</div>';
+    }
+
+
+    // ==========================================
+    // RENDER: ARTICLE LIST
+    // ==========================================
+
+    function formatDate(value) {
+        if (!value) return "";
+        try {
+            var d = new Date(value);
+            if (isNaN(d.getTime())) return "";
+            return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+        } catch (e) {
+            return "";
+        }
+    }
+
+    function renderArticles(list) {
+        if (!list.length) {
+            renderEmpty();
+            return;
+        }
+
+        var html = '<div class="articles-container">';
+
+        list.forEach(function (article) {
+            var isPublished = article.published === true;
+            var statusLabel = isPublished ? "Published" : "Draft";
+            var statusClass = isPublished ? "published" : "draft";
+
+            var imageBlock = article.image_url
+                ? '<img src="' + escapeAttribute(article.image_url) + '" alt="' + escapeAttribute(article.title) + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<div class=&quot;no-image&quot;><i class=&quot;fa-solid fa-image&quot;></i></div>\'">'
+                : '<div class="no-image"><i class="fa-solid fa-image"></i></div>';
+
+            html +=
+                '<div class="article-admin-card" data-row-id="' + escapeAttribute(article.id) + '">' +
+
+                '<div class="article-image">' + imageBlock + '</div>' +
+
+                '<div class="article-info">' +
+
+                '<div class="article-top">' +
+                '<span class="status ' + statusClass + '">' + (isPublished ? "🟢" : "🟡") + ' ' + statusLabel + '</span>' +
+                (article.category ? '<span class="category">' + escapeHtml(article.category) + '</span>' : '') +
+                '</div>' +
+
+                '<h2>' + escapeHtml(article.title || "Untitled") + '</h2>' +
+
+                (article.excerpt ? '<p class="excerpt">' + escapeHtml(article.excerpt) + '</p>' : '') +
+
+                '<div class="article-meta">' +
+                (article.created_at ? '<span><i class="fa-regular fa-calendar"></i> ' + escapeHtml(formatDate(article.created_at)) + '</span>' : '') +
+                (article.author ? '<span><i class="fa-regular fa-user"></i> ' + escapeHtml(article.author) + '</span>' : '') +
+                '</div>' +
+
+                '<div class="article-actions">' +
+
+                '<a href="../blog.html" target="_blank" class="action-btn view">' +
+                '<i class="fa-solid fa-eye"></i> View' +
+                '</a>' +
+
+                '<a href="edit-article.html?id=' + encodeURIComponent(article.id) + '" class="action-btn edit">' +
+                '<i class="fa-solid fa-pen"></i> Edit' +
+                '</a>' +
+
+                '<button type="button" class="action-btn duplicate" data-duplicate-id="' + escapeAttribute(article.id) + '">' +
+                '<i class="fa-solid fa-copy"></i> Duplicate' +
+                '</button>' +
+
+                '<button type="button" class="action-btn delete" ' +
+                'data-id="' + escapeAttribute(article.id) + '" ' +
+                'data-title="' + escapeAttribute(article.title) + '">' +
+                '<i class="fa-solid fa-trash"></i> Delete' +
+                '</button>' +
+
+                '</div>' + // .article-actions
+                '</div>' + // .article-info
+                '</div>'; // .article-admin-card
+        });
+
+        html += '</div>';
+        root.innerHTML = html;
+
+        attachRowListeners();
+    }
+
+
+    // ==========================================
+    // ROW ACTION LISTENERS
+    // ==========================================
+
+    function attachRowListeners() {
+        document.querySelectorAll(".delete-btn, .action-btn.delete").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                openDeleteModal(btn.dataset.id, btn.dataset.title);
+            });
+        });
+
+        document.querySelectorAll(".action-btn.duplicate").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                duplicateArticle(btn.dataset.duplicateId);
+            });
+        });
+    }
+
+
+    // ==========================================
+    // DELETE FLOW (modal, never immediate)
+    // ==========================================
+
+    var deleteModal = document.getElementById("deleteModal");
+    var deleteModalText = document.getElementById("deleteModalText");
+
+    function openDeleteModal(id, title) {
+        pendingDeleteId = id;
+        deleteModalText.textContent =
+            'Are you sure you want to permanently delete "' + (title || "this article") + '"? This action cannot be undone.';
+        deleteModal.style.display = "flex";
+    }
+
+    function closeDeleteModal() {
+        deleteModal.style.display = "none";
+        pendingDeleteId = null;
+    }
+
+    document.getElementById("deleteCancelBtn").addEventListener("click", closeDeleteModal);
+    deleteModal.addEventListener("click", function (e) {
+        if (e.target === deleteModal) closeDeleteModal();
+    });
+
+    document.getElementById("deleteConfirmBtn").addEventListener("click", async function () {
+        if (!pendingDeleteId) return;
+
+        var confirmBtn = document.getElementById("deleteConfirmBtn");
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Deleting...';
+
+        try {
+            var response = await window.supabaseClient
+                .from("articles")
+                .delete()
+                .eq("id", pendingDeleteId);
+
+            if (response.error) {
+                console.error("Delete failed:", response.error);
+                showToast("Unable to delete article.", true);
+            } else {
+                showToast("Article deleted successfully.");
+                var row = document.querySelector('[data-row-id="' + CSS.escape(String(pendingDeleteId)) + '"]');
+                if (row) row.remove();
+                allArticles = allArticles.filter(function (a) { return String(a.id) !== String(pendingDeleteId); });
+                if (!allArticles.length) renderEmpty();
+            }
+
+        } catch (error) {
+            console.error("Unexpected delete error:", error);
+            showToast("Unable to delete article.", true);
+        }
+
+        confirmBtn.disabled = false;
+        confirmBtn.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
+        closeDeleteModal();
+    });
+
+
+    // ==========================================
+    // DUPLICATE (opens Create Article pre-filled
+    // via localStorage handoff — does not touch
+    // the original row, does not auto-publish)
+    // ==========================================
+
+    function duplicateArticle(id) {
+        var source = allArticles.find(function (a) { return String(a.id) === String(id); });
+        if (!source) {
+            showToast("Unable to duplicate article.", true);
+            return;
+        }
+
+        var copy = Object.assign({}, source);
+        delete copy.id;
+        delete copy.created_at;
+        copy.title = (copy.title || "Untitled") + " (Copy)";
+        copy.slug = (copy.slug || "") + "-copy";
+        copy.published = false;
+
+        try {
+            localStorage.setItem("bj_article_duplicate", JSON.stringify(copy));
+            window.location.href = "create-article.html?duplicate=1";
+        } catch (error) {
+            console.error("Could not stage duplicate:", error);
+            showToast("Unable to duplicate article.", true);
+        }
+    }
+
+
+    // ==========================================
+    // START
+    // ==========================================
+
+    (async function start() {
+        var ok = await checkAuth();
+        if (ok) loadArticles();
+    })();
+
+</script>
+
+</body>
+
+</html>

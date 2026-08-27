@@ -1,649 +1,1355 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Create and publish articles - Bibek Joshi Admin">
-
     <title>Create Article | Bibek Joshi</title>
 
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+    <meta name="description"
+          content="Create and publish articles on Bibek Joshi's website.">
 
-    <!-- IMPORTANT:
-         create-article.html is inside /admin/
-         admin.css is also inside /admin/
-    -->
-    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .topbar {
+            height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid #e6eaf0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 32px;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 11px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #111827;
+            color: #ffffff;
+
+            font-weight: 800;
+        }
+
+        .brand-text strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .brand-text span {
+            display: block;
+            font-size: 12px;
+            color: #8a94a6;
+            margin-top: 2px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-btn {
+            height: 40px;
+            padding: 0 15px;
+
+            border-radius: 9px;
+            border: 1px solid #dfe4eb;
+
+            background: #ffffff;
+            color: #344054;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .top-btn:hover {
+            background: #f8fafc;
+        }
+
+        .top-btn.primary {
+            background: #111827;
+            border-color: #111827;
+            color: #ffffff;
+        }
+
+
+        /* =========================================================
+           PAGE
+        ========================================================= */
+
+        .page {
+            max-width: 1500px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .page-heading h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-heading p {
+            margin: 7px 0 0;
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .save-status {
+            color: #667085;
+            font-size: 13px;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+
+        /* =========================================================
+           EDITOR LAYOUT
+        ========================================================= */
+
+        .editor-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 360px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .editor-card,
+        .side-card {
+            background: #ffffff;
+            border: 1px solid #e7ebf1;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(16, 24, 40, 0.04);
+        }
+
+        .editor-card {
+            overflow: hidden;
+        }
+
+        .side-column {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            position: sticky;
+            top: 92px;
+        }
+
+
+        /* =========================================================
+           TITLE
+        ========================================================= */
+
+        .title-area {
+            padding: 28px 30px 18px;
+        }
+
+        .title-area input {
+            width: 100%;
+
+            border: 0;
+            outline: 0;
+
+            font-size: 34px;
+            font-weight: 800;
+
+            color: #111827;
+
+            padding: 0;
+
+            background: transparent;
+        }
+
+        .title-area input::placeholder {
+            color: #c4cbd5;
+        }
+
+        .slug-row {
+            margin-top: 13px;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #8a94a6;
+            font-size: 12px;
+        }
+
+        .slug-row input {
+            flex: 1;
+
+            border: 0;
+            outline: 0;
+
+            background: transparent;
+
+            color: #667085;
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           TOOLBAR
+        ========================================================= */
+
+        .toolbar {
+            border-top: 1px solid #edf0f4;
+            border-bottom: 1px solid #edf0f4;
+
+            padding: 9px 14px;
+
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            flex-wrap: wrap;
+
+            background: #fbfcfe;
+
+            position: sticky;
+            top: 72px;
+            z-index: 20;
+        }
+
+        .tool-btn {
+            width: 34px;
+            height: 34px;
+
+            border: 0;
+            border-radius: 7px;
+
+            background: transparent;
+            color: #475467;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-btn:hover,
+        .tool-btn.active {
+            background: #e9edf3;
+            color: #111827;
+        }
+
+        .toolbar select {
+            height: 34px;
+
+            border: 1px solid #dfe4eb;
+            border-radius: 7px;
+
+            background: #ffffff;
+
+            padding: 0 8px;
+
+            font-size: 12px;
+            color: #475467;
+
+            outline: none;
+        }
+
+        .toolbar-divider {
+            width: 1px;
+            height: 23px;
+            background: #dfe4eb;
+            margin: 0 5px;
+        }
+
+
+        /* =========================================================
+           EDITOR
+        ========================================================= */
+
+        .editor-wrapper {
+            min-height: 620px;
+        }
+
+        #editor {
+            min-height: 620px;
+
+            padding: 30px 34px;
+
+            outline: none;
+
+            font-size: 17px;
+            line-height: 1.8;
+
+            color: #263142;
+        }
+
+        #editor:empty::before {
+            content: attr(data-placeholder);
+            color: #b2bac7;
+            pointer-events: none;
+        }
+
+        #editor h1,
+        #editor h2,
+        #editor h3 {
+            color: #111827;
+            line-height: 1.3;
+        }
+
+        #editor h2 {
+            font-size: 27px;
+        }
+
+        #editor h3 {
+            font-size: 22px;
+        }
+
+        #editor blockquote {
+            margin: 25px 0;
+            padding: 15px 20px;
+
+            border-left: 4px solid #111827;
+
+            background: #f5f7fa;
+
+            color: #667085;
+        }
+
+        #editor img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+
+        #editor a {
+            color: #2563eb;
+        }
+
+        #editor pre {
+            padding: 18px;
+            border-radius: 10px;
+            background: #111827;
+            color: #ffffff;
+            overflow-x: auto;
+        }
+
+
+        /* =========================================================
+           SOURCE MODE
+        ========================================================= */
+
+        #sourceEditor {
+            width: 100%;
+            min-height: 620px;
+
+            display: none;
+
+            padding: 25px;
+
+            border: 0;
+            outline: 0;
+
+            resize: vertical;
+
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+
+            background: #111827;
+            color: #e5e7eb;
+        }
+
+        .source-mode #editor {
+            display: none;
+        }
+
+        .source-mode #sourceEditor {
+            display: block;
+        }
+
+
+        /* =========================================================
+           EDITOR FOOTER
+        ========================================================= */
+
+        .editor-footer {
+            border-top: 1px solid #edf0f4;
+
+            padding: 12px 25px;
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #8a94a6;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           SIDE CARDS
+        ========================================================= */
+
+        .side-card {
+            padding: 21px;
+        }
+
+        .side-card h3 {
+            margin: 0 0 17px;
+
+            font-size: 14px;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .side-card h3 i {
+            color: #667085;
+        }
+
+        .field {
+            margin-bottom: 17px;
+        }
+
+        .field:last-child {
+            margin-bottom: 0;
+        }
+
+        .field label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            color: #344054;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+
+            border: 1px solid #dfe4eb;
+            border-radius: 9px;
+
+            padding: 11px 12px;
+
+            outline: none;
+
+            background: #ffffff;
+
+            color: #172033;
+
+            font-size: 13px;
+
+            transition: border .2s;
+        }
+
+        .field textarea {
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
+            border-color: #111827;
+        }
+
+        .help {
+            display: block;
+
+            margin-top: 6px;
+
+            color: #98a2b3;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================================================
+           FEATURED IMAGE
+        ========================================================= */
+
+        .image-upload {
+            border: 1.5px dashed #cdd4df;
+            border-radius: 12px;
+
+            min-height: 170px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            background: #fafbfc;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .image-upload:hover {
+            border-color: #111827;
+            background: #f8fafc;
+        }
+
+        .image-upload i {
+            font-size: 30px;
+            color: #98a2b3;
+            margin-bottom: 10px;
+        }
+
+        .image-upload strong {
+            font-size: 13px;
+            color: #344054;
+        }
+
+        .image-upload span {
+            font-size: 11px;
+            color: #98a2b3;
+            margin-top: 5px;
+        }
+
+        #imagePreview {
+            display: none;
+
+            width: 100%;
+            height: 200px;
+
+            object-fit: cover;
+        }
+
+        .remove-image {
+            display: none;
+
+            position: absolute;
+            top: 10px;
+            right: 10px;
+
+            width: 32px;
+            height: 32px;
+
+            border: 0;
+            border-radius: 50%;
+
+            background: rgba(0, 0, 0, .7);
+            color: white;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           SEO
+        ========================================================= */
+
+        .seo-meter {
+            height: 5px;
+            background: #edf0f4;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .seo-meter span {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: #16a34a;
+            transition: width .2s;
+        }
+
+
+        /* =========================================================
+           PUBLISH CARD
+        ========================================================= */
+
+        .publish-card {
+            background: #111827;
+            color: #ffffff;
+        }
+
+        .publish-card h3 {
+            color: #ffffff;
+        }
+
+        .publish-card .status-row {
+            color: #cbd5e1;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 17px;
+
+            font-size: 13px;
+        }
+
+        .switch {
+            position: relative;
+            width: 42px;
+            height: 23px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+
+            border-radius: 30px;
+
+            background: #475467;
+
+            cursor: pointer;
+        }
+
+        .slider:before {
+            content: "";
+
+            position: absolute;
+
+            width: 17px;
+            height: 17px;
+
+            left: 3px;
+            top: 3px;
+
+            background: #ffffff;
+
+            border-radius: 50%;
+
+            transition: .2s;
+        }
+
+        .switch input:checked + .slider {
+            background: #22c55e;
+        }
+
+        .switch input:checked + .slider:before {
+            transform: translateX(19px);
+        }
+
+        .publish-button {
+            width: 100%;
+
+            height: 45px;
+
+            border: 0;
+            border-radius: 9px;
+
+            background: #ffffff;
+            color: #111827;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .publish-button:hover {
+            background: #f1f5f9;
+        }
+
+        .secondary-publish {
+            width: 100%;
+
+            margin-top: 9px;
+
+            height: 40px;
+
+            border: 1px solid #475467;
+            border-radius: 9px;
+
+            background: transparent;
+            color: #ffffff;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
+
+        #message {
+            margin-top: 12px;
+
+            font-size: 12px;
+            line-height: 1.5;
+
+            display: none;
+        }
+
+        #message.success {
+            color: #86efac;
+        }
+
+        #message.error {
+            color: #fca5a5;
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(15, 23, 42, .55);
+
+            z-index: 5000;
+
+            padding: 20px;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 850px;
+
+            max-height: 90vh;
+
+            overflow: auto;
+
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            box-shadow: 0 30px 80px rgba(0,0,0,.3);
+        }
+
+        .modal-header {
+            padding: 18px 22px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        .close-modal {
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .preview-content {
+            padding: 35px;
+            line-height: 1.8;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media(max-width: 1100px) {
+
+            .editor-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .side-column {
+                position: static;
+
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .publish-card {
+                grid-column: span 2;
+            }
+
+        }
+
+
+        @media(max-width: 700px) {
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .brand-text {
+                display: none;
+            }
+
+            .top-btn span {
+                display: none;
+            }
+
+            .page {
+                padding: 18px 12px;
+            }
+
+            .page-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .title-area {
+                padding: 22px 18px 15px;
+            }
+
+            .title-area input {
+                font-size: 26px;
+            }
+
+            #editor {
+                padding: 22px 18px;
+                min-height: 500px;
+            }
+
+            #sourceEditor {
+                min-height: 500px;
+            }
+
+            .toolbar {
+                top: 72px;
+            }
+
+            .side-column {
+                display: flex;
+            }
+
+            .publish-card {
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
 </head>
 
-<body class="admin-page">
 
-    <!-- ==========================================
-         MOBILE HEADER
-    =========================================== -->
+<body>
 
-    <header class="mobile-header">
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            B
+        </div>
+
+        <div class="brand-text">
+            <strong>Bibek Joshi</strong>
+            <span>Content Management</span>
+        </div>
+
+    </div>
+
+
+    <div class="top-actions">
 
         <button
             type="button"
-            id="menuToggle"
-            class="menu-toggle"
-            aria-label="Open menu"
-        >
-            <i class="fa-solid fa-bars"></i>
+            class="top-btn"
+            id="previewBtn">
+
+            <i class="fa-regular fa-eye"></i>
+
+            <span>Preview</span>
+
         </button>
 
-        <div class="mobile-brand">
-            <strong>Bibek Joshi</strong>
-        </div>
 
-    </header>
+        <a
+            href="articles.html"
+            class="top-btn">
 
+            <i class="fa-solid fa-arrow-left"></i>
 
-    <!-- ==========================================
-         SIDEBAR
-    =========================================== -->
+            <span>Articles</span>
 
-    <aside class="admin-sidebar" id="adminSidebar">
+        </a>
 
-        <div class="sidebar-brand">
+    </div>
 
-            <div class="brand-icon">
-                <i class="fa-solid fa-b"></i>
-            </div>
-
-            <div class="brand-text">
-                <strong>Bibek Joshi</strong>
-                <span>Admin Panel</span>
-            </div>
-
-        </div>
+</header>
 
 
-        <nav class="sidebar-nav">
 
-            <a href="admin.html" class="sidebar-link">
+<!-- =========================================================
+     PAGE
+========================================================= -->
 
-                <i class="fa-solid fa-gauge-high"></i>
-
-                <span>Dashboard</span>
-
-            </a>
+<main class="page">
 
 
-            <a href="articles.html" class="sidebar-link">
+    <div class="page-heading">
 
-                <i class="fa-solid fa-newspaper"></i>
+        <div>
 
-                <span>Articles</span>
+            <h1>
+                Create Article
+            </h1>
 
-            </a>
-
-
-            <a
-                href="create-article.html"
-                class="sidebar-link active"
-            >
-
-                <i class="fa-solid fa-pen-to-square"></i>
-
-                <span>Create Article</span>
-
-            </a>
-
-
-            <div class="sidebar-divider"></div>
-
-
-            <a
-                href="../blog.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="sidebar-link"
-            >
-
-                <i class="fa-solid fa-globe"></i>
-
-                <span>View Website</span>
-
-            </a>
-
-        </nav>
-
-
-        <div class="sidebar-bottom">
-
-            <button
-                type="button"
-                id="themeToggle"
-                class="sidebar-link sidebar-button"
-            >
-
-                <i class="fa-solid fa-moon"></i>
-
-                <span>Dark Mode</span>
-
-            </button>
-
-
-            <button
-                type="button"
-                id="logoutBtn"
-                class="sidebar-link sidebar-button logout-link"
-            >
-
-                <i class="fa-solid fa-right-from-bracket"></i>
-
-                <span>Logout</span>
-
-            </button>
+            <p>
+                Write, optimize and publish your next article.
+            </p>
 
         </div>
 
-    </aside>
+
+        <div class="save-status" id="saveStatus">
+
+            <i class="fa-regular fa-circle-check"></i>
+
+            Saved locally
+
+        </div>
+
+    </div>
 
 
-    <!-- ==========================================
-         OVERLAY
-    =========================================== -->
 
-    <div
-        id="sidebarOverlay"
-        class="sidebar-overlay"
-    ></div>
+    <form id="articleForm">
+
+        <div class="editor-layout">
 
 
-    <!-- ==========================================
-         MAIN
-    =========================================== -->
+            <!-- =================================================
+                 MAIN EDITOR
+            ================================================== -->
 
-    <main class="admin-main">
-
-
-        <!-- ======================================
-             TOP BAR
-        ======================================= -->
-
-        <header class="admin-topbar">
-
-            <div>
-
-                <p class="page-label">
-                    CONTENT MANAGEMENT
-                </p>
-
-                <h1>
-                    Create Article
-                </h1>
-
-                <p class="topbar-description">
-                    Write, optimize and publish a new article.
-                </p>
-
-            </div>
+            <section class="editor-card">
 
 
-            <div class="topbar-actions">
+                <!-- TITLE -->
 
-                <a
-                    href="articles.html"
-                    class="topbar-button"
-                >
+                <div class="title-area">
 
-                    <i class="fa-solid fa-arrow-left"></i>
-
-                    Back to Articles
-
-                </a>
-
-            </div>
-
-        </header>
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Article title..."
+                        required
+                        autocomplete="off"
+                    >
 
 
-        <!-- ======================================
-             MESSAGE
-        ======================================= -->
+                    <div class="slug-row">
 
-        <div
-            id="message"
-            class="editor-message"
-            role="alert"
-        ></div>
+                        <i class="fa-solid fa-link"></i>
 
-
-        <!-- ======================================
-             EDITOR
-        ======================================= -->
-
-        <form
-            id="articleForm"
-            class="modern-editor"
-        >
-
-
-            <!-- ==================================
-                 LEFT COLUMN
-            =================================== -->
-
-            <div class="editor-content">
-
-
-                <!-- ARTICLE DETAILS -->
-
-                <section class="editor-card">
-
-                    <div class="editor-card-header">
-
-                        <div>
-
-                            <span class="section-label">
-                                ARTICLE
-                            </span>
-
-                            <h2>
-                                Article Details
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- TITLE -->
-
-                    <div class="form-group">
-
-                        <label for="title">
-                            Article Title
-                            <span class="required">*</span>
-                        </label>
+                        <span>
+                            URL:
+                        </span>
 
                         <input
                             type="text"
-                            id="title"
-                            placeholder="Enter your article title..."
-                            maxlength="200"
+                            id="slug"
+                            placeholder="article-slug"
                             required
                         >
 
-                        <div class="field-help">
-                            <span>
-                                Write a clear and engaging headline.
-                            </span>
+                    </div>
 
-                            <span id="titleCount">
-                                0 / 200
-                            </span>
-                        </div>
+                </div>
+
+
+
+                <!-- TOOLBAR -->
+
+                <div class="toolbar">
+
+
+                    <select id="formatBlock">
+
+                        <option value="p">
+                            Paragraph
+                        </option>
+
+                        <option value="h2">
+                            Heading 2
+                        </option>
+
+                        <option value="h3">
+                            Heading 3
+                        </option>
+
+                        <option value="blockquote">
+                            Quote
+                        </option>
+
+                        <option value="pre">
+                            Code
+                        </option>
+
+                    </select>
+
+
+                    <div class="toolbar-divider"></div>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="bold"
+                        title="Bold">
+
+                        <i class="fa-solid fa-bold"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="italic"
+                        title="Italic">
+
+                        <i class="fa-solid fa-italic"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="underline"
+                        title="Underline">
+
+                        <i class="fa-solid fa-underline"></i>
+
+                    </button>
+
+
+                    <div class="toolbar-divider"></div>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="insertUnorderedList"
+                        title="Bullet list">
+
+                        <i class="fa-solid fa-list-ul"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="insertOrderedList"
+                        title="Numbered list">
+
+                        <i class="fa-solid fa-list-ol"></i>
+
+                    </button>
+
+
+                    <div class="toolbar-divider"></div>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="justifyLeft"
+                        title="Align left">
+
+                        <i class="fa-solid fa-align-left"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="justifyCenter"
+                        title="Align center">
+
+                        <i class="fa-solid fa-align-center"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="justifyRight"
+                        title="Align right">
+
+                        <i class="fa-solid fa-align-right"></i>
+
+                    </button>
+
+
+                    <div class="toolbar-divider"></div>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="linkBtn"
+                        title="Insert link">
+
+                        <i class="fa-solid fa-link"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="imageBtn"
+                        title="Insert image">
+
+                        <i class="fa-regular fa-image"></i>
+
+                    </button>
+
+
+                    <input
+                        type="file"
+                        id="editorImageInput"
+                        accept="image/*"
+                        hidden
+                    >
+
+
+                    <div class="toolbar-divider"></div>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="undo"
+                        title="Undo">
+
+                        <i class="fa-solid fa-rotate-left"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        data-command="redo"
+                        title="Redo">
+
+                        <i class="fa-solid fa-rotate-right"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="sourceBtn"
+                        title="HTML source">
+
+                        <i class="fa-solid fa-code"></i>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- CONTENT EDITOR -->
+
+                <div class="editor-wrapper">
+
+                    <div
+                        id="editor"
+                        contenteditable="true"
+                        data-placeholder="Start writing your article here...">
 
                     </div>
 
 
-                    <!-- SLUG -->
+                    <textarea
+                        id="sourceEditor"
+                        spellcheck="false">
+                    </textarea>
 
-                    <div class="form-group">
+                </div>
 
-                        <label for="slug">
-                            URL Slug
-                            <span class="required">*</span>
-                        </label>
 
-                        <div class="slug-wrapper">
 
-                            <span class="slug-prefix">
-                                /blog/
-                            </span>
+                <!-- FOOTER -->
 
-                            <input
-                                type="text"
-                                id="slug"
-                                placeholder="article-title"
-                                required
-                            >
+                <div class="editor-footer">
 
-                        </div>
+                    <span id="wordCount">
+                        0 words
+                    </span>
 
-                        <div class="field-help">
+                    <span id="readingTime">
+                        0 min read
+                    </span>
 
-                            <span>
-                                Use lowercase words separated by hyphens.
-                            </span>
+                </div>
 
-                            <button
-                                type="button"
-                                id="resetSlug"
-                                class="small-link"
-                            >
-                                Auto generate
-                            </button>
+            </section>
 
-                        </div>
 
-                    </div>
 
+            <!-- =================================================
+                 SIDEBAR
+            ================================================== -->
 
-                    <!-- EXCERPT -->
-
-                    <div class="form-group">
-
-                        <label for="excerpt">
-                            Excerpt
-                        </label>
-
-                        <textarea
-                            id="excerpt"
-                            rows="4"
-                            maxlength="300"
-                            placeholder="Write a short summary that will appear on your blog listing..."
-                        ></textarea>
-
-                        <div class="field-help">
-
-                            <span>
-                                Recommended: 120–160 characters.
-                            </span>
-
-                            <span id="excerptCount">
-                                0 / 300
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- CONTENT -->
-
-                    <div class="form-group">
-
-                        <label for="content">
-
-                            Article Content
-
-                            <span class="required">
-                                *
-                            </span>
-
-                        </label>
-
-
-                        <!-- Simple Toolbar -->
-
-                        <div class="editor-toolbar">
-
-                            <button
-                                type="button"
-                                data-tag="h2"
-                                title="Heading"
-                            >
-                                <i class="fa-solid fa-heading"></i>
-                            </button>
-
-                            <button
-                                type="button"
-                                data-tag="strong"
-                                title="Bold"
-                            >
-                                <i class="fa-solid fa-bold"></i>
-                            </button>
-
-                            <button
-                                type="button"
-                                data-tag="em"
-                                title="Italic"
-                            >
-                                <i class="fa-solid fa-italic"></i>
-                            </button>
-
-                            <button
-                                type="button"
-                                data-tag="ul"
-                                title="List"
-                            >
-                                <i class="fa-solid fa-list-ul"></i>
-                            </button>
-
-                            <button
-                                type="button"
-                                data-tag="blockquote"
-                                title="Quote"
-                            >
-                                <i class="fa-solid fa-quote-left"></i>
-                            </button>
-
-                            <span class="toolbar-divider"></span>
-
-                            <button
-                                type="button"
-                                id="insertParagraph"
-                                title="Paragraph"
-                            >
-                                <i class="fa-solid fa-paragraph"></i>
-                            </button>
-
-                        </div>
-
-
-                        <textarea
-                            id="content"
-                            rows="25"
-                            placeholder="Start writing your article...
-
-You can use HTML formatting.
-
-Example:
-<h2>Introduction</h2>
-<p>Your article content goes here...</p>"
-                            required
-                        ></textarea>
-
-
-                        <div class="content-tip">
-
-                            <i class="fa-solid fa-circle-info"></i>
-
-                            <span>
-                                HTML formatting is supported.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- SEO -->
-
-                <section class="editor-card">
-
-                    <div class="editor-card-header">
-
-                        <div>
-
-                            <span class="section-label">
-                                SEARCH ENGINE OPTIMIZATION
-                            </span>
-
-                            <h2>
-                                SEO Settings
-                            </h2>
-
-                        </div>
-
-                        <div class="seo-score">
-                            <span>SEO</span>
-                            <strong id="seoScore">0%</strong>
-                        </div>
-
-                    </div>
-
-
-                    <!-- SEO TITLE -->
-
-                    <div class="form-group">
-
-                        <label for="seo_title">
-                            SEO Title
-                        </label>
-
-                        <input
-                            type="text"
-                            id="seo_title"
-                            maxlength="60"
-                            placeholder="SEO optimized title..."
-                        >
-
-                        <div class="field-help">
-
-                            <span>
-                                Recommended: 50–60 characters.
-                            </span>
-
-                            <span id="seoTitleCount">
-                                0 / 60
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- SEO DESCRIPTION -->
-
-                    <div class="form-group">
-
-                        <label for="seo_description">
-                            SEO Description
-                        </label>
-
-                        <textarea
-                            id="seo_description"
-                            rows="4"
-                            maxlength="160"
-                            placeholder="Write a compelling description for search engines..."
-                        ></textarea>
-
-                        <div class="field-help">
-
-                            <span>
-                                Recommended: 140–160 characters.
-                            </span>
-
-                            <span id="seoDescriptionCount">
-                                0 / 160
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- KEYWORDS -->
-
-                    <div class="form-group">
-
-                        <label for="seo_keywords">
-                            Keywords
-                        </label>
-
-                        <input
-                            type="text"
-                            id="seo_keywords"
-                            placeholder="finance, Nepal stock market, investment"
-                        >
-
-                        <div class="field-help">
-
-                            <span>
-                                Separate keywords with commas.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-            </div>
-
-
-            <!-- ==================================
-                 RIGHT SIDEBAR
-            =================================== -->
-
-            <aside class="editor-sidebar-new">
+            <aside class="side-column">
 
 
                 <!-- PUBLISH -->
 
-                <section class="editor-card publish-card">
+                <div class="side-card publish-card">
 
-                    <div class="editor-card-header">
+                    <h3>
 
-                        <div>
+                        <i class="fa-solid fa-paper-plane"></i>
 
-                            <span class="section-label">
-                                PUBLISH
-                            </span>
+                        Publish
 
-                            <h2>
-                                Publish Article
-                            </h2>
-
-                        </div>
-
-                    </div>
+                    </h3>
 
 
-                    <div class="publish-status">
+                    <div class="status-row">
 
-                        <div class="status-dot"></div>
-
-                        <div>
-
-                            <strong id="statusText">
-                                Ready to publish
-                            </strong>
-
-                            <span>
-                                Your article is currently set to publish.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <label class="publish-toggle-new">
-
-                        <input
-                            type="checkbox"
-                            id="published"
-                            checked
-                        >
-
-                        <span class="toggle-slider"></span>
-
-                        <span class="toggle-text">
-                            Publish immediately
+                        <span>
+                            Publish article
                         </span>
 
-                    </label>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="published"
+                                checked
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
 
 
                     <button
                         type="submit"
-                        id="publishBtn"
-                        class="primary-button full-width"
-                    >
+                        class="publish-button"
+                        id="publishBtn">
 
                         <i class="fa-solid fa-paper-plane"></i>
 
@@ -654,51 +1360,42 @@ Example:
 
                     <button
                         type="button"
-                        id="saveDraftBtn"
-                        class="secondary-button full-width"
-                    >
-
-                        <i class="fa-solid fa-file"></i>
+                        class="secondary-publish"
+                        id="draftBtn">
 
                         Save as Draft
 
                     </button>
 
-                </section>
+
+                    <div id="message"></div>
+
+                </div>
 
 
-                <!-- CATEGORY -->
 
-                <section class="editor-card">
+                <!-- BASIC INFORMATION -->
 
-                    <div class="editor-card-header">
+                <div class="side-card">
 
-                        <div>
+                    <h3>
 
-                            <span class="section-label">
-                                ORGANIZATION
-                            </span>
+                        <i class="fa-solid fa-sliders"></i>
 
-                            <h2>
-                                Category
-                            </h2>
+                        Article Settings
 
-                        </div>
-
-                    </div>
+                    </h3>
 
 
-                    <div class="form-group">
+                    <div class="field">
 
-                        <label for="category">
-                            Article Category
-                            <span class="required">*</span>
+                        <label>
+                            Category
                         </label>
 
                         <select
                             id="category"
-                            required
-                        >
+                            required>
 
                             <option value="">
                                 Select category
@@ -740,90 +1437,11 @@ Example:
 
                     </div>
 
-                </section>
 
+                    <div class="field">
 
-                <!-- FEATURED IMAGE -->
-
-                <section class="editor-card">
-
-                    <div class="editor-card-header">
-
-                        <div>
-
-                            <span class="section-label">
-                                MEDIA
-                            </span>
-
-                            <h2>
-                                Featured Image
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="image_url">
-                            Image URL
-                        </label>
-
-                        <input
-                            type="url"
-                            id="image_url"
-                            placeholder="https://example.com/image.jpg"
-                        >
-
-                    </div>
-
-
-                    <div
-                        id="imagePreview"
-                        class="image-preview"
-                    >
-
-                        <div class="image-placeholder">
-
-                            <i class="fa-regular fa-image"></i>
-
-                            <span>
-                                Image preview
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- AUTHOR -->
-
-                <section class="editor-card">
-
-                    <div class="editor-card-header">
-
-                        <div>
-
-                            <span class="section-label">
-                                AUTHOR
-                            </span>
-
-                            <h2>
-                                Article Author
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="author">
-                            Author Name
+                        <label>
+                            Author
                         </label>
 
                         <input
@@ -834,284 +1452,395 @@ Example:
 
                     </div>
 
-                </section>
+
+                    <div class="field">
+
+                        <label>
+                            Excerpt
+                        </label>
+
+                        <textarea
+                            id="excerpt"
+                            rows="4"
+                            placeholder="Short description...">
+                        </textarea>
+
+                        <span class="help">
+                            Recommended: 120–160 characters.
+                        </span>
+
+                    </div>
+
+                </div>
 
 
-                <!-- CHECKLIST -->
 
-                <section class="editor-card checklist-card">
+                <!-- FEATURED IMAGE -->
 
-                    <div class="editor-card-header">
+                <div class="side-card">
 
-                        <div>
+                    <h3>
 
-                            <span class="section-label">
-                                CHECKLIST
+                        <i class="fa-regular fa-image"></i>
+
+                        Featured Image
+
+                    </h3>
+
+
+                    <div
+                        class="image-upload"
+                        id="imageUpload">
+
+                        <img
+                            id="imagePreview"
+                            alt="Featured image preview"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="remove-image"
+                            id="removeImage">
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                        </button>
+
+
+                        <div id="uploadPlaceholder">
+
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                            <strong>
+                                Upload image
+                            </strong>
+
+                            <span>
+                                JPG, PNG or WebP
                             </span>
-
-                            <h2>
-                                Before Publishing
-                            </h2>
 
                         </div>
 
                     </div>
 
 
-                    <div class="check-item" id="checkTitle">
+                    <input
+                        type="file"
+                        id="featuredImage"
+                        accept="image/jpeg,image/png,image/webp"
+                        hidden
+                    >
 
-                        <i class="fa-solid fa-circle-xmark"></i>
 
-                        <span>
-                            Article title
-                        </span>
+                    <div
+                        class="field"
+                        style="margin-top:14px;">
+
+                        <label>
+                            Or use image URL
+                        </label>
+
+                        <input
+                            type="url"
+                            id="image_url"
+                            placeholder="https://example.com/image.jpg"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SEO -->
+
+                <div class="side-card">
+
+                    <h3>
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Search Engine Optimization
+
+                    </h3>
+
+
+                    <div class="field">
+
+                        <label>
+                            SEO Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="seo_title"
+                            maxlength="60"
+                            placeholder="SEO optimized title"
+                        >
+
+                        <div class="seo-meter">
+                            <span id="seoTitleMeter"></span>
+                        </div>
 
                     </div>
 
 
-                    <div class="check-item" id="checkSlug">
+                    <div class="field">
 
-                        <i class="fa-solid fa-circle-xmark"></i>
+                        <label>
+                            SEO Description
+                        </label>
 
-                        <span>
-                            URL slug
-                        </span>
-
-                    </div>
-
-
-                    <div class="check-item" id="checkCategory">
-
-                        <i class="fa-solid fa-circle-xmark"></i>
-
-                        <span>
-                            Category selected
-                        </span>
+                        <textarea
+                            id="seo_description"
+                            rows="4"
+                            maxlength="160"
+                            placeholder="Description for Google search results...">
+                        </textarea>
 
                     </div>
 
 
-                    <div class="check-item" id="checkContent">
+                    <div class="field">
 
-                        <i class="fa-solid fa-circle-xmark"></i>
+                        <label>
+                            Keywords
+                        </label>
 
-                        <span>
-                            Article content
+                        <input
+                            type="text"
+                            id="seo_keywords"
+                            placeholder="finance, investment, Nepal"
+                        >
+
+                        <span class="help">
+                            Separate keywords with commas.
                         </span>
 
                     </div>
 
-                </section>
+                </div>
 
             </aside>
 
-        </form>
+        </div>
 
-    </main>
+    </form>
 
-
-    <!-- ==========================================
-         SUPABASE
-    =========================================== -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- Supabase configuration is in main folder -->
-    <script src="../supabase.js"></script>
-
-    <!-- Admin safety -->
-    <script src="admin-safety.js"></script>
+</main>
 
 
-    <!-- ==========================================
-         PAGE JAVASCRIPT
-    =========================================== -->
 
-    <script>
+<!-- =========================================================
+     PREVIEW MODAL
+========================================================= -->
 
-        /* =========================================
-           ELEMENTS
-        ========================================= */
+<div
+    class="modal"
+    id="previewModal">
 
-        const form =
-            document.getElementById("articleForm");
+    <div class="modal-box">
 
-        const titleInput =
-            document.getElementById("title");
+        <div class="modal-header">
 
-        const slugInput =
-            document.getElementById("slug");
+            <h2>
+                Article Preview
+            </h2>
 
-        const excerptInput =
-            document.getElementById("excerpt");
+            <button
+                type="button"
+                class="close-modal"
+                id="closePreview">
 
-        const contentInput =
-            document.getElementById("content");
+                <i class="fa-solid fa-xmark"></i>
 
-        const categoryInput =
-            document.getElementById("category");
+            </button>
 
-        const imageInput =
-            document.getElementById("image_url");
-
-        const authorInput =
-            document.getElementById("author");
-
-        const publishedInput =
-            document.getElementById("published");
-
-        const publishBtn =
-            document.getElementById("publishBtn");
-
-        const saveDraftBtn =
-            document.getElementById("saveDraftBtn");
-
-        const message =
-            document.getElementById("message");
+        </div>
 
 
-        /* =========================================
-           MESSAGE
-        ========================================= */
+        <article class="preview-content">
 
-        function showMessage(text, type) {
+            <h1 id="previewTitle">
+                Article Title
+            </h1>
 
-            message.textContent = text;
 
-            message.className =
-                "editor-message " + type;
+            <p
+                id="previewExcerpt"
+                style="color:#667085;">
+            </p>
 
-            message.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
 
+            <div id="previewBody"></div>
+
+        </article>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     SUPABASE
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../supabase.js"></script>
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
+
+    const form = document.getElementById("articleForm");
+
+    const title = document.getElementById("title");
+
+    const slug = document.getElementById("slug");
+
+    const editor = document.getElementById("editor");
+
+    const sourceEditor = document.getElementById("sourceEditor");
+
+    const category = document.getElementById("category");
+
+    const excerpt = document.getElementById("excerpt");
+
+    const author = document.getElementById("author");
+
+    const published = document.getElementById("published");
+
+    const imageUrl = document.getElementById("image_url");
+
+    const featuredImage = document.getElementById("featuredImage");
+
+    const imagePreview = document.getElementById("imagePreview");
+
+    const uploadPlaceholder = document.getElementById("uploadPlaceholder");
+
+    const removeImage = document.getElementById("removeImage");
+
+    const imageUpload = document.getElementById("imageUpload");
+
+    const message = document.getElementById("message");
+
+    const publishBtn = document.getElementById("publishBtn");
+
+    const saveStatus = document.getElementById("saveStatus");
+
+
+
+    /* =========================================================
+       AUTH
+    ========================================================= */
+
+    async function checkAuth() {
+
+        if (!window.supabaseClient) {
+
+            showMessage(
+                "Supabase connection is not available.",
+                true
+            );
+
+            return false;
         }
 
 
-        /* =========================================
-           SLUG GENERATOR
-        ========================================= */
+        try {
 
-        function generateSlug(text) {
+            const result =
+                await window.supabaseClient.auth.getSession();
 
-            return text
+
+            if (!result.data ||
+                !result.data.session) {
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+            }
+
+
+            return true;
+
+        } catch (error) {
+
+            console.error(error);
+
+            window.location.href =
+                "login.html";
+
+            return false;
+        }
+
+    }
+
+
+
+    /* =========================================================
+       AUTO SLUG
+    ========================================================= */
+
+    let slugManuallyEdited = false;
+
+
+    title.addEventListener("input", function () {
+
+        if (slugManuallyEdited) return;
+
+
+        slug.value =
+            title.value
                 .toLowerCase()
                 .trim()
                 .replace(/[^a-z0-9\s-]/g, "")
                 .replace(/\s+/g, "-")
                 .replace(/-+/g, "-");
 
-        }
+    });
 
 
-        let manuallyEditedSlug = false;
+    slug.addEventListener("input", function () {
+
+        slugManuallyEdited = true;
+
+    });
 
 
-        titleInput.addEventListener(
-            "input",
-            function () {
 
-                if (!manuallyEditedSlug) {
+    /* =========================================================
+       RICH TEXT TOOLBAR
+    ========================================================= */
 
-                    slugInput.value =
-                        generateSlug(
-                            titleInput.value
-                        );
+    document
+        .querySelectorAll("[data-command]")
+        .forEach(function (button) {
 
-                }
-
-                updateChecklist();
-                updateCounts();
-                updateSEOScore();
-
-            }
-        );
-
-
-        slugInput.addEventListener(
-            "input",
-            function () {
-
-                manuallyEditedSlug = true;
-
-                updateChecklist();
-
-            }
-        );
-
-
-        document
-            .getElementById("resetSlug")
-            .addEventListener(
+            button.addEventListener(
                 "click",
                 function () {
 
-                    manuallyEditedSlug = false;
+                    editor.focus();
 
-                    slugInput.value =
-                        generateSlug(
-                            titleInput.value
-                        );
+                    document.execCommand(
+                        button.dataset.command,
+                        false,
+                        null
+                    );
 
-                    updateChecklist();
-
-                }
-            );
-
-
-        /* =========================================
-           CHARACTER COUNTERS
-        ========================================= */
-
-        function updateCounts() {
-
-            document.getElementById(
-                "titleCount"
-            ).textContent =
-                titleInput.value.length +
-                " / 200";
-
-
-            document.getElementById(
-                "excerptCount"
-            ).textContent =
-                excerptInput.value.length +
-                " / 300";
-
-
-            document.getElementById(
-                "seoTitleCount"
-            ).textContent =
-                document.getElementById(
-                    "seo_title"
-                ).value.length +
-                " / 60";
-
-
-            document.getElementById(
-                "seoDescriptionCount"
-            ).textContent =
-                document.getElementById(
-                    "seo_description"
-                ).value.length +
-                " / 160";
-
-        }
-
-
-        [
-            excerptInput,
-            document.getElementById("seo_title"),
-            document.getElementById("seo_description")
-        ].forEach(function (element) {
-
-            element.addEventListener(
-                "input",
-                function () {
-
-                    updateCounts();
-                    updateSEOScore();
+                    updateStats();
 
                 }
             );
@@ -1119,532 +1848,664 @@ Example:
         });
 
 
-        /* =========================================
-           IMAGE PREVIEW
-        ========================================= */
 
-        imageInput.addEventListener(
-            "input",
-            function () {
+    /* =========================================================
+       FORMAT BLOCK
+    ========================================================= */
 
-                const preview =
-                    document.getElementById(
-                        "imagePreview"
-                    );
+    document
+        .getElementById("formatBlock")
+        .addEventListener("change", function () {
 
-                const url =
-                    imageInput.value.trim();
+            editor.focus();
 
+            document.execCommand(
+                "formatBlock",
+                false,
+                this.value
+            );
 
-                if (!url) {
-
-                    preview.innerHTML =
-                        `
-                        <div class="image-placeholder">
-
-                            <i class="fa-regular fa-image"></i>
-
-                            <span>
-                                Image preview
-                            </span>
-
-                        </div>
-                        `;
-
-                    return;
-
-                }
+        });
 
 
-                preview.innerHTML =
-                    `
-                    <img
-                        src="${url.replace(/"/g, "&quot;")}"
-                        alt="Featured image preview"
-                        onerror="this.parentElement.innerHTML='<div class=&quot;image-placeholder error&quot;><i class=&quot;fa-solid fa-image&quot;></i><span>Unable to load image</span></div>'"
-                    >
-                    `;
 
-            }
-        );
+    /* =========================================================
+       LINK
+    ========================================================= */
 
+    document
+        .getElementById("linkBtn")
+        .addEventListener("click", function () {
 
-        /* =========================================
-           PUBLISH STATUS
-        ========================================= */
-
-        publishedInput.addEventListener(
-            "change",
-            function () {
-
-                const statusText =
-                    document.getElementById(
-                        "statusText"
-                    );
-
-
-                if (publishedInput.checked) {
-
-                    statusText.textContent =
-                        "Ready to publish";
-
-                } else {
-
-                    statusText.textContent =
-                        "Saving as draft";
-
-                }
-
-            }
-        );
-
-
-        /* =========================================
-           CHECKLIST
-        ========================================= */
-
-        function updateCheck(id, valid) {
-
-            const element =
-                document.getElementById(id);
-
-            if (!element) return;
-
-            const icon =
-                element.querySelector("i");
-
-
-            if (valid) {
-
-                element.classList.add("complete");
-
-                icon.className =
-                    "fa-solid fa-circle-check";
-
-            } else {
-
-                element.classList.remove(
-                    "complete"
+            const url =
+                prompt(
+                    "Enter URL:",
+                    "https://"
                 );
 
-                icon.className =
-                    "fa-solid fa-circle-xmark";
 
-            }
-
-        }
+            if (!url) return;
 
 
-        function updateChecklist() {
+            editor.focus();
 
-            updateCheck(
-                "checkTitle",
-                titleInput.value.trim().length > 0
-            );
-
-
-            updateCheck(
-                "checkSlug",
-                slugInput.value.trim().length > 0
-            );
-
-
-            updateCheck(
-                "checkCategory",
-                categoryInput.value !== ""
-            );
-
-
-            updateCheck(
-                "checkContent",
-                contentInput.value.trim().length > 0
-            );
-
-        }
-
-
-        [
-            contentInput,
-            categoryInput
-        ].forEach(function (element) {
-
-            element.addEventListener(
-                "input",
-                updateChecklist
-            );
-
-            element.addEventListener(
-                "change",
-                updateChecklist
+            document.execCommand(
+                "createLink",
+                false,
+                url
             );
 
         });
 
 
-        /* =========================================
-           SEO SCORE
-        ========================================= */
 
-        function updateSEOScore() {
+    /* =========================================================
+       SOURCE MODE
+    ========================================================= */
 
-            let score = 0;
+    const sourceBtn =
+        document.getElementById("sourceBtn");
 
-            const seoTitle =
-                document.getElementById(
-                    "seo_title"
-                ).value.trim();
-
-            const seoDescription =
-                document.getElementById(
-                    "seo_description"
-                ).value.trim();
-
-            const keywords =
-                document.getElementById(
-                    "seo_keywords"
-                ).value.trim();
+    let sourceMode = false;
 
 
-            if (seoTitle.length >= 30) {
-                score += 25;
+    sourceBtn.addEventListener("click", function () {
+
+        sourceMode = !sourceMode;
+
+
+        document
+            .querySelector(".editor-card")
+            .classList.toggle(
+                "source-mode",
+                sourceMode
+            );
+
+
+        if (sourceMode) {
+
+            sourceEditor.value =
+                editor.innerHTML;
+
+        } else {
+
+            editor.innerHTML =
+                sourceEditor.value;
+
+        }
+
+    });
+
+
+
+    /* =========================================================
+       IMAGE INSERT INTO ARTICLE
+    ========================================================= */
+
+    const imageBtn =
+        document.getElementById("imageBtn");
+
+    const editorImageInput =
+        document.getElementById("editorImageInput");
+
+
+    imageBtn.addEventListener(
+        "click",
+        function () {
+
+            editorImageInput.click();
+
+        }
+    );
+
+
+    editorImageInput.addEventListener(
+        "change",
+        async function () {
+
+            const file =
+                this.files[0];
+
+            if (!file) return;
+
+
+            try {
+
+                showMessage(
+                    "Uploading image...",
+                    false
+                );
+
+
+                const url =
+                    await uploadImage(
+                        file
+                    );
+
+
+                editor.focus();
+
+
+                document.execCommand(
+                    "insertHTML",
+                    false,
+                    `<img src="${escapeAttribute(url)}"
+                          alt="Article image">`
+                );
+
+
+                hideMessage();
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    error.message ||
+                    "Image upload failed.",
+                    true
+                );
+
             }
 
-            if (
-                seoTitle.length >= 50 &&
-                seoTitle.length <= 60
-            ) {
-                score += 15;
+
+            this.value = "";
+
+        }
+    );
+
+
+
+    /* =========================================================
+       FEATURED IMAGE
+    ========================================================= */
+
+    imageUpload.addEventListener(
+        "click",
+        function () {
+
+            featuredImage.click();
+
+        }
+    );
+
+
+    featuredImage.addEventListener(
+        "change",
+        function () {
+
+            const file =
+                this.files[0];
+
+            if (!file) return;
+
+
+            if (file.size > 5 * 1024 * 1024) {
+
+                alert(
+                    "Image must be smaller than 5MB."
+                );
+
+                this.value = "";
+
+                return;
             }
 
 
-            if (seoDescription.length >= 100) {
-                score += 25;
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    imagePreview.src =
+                        event.target.result;
+
+                    imagePreview.style.display =
+                        "block";
+
+                    uploadPlaceholder.style.display =
+                        "none";
+
+                    removeImage.style.display =
+                        "block";
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+    removeImage.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+            featuredImage.value = "";
+
+            imagePreview.src = "";
+
+            imagePreview.style.display =
+                "none";
+
+            uploadPlaceholder.style.display =
+                "block";
+
+            removeImage.style.display =
+                "none";
+
+        }
+    );
+
+
+
+    /* =========================================================
+       IMAGE URL PREVIEW
+    ========================================================= */
+
+    imageUrl.addEventListener(
+        "input",
+        function () {
+
+            if (!featuredImage.files.length &&
+                this.value.trim()) {
+
+                imagePreview.src =
+                    this.value.trim();
+
+                imagePreview.style.display =
+                    "block";
+
+                uploadPlaceholder.style.display =
+                    "none";
+
+                removeImage.style.display =
+                    "block";
+
             }
 
-            if (
-                seoDescription.length >= 140 &&
-                seoDescription.length <= 160
-            ) {
-                score += 15;
-            }
+        }
+    );
 
 
-            if (keywords.length > 0) {
-                score += 20;
-            }
 
+    /* =========================================================
+       SUPABASE IMAGE UPLOAD
+    ========================================================= */
 
-            document.getElementById(
-                "seoScore"
-            ).textContent =
-                Math.min(score, 100) + "%";
+    async function uploadImage(file) {
+
+        if (!window.supabaseClient) {
+
+            throw new Error(
+                "Supabase is not connected."
+            );
 
         }
 
 
-        /* =========================================
-           SIMPLE HTML TOOLBAR
-        ========================================= */
-
-        document
-            .querySelectorAll(
-                ".editor-toolbar button[data-tag]"
-            )
-            .forEach(function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        const tag =
-                            button.dataset.tag;
-
-                        const start =
-                            contentInput.selectionStart;
-
-                        const end =
-                            contentInput.selectionEnd;
-
-                        const selected =
-                            contentInput.value.substring(
-                                start,
-                                end
-                            );
+        const extension =
+            file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
 
 
-                        let replacement;
+        const fileName =
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2, 10) +
+            "." +
+            extension;
 
 
-                        if (tag === "ul") {
-
-                            replacement =
-                                "<ul>\n" +
-                                "    <li>" +
-                                selected +
-                                "</li>\n" +
-                                "</ul>";
-
-                        } else {
-
-                            replacement =
-                                "<" +
-                                tag +
-                                ">" +
-                                selected +
-                                "</" +
-                                tag +
-                                ">";
-
-                        }
+        const filePath =
+            "articles/" +
+            fileName;
 
 
-                        contentInput.setRangeText(
-                            replacement,
-                            start,
-                            end,
-                            "end"
-                        );
-
-                        contentInput.focus();
-
-                        updateChecklist();
-
+        const upload =
+            await window.supabaseClient
+                .storage
+                .from("article-images")
+                .upload(
+                    filePath,
+                    file,
+                    {
+                        cacheControl: "3600",
+                        upsert: false
                     }
                 );
 
-            });
+
+        if (upload.error) {
+
+            throw upload.error;
+
+        }
 
 
-        document
-            .getElementById("insertParagraph")
-            .addEventListener(
-                "click",
-                function () {
+        const publicData =
+            window.supabaseClient
+                .storage
+                .from("article-images")
+                .getPublicUrl(
+                    filePath
+                );
 
-                    const start =
-                        contentInput.selectionStart;
 
-                    contentInput.setRangeText(
-                        "<p>Your paragraph here...</p>",
-                        start,
-                        start,
-                        "end"
-                    );
+        return publicData.data.publicUrl;
 
-                    contentInput.focus();
+    }
 
-                    updateChecklist();
 
-                }
+
+    /* =========================================================
+       WORD COUNT
+    ========================================================= */
+
+    function updateStats() {
+
+        let text;
+
+
+        if (sourceMode) {
+
+            text =
+                sourceEditor.value
+                    .replace(/<[^>]*>/g, " ");
+
+        } else {
+
+            text =
+                editor.innerText;
+
+        }
+
+
+        text =
+            text
+                .replace(/\s+/g, " ")
+                .trim();
+
+
+        const words =
+            text
+                ? text.split(" ").length
+                : 0;
+
+
+        const minutes =
+            words
+                ? Math.max(
+                    1,
+                    Math.ceil(words / 200)
+                )
+                : 0;
+
+
+        document.getElementById(
+            "wordCount"
+        ).textContent =
+            words + " words";
+
+
+        document.getElementById(
+            "readingTime"
+        ).textContent =
+            minutes + " min read";
+
+    }
+
+
+    editor.addEventListener(
+        "input",
+        updateStats
+    );
+
+
+    sourceEditor.addEventListener(
+        "input",
+        updateStats
+    );
+
+
+
+    /* =========================================================
+       SEO METER
+    ========================================================= */
+
+    document
+        .getElementById("seo_title")
+        .addEventListener("input", function () {
+
+            const length =
+                this.value.length;
+
+
+            let percent =
+                Math.min(
+                    100,
+                    (length / 60) * 100
+                );
+
+
+            document
+                .getElementById(
+                    "seoTitleMeter"
+                )
+                .style.width =
+                percent + "%";
+
+        });
+
+
+
+    /* =========================================================
+       LOCAL AUTOSAVE
+    ========================================================= */
+
+    function saveDraftLocally() {
+
+        const draft = {
+
+            title: title.value,
+
+            slug: slug.value,
+
+            category: category.value,
+
+            excerpt: excerpt.value,
+
+            author: author.value,
+
+            content:
+                sourceMode
+                    ? sourceEditor.value
+                    : editor.innerHTML,
+
+            image_url:
+                imageUrl.value,
+
+            seo_title:
+                document
+                    .getElementById("seo_title")
+                    .value,
+
+            seo_description:
+                document
+                    .getElementById("seo_description")
+                    .value,
+
+            seo_keywords:
+                document
+                    .getElementById("seo_keywords")
+                    .value
+
+        };
+
+
+        localStorage.setItem(
+            "bj_article_autosave",
+            JSON.stringify(draft)
+        );
+
+
+        saveStatus.innerHTML =
+            '<i class="fa-solid fa-check"></i> Saved locally';
+
+    }
+
+
+    setInterval(
+        saveDraftLocally,
+        10000
+    );
+
+
+
+    /* =========================================================
+       RESTORE DRAFT
+    ========================================================= */
+
+    function restoreDraft() {
+
+        try {
+
+            const saved =
+                localStorage.getItem(
+                    "bj_article_autosave"
+                );
+
+
+            if (!saved) return;
+
+
+            const draft =
+                JSON.parse(saved);
+
+
+            if (!draft.title &&
+                !draft.content) {
+
+                return;
+            }
+
+
+            const restore =
+                confirm(
+                    "A locally saved draft was found. Restore it?"
+                );
+
+
+            if (!restore) return;
+
+
+            title.value =
+                draft.title || "";
+
+
+            slug.value =
+                draft.slug || "";
+
+
+            category.value =
+                draft.category || "";
+
+
+            excerpt.value =
+                draft.excerpt || "";
+
+
+            author.value =
+                draft.author ||
+                "Bibek Joshi";
+
+
+            editor.innerHTML =
+                draft.content || "";
+
+
+            imageUrl.value =
+                draft.image_url || "";
+
+
+            document.getElementById(
+                "seo_title"
+            ).value =
+                draft.seo_title || "";
+
+
+            document.getElementById(
+                "seo_description"
+            ).value =
+                draft.seo_description || "";
+
+
+            document.getElementById(
+                "seo_keywords"
+            ).value =
+                draft.seo_keywords || "";
+
+
+            updateStats();
+
+        } catch (error) {
+
+            console.error(
+                "Draft restore failed:",
+                error
             );
 
+        }
 
-        /* =========================================
-           DUPLICATE ARTICLE SUPPORT
-        ========================================= */
-
-        function loadDuplicate() {
-
-            const params =
-                new URLSearchParams(
-                    window.location.search
-                );
-
-            if (
-                params.get("duplicate") !== "1"
-            ) {
-                return;
-            }
+    }
 
 
-            const stored =
-                localStorage.getItem(
-                    "bj_article_duplicate"
-                );
 
+    /* =========================================================
+       DRAFT BUTTON
+    ========================================================= */
 
-            if (!stored) {
-                return;
-            }
+    document
+        .getElementById("draftBtn")
+        .addEventListener(
+            "click",
+            async function () {
 
-
-            try {
-
-                const article =
-                    JSON.parse(stored);
-
-
-                titleInput.value =
-                    article.title || "";
-
-                slugInput.value =
-                    article.slug || "";
-
-                manuallyEditedSlug = true;
-
-
-                excerptInput.value =
-                    article.excerpt || "";
-
-
-                contentInput.value =
-                    article.content || "";
-
-
-                categoryInput.value =
-                    article.category || "";
-
-
-                imageInput.value =
-                    article.image_url || "";
-
-
-                authorInput.value =
-                    article.author ||
-                    "Bibek Joshi";
-
-
-                document.getElementById(
-                    "seo_title"
-                ).value =
-                    article.seo_title || "";
-
-
-                document.getElementById(
-                    "seo_description"
-                ).value =
-                    article.seo_description || "";
-
-
-                document.getElementById(
-                    "seo_keywords"
-                ).value =
-                    article.seo_keywords || "";
-
-
-                publishedInput.checked =
+                published.checked =
                     false;
 
-
-                localStorage.removeItem(
-                    "bj_article_duplicate"
-                );
-
-
-                updateCounts();
-                updateChecklist();
-                updateSEOScore();
-
-
-                imageInput.dispatchEvent(
-                    new Event("input")
-                );
-
-
-                showMessage(
-                    "Article duplicated. Review it before publishing.",
-                    "success"
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "Duplicate loading error:",
-                    error
-                );
+                form.requestSubmit();
 
             }
-
-        }
-
-
-        /* =========================================
-           AUTHENTICATION
-        ========================================= */
-
-        async function checkAuth() {
-
-            try {
-
-                if (!window.supabaseClient) {
-
-                    showMessage(
-                        "Supabase connection could not be loaded.",
-                        "error"
-                    );
-
-                    return false;
-
-                }
+        );
 
 
-                const {
-                    data,
-                    error
-                } =
-                    await window.supabaseClient
-                        .auth
-                        .getSession();
 
+    /* =========================================================
+       PUBLISH
+    ========================================================= */
 
-                if (error) {
+    form.addEventListener(
+        "submit",
+        async function (event) {
 
-                    console.error(
-                        "Auth error:",
-                        error
-                    );
+            event.preventDefault();
 
-                    window.location.href =
-                        "login.html";
-
-                    return false;
-
-                }
-
-
-                if (!data.session) {
-
-                    window.location.href =
-                        "login.html";
-
-                    return false;
-
-                }
-
-
-                return true;
-
-            } catch (error) {
-
-                console.error(
-                    "Authentication failed:",
-                    error
-                );
-
-                window.location.href =
-                    "login.html";
-
-                return false;
-
-            }
-
-        }
-
-
-        /* =========================================
-           CREATE ARTICLE
-        ========================================= */
-
-        async function saveArticle(
-            shouldPublish
-        ) {
 
             if (!window.supabaseClient) {
 
                 showMessage(
                     "Supabase is not connected.",
-                    "error"
+                    true
                 );
 
                 return;
@@ -1652,182 +2513,182 @@ Example:
             }
 
 
-            const title =
-                titleInput.value.trim();
-
-            const slug =
-                slugInput.value.trim();
-
-            const category =
-                categoryInput.value;
-
-
-            const content =
-                contentInput.value.trim();
-
-
-            if (!title) {
+            if (!title.value.trim()) {
 
                 showMessage(
                     "Please enter an article title.",
-                    "error"
+                    true
                 );
-
-                titleInput.focus();
 
                 return;
 
             }
 
 
-            if (!slug) {
+            if (!category.value) {
 
                 showMessage(
-                    "Please enter a URL slug.",
-                    "error"
+                    "Please select a category.",
+                    true
                 );
-
-                slugInput.focus();
 
                 return;
 
             }
 
 
-            if (!category) {
+            let content;
 
-                showMessage(
-                    "Please select an article category.",
-                    "error"
-                );
 
-                categoryInput.focus();
+            if (sourceMode) {
 
-                return;
+                content =
+                    sourceEditor.value;
+
+            } else {
+
+                content =
+                    editor.innerHTML;
 
             }
 
 
-            if (!content) {
+            if (!content.trim()) {
 
                 showMessage(
                     "Please write some article content.",
-                    "error"
+                    true
                 );
-
-                contentInput.focus();
 
                 return;
 
             }
 
 
-            publishBtn.disabled = true;
-            saveDraftBtn.disabled = true;
+            publishBtn.disabled =
+                true;
 
 
             publishBtn.innerHTML =
-                `
-                <i class="fa-solid fa-spinner fa-spin"></i>
-                Saving...
-                `;
-
-
-            const article = {
-
-                title: title,
-
-                slug: slug,
-
-                category: category,
-
-                excerpt:
-                    excerptInput.value.trim() ||
-                    null,
-
-                content: content,
-
-                image_url:
-                    imageInput.value.trim() ||
-                    null,
-
-                author:
-                    authorInput.value.trim() ||
-                    "Bibek Joshi",
-
-                seo_title:
-                    document
-                        .getElementById("seo_title")
-                        .value
-                        .trim() ||
-                    null,
-
-                seo_description:
-                    document
-                        .getElementById("seo_description")
-                        .value
-                        .trim() ||
-                    null,
-
-                seo_keywords:
-                    document
-                        .getElementById("seo_keywords")
-                        .value
-                        .trim() ||
-                    null,
-
-                published:
-                    shouldPublish
-
-            };
+                '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
 
 
             try {
 
-                const {
-                    data,
-                    error
-                } =
-                    await window
-                        .supabaseClient
+
+                /* -----------------------------------------
+                   FEATURED IMAGE
+                ----------------------------------------- */
+
+                let finalImageUrl =
+                    imageUrl.value.trim() ||
+                    null;
+
+
+                if (featuredImage.files.length) {
+
+                    finalImageUrl =
+                        await uploadImage(
+                            featuredImage.files[0]
+                        );
+
+                }
+
+
+
+                /* -----------------------------------------
+                   ARTICLE DATA
+                ----------------------------------------- */
+
+                const article = {
+
+                    title:
+                        title.value.trim(),
+
+                    slug:
+                        slug.value.trim(),
+
+                    category:
+                        category.value,
+
+                    excerpt:
+                        excerpt.value.trim(),
+
+                    content:
+                        content,
+
+                    image_url:
+                        finalImageUrl,
+
+                    author:
+                        author.value.trim() ||
+                        "Bibek Joshi",
+
+                    seo_title:
+                        document
+                            .getElementById(
+                                "seo_title"
+                            )
+                            .value
+                            .trim() ||
+                        null,
+
+                    seo_description:
+                        document
+                            .getElementById(
+                                "seo_description"
+                            )
+                            .value
+                            .trim() ||
+                        null,
+
+                    seo_keywords:
+                        document
+                            .getElementById(
+                                "seo_keywords"
+                            )
+                            .value
+                            .trim() ||
+                        null,
+
+                    published:
+                        published.checked
+
+                };
+
+
+
+                /* -----------------------------------------
+                   INSERT
+                ----------------------------------------- */
+
+                const result =
+                    await window.supabaseClient
                         .from("articles")
                         .insert([article])
                         .select();
 
 
-                if (error) {
+                if (result.error) {
 
-                    console.error(
-                        "Supabase insert error:",
-                        error
-                    );
-
-
-                    showMessage(
-                        "Unable to save article: " +
-                        error.message,
-                        "error"
-                    );
-
-
-                    resetButtons();
-
-                    return;
+                    throw result.error;
 
                 }
 
 
-                console.log(
-                    "Article created:",
-                    data
+                showMessage(
+
+                    published.checked
+                        ? "Article published successfully!"
+                        : "Article saved as draft.",
+
+                    false
+
                 );
 
 
-                showMessage(
-                    shouldPublish
-                        ? "Article published successfully!"
-                        : "Article saved as draft successfully!",
-                    "success"
+                localStorage.removeItem(
+                    "bj_article_autosave"
                 );
 
 
@@ -1845,282 +2706,184 @@ Example:
             } catch (error) {
 
                 console.error(
-                    "Save article error:",
+                    "Article save error:",
                     error
                 );
 
 
                 showMessage(
                     error.message ||
-                    "Something went wrong.",
-                    "error"
+                    "Unable to save article.",
+                    true
                 );
 
 
-                resetButtons();
+                publishBtn.disabled =
+                    false;
+
+
+                publishBtn.innerHTML =
+                    '<i class="fa-solid fa-paper-plane"></i> Publish Article';
 
             }
 
         }
+    );
 
 
-        /* =========================================
-           FORM SUBMIT
-        ========================================= */
 
-        form.addEventListener(
-            "submit",
-            function (event) {
+    /* =========================================================
+       MESSAGE
+    ========================================================= */
 
-                event.preventDefault();
+    function showMessage(
+        text,
+        isError
+    ) {
 
-                saveArticle(
-                    publishedInput.checked
-                );
+        message.textContent =
+            text;
 
-            }
+
+        message.className =
+            isError
+                ? "error"
+                : "success";
+
+
+        message.style.display =
+            "block";
+
+    }
+
+
+    function hideMessage() {
+
+        message.style.display =
+            "none";
+
+    }
+
+
+
+    /* =========================================================
+       PREVIEW
+    ========================================================= */
+
+    const previewModal =
+        document.getElementById(
+            "previewModal"
         );
 
 
-        /* =========================================
-           SAVE DRAFT
-        ========================================= */
-
-        saveDraftBtn.addEventListener(
+    document
+        .getElementById("previewBtn")
+        .addEventListener(
             "click",
             function () {
 
-                publishedInput.checked = false;
+                document.getElementById(
+                    "previewTitle"
+                ).textContent =
+                    title.value ||
+                    "Article Title";
 
-                saveArticle(false);
+
+                document.getElementById(
+                    "previewExcerpt"
+                ).textContent =
+                    excerpt.value;
+
+
+                document.getElementById(
+                    "previewBody"
+                ).innerHTML =
+                    sourceMode
+                        ? sourceEditor.value
+                        : editor.innerHTML;
+
+
+                previewModal.classList.add(
+                    "open"
+                );
 
             }
         );
 
 
-        /* =========================================
-           RESET BUTTONS
-        ========================================= */
-
-        function resetButtons() {
-
-            publishBtn.disabled = false;
-
-            saveDraftBtn.disabled = false;
-
-
-            publishBtn.innerHTML =
-                `
-                <i class="fa-solid fa-paper-plane"></i>
-                Publish Article
-                `;
-
-        }
-
-
-        /* =========================================
-           MOBILE SIDEBAR
-        ========================================= */
-
-        document.addEventListener(
-            "DOMContentLoaded",
+    document
+        .getElementById("closePreview")
+        .addEventListener(
+            "click",
             function () {
 
-                const menuToggle =
-                    document.getElementById(
-                        "menuToggle"
-                    );
-
-                const sidebar =
-                    document.getElementById(
-                        "adminSidebar"
-                    );
-
-                const overlay =
-                    document.getElementById(
-                        "sidebarOverlay"
-                    );
-
-
-                function closeSidebar() {
-
-                    sidebar.classList.remove(
-                        "open"
-                    );
-
-                    overlay.classList.remove(
-                        "active"
-                    );
-
-                }
-
-
-                if (menuToggle) {
-
-                    menuToggle.addEventListener(
-                        "click",
-                        function () {
-
-                            sidebar.classList.toggle(
-                                "open"
-                            );
-
-                            overlay.classList.toggle(
-                                "active"
-                            );
-
-                        }
-                    );
-
-                }
-
-
-                if (overlay) {
-
-                    overlay.addEventListener(
-                        "click",
-                        closeSidebar
-                    );
-
-                }
-
-
-                /* DARK MODE */
-
-                const themeToggle =
-                    document.getElementById(
-                        "themeToggle"
-                    );
-
-
-                const savedTheme =
-                    localStorage.getItem(
-                        "admin-theme"
-                    );
-
-
-                if (
-                    savedTheme === "dark"
-                ) {
-
-                    document.body.classList.add(
-                        "dark-mode"
-                    );
-
-
-                    if (themeToggle) {
-
-                        themeToggle.innerHTML =
-                            `
-                            <i class="fa-solid fa-sun"></i>
-                            <span>Light Mode</span>
-                            `;
-
-                    }
-
-                }
-
-
-                if (themeToggle) {
-
-                    themeToggle.addEventListener(
-                        "click",
-                        function () {
-
-                            document.body.classList.toggle(
-                                "dark-mode"
-                            );
-
-
-                            const isDark =
-                                document.body.classList.contains(
-                                    "dark-mode"
-                                );
-
-
-                            localStorage.setItem(
-                                "admin-theme",
-                                isDark
-                                    ? "dark"
-                                    : "light"
-                            );
-
-
-                            themeToggle.innerHTML =
-                                isDark
-                                    ?
-                                    `
-                                    <i class="fa-solid fa-sun"></i>
-                                    <span>Light Mode</span>
-                                    `
-                                    :
-                                    `
-                                    <i class="fa-solid fa-moon"></i>
-                                    <span>Dark Mode</span>
-                                    `;
-
-                        }
-                    );
-
-                }
-
-
-                /* LOGOUT */
-
-                const logoutBtn =
-                    document.getElementById(
-                        "logoutBtn"
-                    );
-
-
-                if (logoutBtn) {
-
-                    logoutBtn.addEventListener(
-                        "click",
-                        async function () {
-
-                            if (
-                                window.supabaseClient
-                            ) {
-
-                                await window
-                                    .supabaseClient
-                                    .auth
-                                    .signOut();
-
-                            }
-
-
-                            window.location.href =
-                                "login.html";
-
-                        }
-                    );
-
-                }
+                previewModal.classList.remove(
+                    "open"
+                );
 
             }
         );
 
 
-        /* =========================================
-           INITIALIZE
-        ========================================= */
+    previewModal.addEventListener(
+        "click",
+        function (event) {
 
-        updateCounts();
-        updateChecklist();
-        updateSEOScore();
-        loadDuplicate();
+            if (
+                event.target ===
+                previewModal
+            ) {
+
+                previewModal.classList.remove(
+                    "open"
+                );
+
+            }
+
+        }
+    );
 
 
-        (async function () {
 
+    /* =========================================================
+       SECURITY
+    ========================================================= */
+
+    function escapeAttribute(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/"/g, "&quot;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+    }
+
+
+
+    /* =========================================================
+       START
+    ========================================================= */
+
+    (async function () {
+
+        const authenticated =
             await checkAuth();
 
-        })();
 
-    </script>
+        if (!authenticated) return;
+
+
+        restoreDraft();
+
+        updateStats();
+
+    })();
+
+});
+
+</script>
+
 
 </body>
-
 </html>

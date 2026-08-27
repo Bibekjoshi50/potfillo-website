@@ -2,387 +2,1649 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create and publish articles - Bibek Joshi Admin">
 
     <title>Create Article | Bibek Joshi</title>
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
-    <link rel="stylesheet"
-          href="admin.css">
-
+    <!-- IMPORTANT:
+         create-article.html is inside /admin/
+         admin.css is also inside /admin/
+    -->
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body class="admin-page">
 
-<script src="admin-safety.js"></script>
+    <!-- ==========================================
+         MOBILE HEADER
+    =========================================== -->
 
-<header class="admin-header">
+    <header class="mobile-header">
 
-    <div>
-        <h1>
-            <i class="fa-solid fa-pen-to-square"></i>
-            Create Article
-        </h1>
+        <button
+            type="button"
+            id="menuToggle"
+            class="menu-toggle"
+            aria-label="Open menu"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-        <p>
-            Write and publish a new article.
-        </p>
-    </div>
-
-    <div class="header-buttons">
-
-        <a href="admin.html" class="btn">
-            <i class="fa-solid fa-arrow-left"></i>
-            Dashboard
-        </a>
-
-        <a href="articles.html" class="btn">
-            Articles
-        </a>
-
-    </div>
-
-</header>
-
-
-<main class="editor-container">
-
-<form id="articleForm" class="article-editor">
-
-    <div class="editor-main">
-
-        <!-- Title -->
-
-        <div class="form-group">
-
-            <label for="title">
-                Article Title
-            </label>
-
-            <input
-                type="text"
-                id="title"
-                placeholder="Enter article title"
-                required
-            >
-
+        <div class="mobile-brand">
+            <strong>Bibek Joshi</strong>
         </div>
 
-
-        <!-- Slug -->
-
-        <div class="form-group">
-
-            <label for="slug">
-                URL Slug
-            </label>
-
-            <input
-                type="text"
-                id="slug"
-                placeholder="article-title"
-                required
-            >
-
-            <small>
-                Example:
-                cybersecurity-in-the-digital-age
-            </small>
-
-        </div>
+    </header>
 
 
-        <!-- Excerpt -->
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
 
-        <div class="form-group">
+    <aside class="admin-sidebar" id="adminSidebar">
 
-            <label for="excerpt">
-                Excerpt
-            </label>
+        <div class="sidebar-brand">
 
-            <textarea
-                id="excerpt"
-                rows="4"
-                placeholder="Short description of your article..."
-            ></textarea>
-
-        </div>
-
-
-        <!-- Content -->
-
-        <div class="form-group">
-
-            <label for="content">
-                Article Content
-            </label>
-
-            <textarea
-                id="content"
-                rows="20"
-                placeholder="Write your article here..."
-                required
-            ></textarea>
-
-            <small>
-                You can use HTML formatting inside the article.
-            </small>
-
-        </div>
-
-    </div>
-
-
-    <aside class="editor-sidebar">
-
-        <!-- Category -->
-
-        <div class="form-group">
-
-            <label for="category">
-                Category
-            </label>
-
-            <select id="category" required>
-
-                <option value="">
-                    Select Category
-                </option>
-
-                <option value="Technology">
-                    Technology
-                </option>
-
-                <option value="Cybersecurity">
-                    Cybersecurity
-                </option>
-
-                <option value="AI">
-                    AI
-                </option>
-
-                <option value="Web Development">
-                    Web Development
-                </option>
-
-                <option value="Finance">
-                    Finance
-                </option>
-
-                <option value="BSc CSIT Notes">
-                    BSc CSIT Notes
-                </option>
-
-                <option value="web3 & Blockchain">
-                    Web3 & Blockchain
-                </option>
-
-                <option value="Research">
-                    Research
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <!-- Image -->
-
-        <div class="form-group">
-
-            <label for="image_url">
-                Featured Image URL
-            </label>
-
-            <input
-                type="url"
-                id="image_url"
-                placeholder="https://..."
-            >
-
-        </div>
-
-
-        <!-- Author -->
-
-        <div class="form-group">
-
-            <label for="author">
-                Author
-            </label>
-
-            <input
-                type="text"
-                id="author"
-                value="Bibek Joshi"
-            >
-
-        </div>
-
-
-        <!-- SEO -->
-
-        <div class="seo-box">
-
-            <h3>
-                <i class="fa-solid fa-magnifying-glass"></i>
-                SEO
-            </h3>
-
-            <div class="form-group">
-
-                <label for="seo_title">
-                    SEO Title
-                </label>
-
-                <input
-                    type="text"
-                    id="seo_title"
-                    placeholder="SEO title"
-                >
-
+            <div class="brand-icon">
+                <i class="fa-solid fa-b"></i>
             </div>
 
-
-            <div class="form-group">
-
-                <label for="seo_description">
-                    SEO Description
-                </label>
-
-                <textarea
-                    id="seo_description"
-                    rows="5"
-                    placeholder="Search engine description..."
-                ></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="seo_keywords">
-                    Keywords
-                </label>
-
-                <input
-                    type="text"
-                    id="seo_keywords"
-                    placeholder="gold price, investment, finance"
-                >
-
+            <div class="brand-text">
+                <strong>Bibek Joshi</strong>
+                <span>Admin Panel</span>
             </div>
 
         </div>
 
 
-        <!-- Publish -->
+        <nav class="sidebar-nav">
 
-        <div class="publish-box">
+            <a href="admin.html" class="sidebar-link">
 
-            <label class="publish-toggle">
+                <i class="fa-solid fa-gauge-high"></i>
 
-                <input
-                    type="checkbox"
-                    id="published"
-                    checked
-                >
+                <span>Dashboard</span>
 
-                <span>
-                    Publish Article
-                </span>
+            </a>
 
-            </label>
 
+            <a href="articles.html" class="sidebar-link">
+
+                <i class="fa-solid fa-newspaper"></i>
+
+                <span>Articles</span>
+
+            </a>
+
+
+            <a
+                href="create-article.html"
+                class="sidebar-link active"
+            >
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+                <span>Create Article</span>
+
+            </a>
+
+
+            <div class="sidebar-divider"></div>
+
+
+            <a
+                href="../blog.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="sidebar-link"
+            >
+
+                <i class="fa-solid fa-globe"></i>
+
+                <span>View Website</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
 
             <button
-                type="submit"
-                id="publishBtn"
-                class="btn primary full-width">
+                type="button"
+                id="themeToggle"
+                class="sidebar-link sidebar-button"
+            >
 
-                <i class="fa-solid fa-paper-plane"></i>
+                <i class="fa-solid fa-moon"></i>
 
-                Publish Article
+                <span>Dark Mode</span>
 
             </button>
 
 
-            <div
-                id="message"
-                class="editor-message">
-            </div>
+            <button
+                type="button"
+                id="logoutBtn"
+                class="sidebar-link sidebar-button logout-link"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </button>
 
         </div>
 
     </aside>
 
-</form>
 
-</main>
+    <!-- ==========================================
+         OVERLAY
+    =========================================== -->
 
-
-<!-- Supabase Library -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-<!-- IMPORTANT:
-     create-article.html is inside /admin/
-     supabase.js is in the main portfolio folder.
--->
-
-<script src="../supabase.js"></script>
+    <div
+        id="sidebarOverlay"
+        class="sidebar-overlay"
+    ></div>
 
 
-<script>
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
 
-    // ==========================================
-    // CHECK SUPABASE CONNECTION
-    // ==========================================
+    <main class="admin-main">
 
-    if (!window.supabaseClient) {
 
-        console.error(
-            "Supabase client was not found."
+        <!-- ======================================
+             TOP BAR
+        ======================================= -->
+
+        <header class="admin-topbar">
+
+            <div>
+
+                <p class="page-label">
+                    CONTENT MANAGEMENT
+                </p>
+
+                <h1>
+                    Create Article
+                </h1>
+
+                <p class="topbar-description">
+                    Write, optimize and publish a new article.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <a
+                    href="articles.html"
+                    class="topbar-button"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Articles
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- ======================================
+             MESSAGE
+        ======================================= -->
+
+        <div
+            id="message"
+            class="editor-message"
+            role="alert"
+        ></div>
+
+
+        <!-- ======================================
+             EDITOR
+        ======================================= -->
+
+        <form
+            id="articleForm"
+            class="modern-editor"
+        >
+
+
+            <!-- ==================================
+                 LEFT COLUMN
+            =================================== -->
+
+            <div class="editor-content">
+
+
+                <!-- ARTICLE DETAILS -->
+
+                <section class="editor-card">
+
+                    <div class="editor-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                ARTICLE
+                            </span>
+
+                            <h2>
+                                Article Details
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TITLE -->
+
+                    <div class="form-group">
+
+                        <label for="title">
+                            Article Title
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="Enter your article title..."
+                            maxlength="200"
+                            required
+                        >
+
+                        <div class="field-help">
+                            <span>
+                                Write a clear and engaging headline.
+                            </span>
+
+                            <span id="titleCount">
+                                0 / 200
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- SLUG -->
+
+                    <div class="form-group">
+
+                        <label for="slug">
+                            URL Slug
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="slug-wrapper">
+
+                            <span class="slug-prefix">
+                                /blog/
+                            </span>
+
+                            <input
+                                type="text"
+                                id="slug"
+                                placeholder="article-title"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field-help">
+
+                            <span>
+                                Use lowercase words separated by hyphens.
+                            </span>
+
+                            <button
+                                type="button"
+                                id="resetSlug"
+                                class="small-link"
+                            >
+                                Auto generate
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EXCERPT -->
+
+                    <div class="form-group">
+
+                        <label for="excerpt">
+                            Excerpt
+                        </label>
+
+                        <textarea
+                            id="excerpt"
+                            rows="4"
+                            maxlength="300"
+                            placeholder="Write a short summary that will appear on your blog listing..."
+                        ></textarea>
+
+                        <div class="field-help">
+
+                            <span>
+                                Recommended: 120–160 characters.
+                            </span>
+
+                            <span id="excerptCount">
+                                0 / 300
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div class="form-group">
+
+                        <label for="content">
+
+                            Article Content
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <!-- Simple Toolbar -->
+
+                        <div class="editor-toolbar">
+
+                            <button
+                                type="button"
+                                data-tag="h2"
+                                title="Heading"
+                            >
+                                <i class="fa-solid fa-heading"></i>
+                            </button>
+
+                            <button
+                                type="button"
+                                data-tag="strong"
+                                title="Bold"
+                            >
+                                <i class="fa-solid fa-bold"></i>
+                            </button>
+
+                            <button
+                                type="button"
+                                data-tag="em"
+                                title="Italic"
+                            >
+                                <i class="fa-solid fa-italic"></i>
+                            </button>
+
+                            <button
+                                type="button"
+                                data-tag="ul"
+                                title="List"
+                            >
+                                <i class="fa-solid fa-list-ul"></i>
+                            </button>
+
+                            <button
+                                type="button"
+                                data-tag="blockquote"
+                                title="Quote"
+                            >
+                                <i class="fa-solid fa-quote-left"></i>
+                            </button>
+
+                            <span class="toolbar-divider"></span>
+
+                            <button
+                                type="button"
+                                id="insertParagraph"
+                                title="Paragraph"
+                            >
+                                <i class="fa-solid fa-paragraph"></i>
+                            </button>
+
+                        </div>
+
+
+                        <textarea
+                            id="content"
+                            rows="25"
+                            placeholder="Start writing your article...
+
+You can use HTML formatting.
+
+Example:
+<h2>Introduction</h2>
+<p>Your article content goes here...</p>"
+                            required
+                        ></textarea>
+
+
+                        <div class="content-tip">
+
+                            <i class="fa-solid fa-circle-info"></i>
+
+                            <span>
+                                HTML formatting is supported.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SEO -->
+
+                <section class="editor-card">
+
+                    <div class="editor-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                SEARCH ENGINE OPTIMIZATION
+                            </span>
+
+                            <h2>
+                                SEO Settings
+                            </h2>
+
+                        </div>
+
+                        <div class="seo-score">
+                            <span>SEO</span>
+                            <strong id="seoScore">0%</strong>
+                        </div>
+
+                    </div>
+
+
+                    <!-- SEO TITLE -->
+
+                    <div class="form-group">
+
+                        <label for="seo_title">
+                            SEO Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="seo_title"
+                            maxlength="60"
+                            placeholder="SEO optimized title..."
+                        >
+
+                        <div class="field-help">
+
+                            <span>
+                                Recommended: 50–60 characters.
+                            </span>
+
+                            <span id="seoTitleCount">
+                                0 / 60
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SEO DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="seo_description">
+                            SEO Description
+                        </label>
+
+                        <textarea
+                            id="seo_description"
+                            rows="4"
+                            maxlength="160"
+                            placeholder="Write a compelling description for search engines..."
+                        ></textarea>
+
+                        <div class="field-help">
+
+                            <span>
+                                Recommended: 140–160 characters.
+                            </span>
+
+                            <span id="seoDescriptionCount">
+                                0 / 160
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- KEYWORDS -->
+
+                    <div class="form-group">
+
+                        <label for="seo_keywords">
+                            Keywords
+                        </label>
+
+                        <input
+                            type="text"
+                            id="seo_keywords"
+                            placeholder="finance, Nepal stock market, investment"
+                        >
+
+                        <div class="field-help">
+
+                            <span>
+                                Separate keywords with commas.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- ==================================
+                 RIGHT SIDEBAR
+            =================================== -->
+
+            <aside class="editor-sidebar-new">
+
+
+                <!-- PUBLISH -->
+
+                <section class="editor-card publish-card">
+
+                    <div class="editor-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                PUBLISH
+                            </span>
+
+                            <h2>
+                                Publish Article
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="publish-status">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <strong id="statusText">
+                                Ready to publish
+                            </strong>
+
+                            <span>
+                                Your article is currently set to publish.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="publish-toggle-new">
+
+                        <input
+                            type="checkbox"
+                            id="published"
+                            checked
+                        >
+
+                        <span class="toggle-slider"></span>
+
+                        <span class="toggle-text">
+                            Publish immediately
+                        </span>
+
+                    </label>
+
+
+                    <button
+                        type="submit"
+                        id="publishBtn"
+                        class="primary-button full-width"
+                    >
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        Publish Article
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="saveDraftBtn"
+                        class="secondary-button full-width"
+                    >
+
+                        <i class="fa-solid fa-file"></i>
+
+                        Save as Draft
+
+                    </button>
+
+                </section>
+
+
+                <!-- CATEGORY -->
+
+                <section class="editor-card">
+
+                    <div class="editor-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                ORGANIZATION
+                            </span>
+
+                            <h2>
+                                Category
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Article Category
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="category"
+                            required
+                        >
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="Technology">
+                                Technology
+                            </option>
+
+                            <option value="Cybersecurity">
+                                Cybersecurity
+                            </option>
+
+                            <option value="AI">
+                                AI
+                            </option>
+
+                            <option value="Web Development">
+                                Web Development
+                            </option>
+
+                            <option value="Finance">
+                                Finance
+                            </option>
+
+                            <option value="BSc CSIT Notes">
+                                BSc CSIT Notes
+                            </option>
+
+                            <option value="Web3 & Blockchain">
+                                Web3 & Blockchain
+                            </option>
+
+                            <option value="Research">
+                                Research
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+
+                <!-- FEATURED IMAGE -->
+
+                <section class="editor-card">
+
+                    <div class="editor-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                MEDIA
+                            </span>
+
+                            <h2>
+                                Featured Image
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="image_url">
+                            Image URL
+                        </label>
+
+                        <input
+                            type="url"
+                            id="image_url"
+                            placeholder="https://example.com/image.jpg"
+                        >
+
+                    </div>
+
+
+                    <div
+                        id="imagePreview"
+                        class="image-preview"
+                    >
+
+                        <div class="image-placeholder">
+
+                            <i class="fa-regular fa-image"></i>
+
+                            <span>
+                                Image preview
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- AUTHOR -->
+
+                <section class="editor-card">
+
+                    <div class="editor-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                AUTHOR
+                            </span>
+
+                            <h2>
+                                Article Author
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="author">
+                            Author Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="author"
+                            value="Bibek Joshi"
+                        >
+
+                    </div>
+
+                </section>
+
+
+                <!-- CHECKLIST -->
+
+                <section class="editor-card checklist-card">
+
+                    <div class="editor-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                CHECKLIST
+                            </span>
+
+                            <h2>
+                                Before Publishing
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="check-item" id="checkTitle">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        <span>
+                            Article title
+                        </span>
+
+                    </div>
+
+
+                    <div class="check-item" id="checkSlug">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        <span>
+                            URL slug
+                        </span>
+
+                    </div>
+
+
+                    <div class="check-item" id="checkCategory">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        <span>
+                            Category selected
+                        </span>
+
+                    </div>
+
+
+                    <div class="check-item" id="checkContent">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        <span>
+                            Article content
+                        </span>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+        </form>
+
+    </main>
+
+
+    <!-- ==========================================
+         SUPABASE
+    =========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Supabase configuration is in main folder -->
+    <script src="../supabase.js"></script>
+
+    <!-- Admin safety -->
+    <script src="admin-safety.js"></script>
+
+
+    <!-- ==========================================
+         PAGE JAVASCRIPT
+    =========================================== -->
+
+    <script>
+
+        /* =========================================
+           ELEMENTS
+        ========================================= */
+
+        const form =
+            document.getElementById("articleForm");
+
+        const titleInput =
+            document.getElementById("title");
+
+        const slugInput =
+            document.getElementById("slug");
+
+        const excerptInput =
+            document.getElementById("excerpt");
+
+        const contentInput =
+            document.getElementById("content");
+
+        const categoryInput =
+            document.getElementById("category");
+
+        const imageInput =
+            document.getElementById("image_url");
+
+        const authorInput =
+            document.getElementById("author");
+
+        const publishedInput =
+            document.getElementById("published");
+
+        const publishBtn =
+            document.getElementById("publishBtn");
+
+        const saveDraftBtn =
+            document.getElementById("saveDraftBtn");
+
+        const message =
+            document.getElementById("message");
+
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        function showMessage(text, type) {
+
+            message.textContent = text;
+
+            message.className =
+                "editor-message " + type;
+
+            message.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+
+        /* =========================================
+           SLUG GENERATOR
+        ========================================= */
+
+        function generateSlug(text) {
+
+            return text
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9\s-]/g, "")
+                .replace(/\s+/g, "-")
+                .replace(/-+/g, "-");
+
+        }
+
+
+        let manuallyEditedSlug = false;
+
+
+        titleInput.addEventListener(
+            "input",
+            function () {
+
+                if (!manuallyEditedSlug) {
+
+                    slugInput.value =
+                        generateSlug(
+                            titleInput.value
+                        );
+
+                }
+
+                updateChecklist();
+                updateCounts();
+                updateSEOScore();
+
+            }
         );
 
-        document.getElementById("message").textContent =
-            "❌ Supabase connection could not be loaded.";
 
-    }
+        slugInput.addEventListener(
+            "input",
+            function () {
+
+                manuallyEditedSlug = true;
+
+                updateChecklist();
+
+            }
+        );
 
 
-    // ==========================================
-    // AUTH CHECK
-    // ==========================================
+        document
+            .getElementById("resetSlug")
+            .addEventListener(
+                "click",
+                function () {
 
-    async function checkAuth() {
+                    manuallyEditedSlug = false;
 
-        try {
+                    slugInput.value =
+                        generateSlug(
+                            titleInput.value
+                        );
 
-            if (!window.supabaseClient) {
+                    updateChecklist();
+
+                }
+            );
+
+
+        /* =========================================
+           CHARACTER COUNTERS
+        ========================================= */
+
+        function updateCounts() {
+
+            document.getElementById(
+                "titleCount"
+            ).textContent =
+                titleInput.value.length +
+                " / 200";
+
+
+            document.getElementById(
+                "excerptCount"
+            ).textContent =
+                excerptInput.value.length +
+                " / 300";
+
+
+            document.getElementById(
+                "seoTitleCount"
+            ).textContent =
+                document.getElementById(
+                    "seo_title"
+                ).value.length +
+                " / 60";
+
+
+            document.getElementById(
+                "seoDescriptionCount"
+            ).textContent =
+                document.getElementById(
+                    "seo_description"
+                ).value.length +
+                " / 160";
+
+        }
+
+
+        [
+            excerptInput,
+            document.getElementById("seo_title"),
+            document.getElementById("seo_description")
+        ].forEach(function (element) {
+
+            element.addEventListener(
+                "input",
+                function () {
+
+                    updateCounts();
+                    updateSEOScore();
+
+                }
+            );
+
+        });
+
+
+        /* =========================================
+           IMAGE PREVIEW
+        ========================================= */
+
+        imageInput.addEventListener(
+            "input",
+            function () {
+
+                const preview =
+                    document.getElementById(
+                        "imagePreview"
+                    );
+
+                const url =
+                    imageInput.value.trim();
+
+
+                if (!url) {
+
+                    preview.innerHTML =
+                        `
+                        <div class="image-placeholder">
+
+                            <i class="fa-regular fa-image"></i>
+
+                            <span>
+                                Image preview
+                            </span>
+
+                        </div>
+                        `;
+
+                    return;
+
+                }
+
+
+                preview.innerHTML =
+                    `
+                    <img
+                        src="${url.replace(/"/g, "&quot;")}"
+                        alt="Featured image preview"
+                        onerror="this.parentElement.innerHTML='<div class=&quot;image-placeholder error&quot;><i class=&quot;fa-solid fa-image&quot;></i><span>Unable to load image</span></div>'"
+                    >
+                    `;
+
+            }
+        );
+
+
+        /* =========================================
+           PUBLISH STATUS
+        ========================================= */
+
+        publishedInput.addEventListener(
+            "change",
+            function () {
+
+                const statusText =
+                    document.getElementById(
+                        "statusText"
+                    );
+
+
+                if (publishedInput.checked) {
+
+                    statusText.textContent =
+                        "Ready to publish";
+
+                } else {
+
+                    statusText.textContent =
+                        "Saving as draft";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           CHECKLIST
+        ========================================= */
+
+        function updateCheck(id, valid) {
+
+            const element =
+                document.getElementById(id);
+
+            if (!element) return;
+
+            const icon =
+                element.querySelector("i");
+
+
+            if (valid) {
+
+                element.classList.add("complete");
+
+                icon.className =
+                    "fa-solid fa-circle-check";
+
+            } else {
+
+                element.classList.remove(
+                    "complete"
+                );
+
+                icon.className =
+                    "fa-solid fa-circle-xmark";
+
+            }
+
+        }
+
+
+        function updateChecklist() {
+
+            updateCheck(
+                "checkTitle",
+                titleInput.value.trim().length > 0
+            );
+
+
+            updateCheck(
+                "checkSlug",
+                slugInput.value.trim().length > 0
+            );
+
+
+            updateCheck(
+                "checkCategory",
+                categoryInput.value !== ""
+            );
+
+
+            updateCheck(
+                "checkContent",
+                contentInput.value.trim().length > 0
+            );
+
+        }
+
+
+        [
+            contentInput,
+            categoryInput
+        ].forEach(function (element) {
+
+            element.addEventListener(
+                "input",
+                updateChecklist
+            );
+
+            element.addEventListener(
+                "change",
+                updateChecklist
+            );
+
+        });
+
+
+        /* =========================================
+           SEO SCORE
+        ========================================= */
+
+        function updateSEOScore() {
+
+            let score = 0;
+
+            const seoTitle =
+                document.getElementById(
+                    "seo_title"
+                ).value.trim();
+
+            const seoDescription =
+                document.getElementById(
+                    "seo_description"
+                ).value.trim();
+
+            const keywords =
+                document.getElementById(
+                    "seo_keywords"
+                ).value.trim();
+
+
+            if (seoTitle.length >= 30) {
+                score += 25;
+            }
+
+            if (
+                seoTitle.length >= 50 &&
+                seoTitle.length <= 60
+            ) {
+                score += 15;
+            }
+
+
+            if (seoDescription.length >= 100) {
+                score += 25;
+            }
+
+            if (
+                seoDescription.length >= 140 &&
+                seoDescription.length <= 160
+            ) {
+                score += 15;
+            }
+
+
+            if (keywords.length > 0) {
+                score += 20;
+            }
+
+
+            document.getElementById(
+                "seoScore"
+            ).textContent =
+                Math.min(score, 100) + "%";
+
+        }
+
+
+        /* =========================================
+           SIMPLE HTML TOOLBAR
+        ========================================= */
+
+        document
+            .querySelectorAll(
+                ".editor-toolbar button[data-tag]"
+            )
+            .forEach(function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const tag =
+                            button.dataset.tag;
+
+                        const start =
+                            contentInput.selectionStart;
+
+                        const end =
+                            contentInput.selectionEnd;
+
+                        const selected =
+                            contentInput.value.substring(
+                                start,
+                                end
+                            );
+
+
+                        let replacement;
+
+
+                        if (tag === "ul") {
+
+                            replacement =
+                                "<ul>\n" +
+                                "    <li>" +
+                                selected +
+                                "</li>\n" +
+                                "</ul>";
+
+                        } else {
+
+                            replacement =
+                                "<" +
+                                tag +
+                                ">" +
+                                selected +
+                                "</" +
+                                tag +
+                                ">";
+
+                        }
+
+
+                        contentInput.setRangeText(
+                            replacement,
+                            start,
+                            end,
+                            "end"
+                        );
+
+                        contentInput.focus();
+
+                        updateChecklist();
+
+                    }
+                );
+
+            });
+
+
+        document
+            .getElementById("insertParagraph")
+            .addEventListener(
+                "click",
+                function () {
+
+                    const start =
+                        contentInput.selectionStart;
+
+                    contentInput.setRangeText(
+                        "<p>Your paragraph here...</p>",
+                        start,
+                        start,
+                        "end"
+                    );
+
+                    contentInput.focus();
+
+                    updateChecklist();
+
+                }
+            );
+
+
+        /* =========================================
+           DUPLICATE ARTICLE SUPPORT
+        ========================================= */
+
+        function loadDuplicate() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            if (
+                params.get("duplicate") !== "1"
+            ) {
                 return;
             }
 
-            const {
-                data: {
-                    session
-                },
-                error
-            } = await window.supabaseClient.auth.getSession();
+
+            const stored =
+                localStorage.getItem(
+                    "bj_article_duplicate"
+                );
 
 
-            if (error) {
+            if (!stored) {
+                return;
+            }
+
+
+            try {
+
+                const article =
+                    JSON.parse(stored);
+
+
+                titleInput.value =
+                    article.title || "";
+
+                slugInput.value =
+                    article.slug || "";
+
+                manuallyEditedSlug = true;
+
+
+                excerptInput.value =
+                    article.excerpt || "";
+
+
+                contentInput.value =
+                    article.content || "";
+
+
+                categoryInput.value =
+                    article.category || "";
+
+
+                imageInput.value =
+                    article.image_url || "";
+
+
+                authorInput.value =
+                    article.author ||
+                    "Bibek Joshi";
+
+
+                document.getElementById(
+                    "seo_title"
+                ).value =
+                    article.seo_title || "";
+
+
+                document.getElementById(
+                    "seo_description"
+                ).value =
+                    article.seo_description || "";
+
+
+                document.getElementById(
+                    "seo_keywords"
+                ).value =
+                    article.seo_keywords || "";
+
+
+                publishedInput.checked =
+                    false;
+
+
+                localStorage.removeItem(
+                    "bj_article_duplicate"
+                );
+
+
+                updateCounts();
+                updateChecklist();
+                updateSEOScore();
+
+
+                imageInput.dispatchEvent(
+                    new Event("input")
+                );
+
+
+                showMessage(
+                    "Article duplicated. Review it before publishing.",
+                    "success"
+                );
+
+
+            } catch (error) {
 
                 console.error(
-                    "Authentication error:",
+                    "Duplicate loading error:",
                     error
+                );
+
+            }
+
+        }
+
+
+        /* =========================================
+           AUTHENTICATION
+        ========================================= */
+
+        async function checkAuth() {
+
+            try {
+
+                if (!window.supabaseClient) {
+
+                    showMessage(
+                        "Supabase connection could not be loaded.",
+                        "error"
+                    );
+
+                    return false;
+
+                }
+
+
+                const {
+                    data,
+                    error
+                } =
+                    await window.supabaseClient
+                        .auth
+                        .getSession();
+
+
+                if (error) {
+
+                    console.error(
+                        "Auth error:",
+                        error
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return false;
+
+                }
+
+
+                if (!data.session) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return false;
+
+                }
+
+
+                return true;
+
+            } catch (error) {
+
+                console.error(
+                    "Authentication failed:",
+                    error
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+
+            }
+
+        }
+
+
+        /* =========================================
+           CREATE ARTICLE
+        ========================================= */
+
+        async function saveArticle(
+            shouldPublish
+        ) {
+
+            if (!window.supabaseClient) {
+
+                showMessage(
+                    "Supabase is not connected.",
+                    "error"
                 );
 
                 return;
@@ -390,294 +1652,474 @@
             }
 
 
-            if (!session) {
+            const title =
+                titleInput.value.trim();
 
-                window.location.href =
-                    "login.html";
+            const slug =
+                slugInput.value.trim();
 
-            }
-
-        } catch (error) {
-
-            console.error(
-                "Auth check failed:",
-                error
-            );
-
-        }
-
-    }
+            const category =
+                categoryInput.value;
 
 
-    checkAuth();
+            const content =
+                contentInput.value.trim();
 
 
-    // ==========================================
-    // AUTO SLUG
-    // ==========================================
+            if (!title) {
 
-    const titleInput =
-        document.getElementById("title");
+                showMessage(
+                    "Please enter an article title.",
+                    "error"
+                );
 
-    const slugInput =
-        document.getElementById("slug");
+                titleInput.focus();
 
-
-    titleInput.addEventListener(
-        "input",
-        () => {
-
-            if (!slugInput.dataset.edited) {
-
-                slugInput.value =
-                    titleInput.value
-                        .toLowerCase()
-                        .trim()
-                        .replace(
-                            /[^a-z0-9\s-]/g,
-                            ""
-                        )
-                        .replace(
-                            /\s+/g,
-                            "-"
-                        )
-                        .replace(
-                            /-+/g,
-                            "-"
-                        );
+                return;
 
             }
 
-        }
-    );
+
+            if (!slug) {
+
+                showMessage(
+                    "Please enter a URL slug.",
+                    "error"
+                );
+
+                slugInput.focus();
+
+                return;
+
+            }
 
 
-    slugInput.addEventListener(
-        "input",
-        () => {
+            if (!category) {
 
-            slugInput.dataset.edited =
-                "true";
+                showMessage(
+                    "Please select an article category.",
+                    "error"
+                );
 
-        }
-    );
+                categoryInput.focus();
 
+                return;
 
-    // ==========================================
-    // CREATE ARTICLE
-    // ==========================================
-
-    document
-        .getElementById("articleForm")
-        .addEventListener(
-            "submit",
-            async (event) => {
-
-                event.preventDefault();
+            }
 
 
-                const button =
-                    document.getElementById(
-                        "publishBtn"
+            if (!content) {
+
+                showMessage(
+                    "Please write some article content.",
+                    "error"
+                );
+
+                contentInput.focus();
+
+                return;
+
+            }
+
+
+            publishBtn.disabled = true;
+            saveDraftBtn.disabled = true;
+
+
+            publishBtn.innerHTML =
+                `
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Saving...
+                `;
+
+
+            const article = {
+
+                title: title,
+
+                slug: slug,
+
+                category: category,
+
+                excerpt:
+                    excerptInput.value.trim() ||
+                    null,
+
+                content: content,
+
+                image_url:
+                    imageInput.value.trim() ||
+                    null,
+
+                author:
+                    authorInput.value.trim() ||
+                    "Bibek Joshi",
+
+                seo_title:
+                    document
+                        .getElementById("seo_title")
+                        .value
+                        .trim() ||
+                    null,
+
+                seo_description:
+                    document
+                        .getElementById("seo_description")
+                        .value
+                        .trim() ||
+                    null,
+
+                seo_keywords:
+                    document
+                        .getElementById("seo_keywords")
+                        .value
+                        .trim() ||
+                    null,
+
+                published:
+                    shouldPublish
+
+            };
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await window
+                        .supabaseClient
+                        .from("articles")
+                        .insert([article])
+                        .select();
+
+
+                if (error) {
+
+                    console.error(
+                        "Supabase insert error:",
+                        error
                     );
 
-                const message =
-                    document.getElementById(
-                        "message"
+
+                    showMessage(
+                        "Unable to save article: " +
+                        error.message,
+                        "error"
                     );
 
 
-                // Check Supabase
-
-                if (!window.supabaseClient) {
-
-                    message.textContent =
-                        "❌ Supabase is not connected.";
-
-                    message.className =
-                        "editor-message error";
+                    resetButtons();
 
                     return;
 
                 }
 
 
-                button.disabled = true;
-
-                button.innerHTML =
-                    `<i class="fa-solid fa-spinner fa-spin"></i>
-                     Publishing...`;
-
-
-                // ==========================================
-                // ARTICLE DATA
-                // ==========================================
-
-                const article = {
-
-                    title:
-                        titleInput.value.trim(),
-
-                    slug:
-                        slugInput.value.trim(),
-
-                    category:
-                        document
-                            .getElementById("category")
-                            .value,
-
-                    excerpt:
-                        document
-                            .getElementById("excerpt")
-                            .value
-                            .trim(),
-
-                    content:
-                        document
-                            .getElementById("content")
-                            .value,
-
-                    image_url:
-                        document
-                            .getElementById("image_url")
-                            .value
-                            .trim() || null,
-
-                    author:
-                        document
-                            .getElementById("author")
-                            .value
-                            .trim() ||
-                        "Bibek Joshi",
-
-                    seo_title:
-                        document
-                            .getElementById("seo_title")
-                            .value
-                            .trim() || null,
-
-                    seo_description:
-                        document
-                            .getElementById("seo_description")
-                            .value
-                            .trim() || null,
-
-                    seo_keywords:
-                        document
-                            .getElementById("seo_keywords")
-                            .value
-                            .trim() || null,
-
-                    published:
-                        document
-                            .getElementById("published")
-                            .checked
-
-                };
+                console.log(
+                    "Article created:",
+                    data
+                );
 
 
-                // ==========================================
-                // INSERT ARTICLE
-                // ==========================================
-
-                try {
-
-                    const {
-                        data,
-                        error
-                    } =
-                        await window
-                            .supabaseClient
-                            .from("articles")
-                            .insert([article])
-                            .select();
+                showMessage(
+                    shouldPublish
+                        ? "Article published successfully!"
+                        : "Article saved as draft successfully!",
+                    "success"
+                );
 
 
-                    if (error) {
+                setTimeout(
+                    function () {
 
-                        console.error(
-                            "Supabase error:",
-                            error
-                        );
+                        window.location.href =
+                            "articles.html";
 
-                        message.textContent =
-                            "❌ " +
-                            error.message;
-
-                        message.className =
-                            "editor-message error";
-
-                        resetButton();
-
-                        return;
-
-                    }
+                    },
+                    1200
+                );
 
 
-                    console.log(
-                        "Article created:",
-                        data
+            } catch (error) {
+
+                console.error(
+                    "Save article error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Something went wrong.",
+                    "error"
+                );
+
+
+                resetButtons();
+
+            }
+
+        }
+
+
+        /* =========================================
+           FORM SUBMIT
+        ========================================= */
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                saveArticle(
+                    publishedInput.checked
+                );
+
+            }
+        );
+
+
+        /* =========================================
+           SAVE DRAFT
+        ========================================= */
+
+        saveDraftBtn.addEventListener(
+            "click",
+            function () {
+
+                publishedInput.checked = false;
+
+                saveArticle(false);
+
+            }
+        );
+
+
+        /* =========================================
+           RESET BUTTONS
+        ========================================= */
+
+        function resetButtons() {
+
+            publishBtn.disabled = false;
+
+            saveDraftBtn.disabled = false;
+
+
+            publishBtn.innerHTML =
+                `
+                <i class="fa-solid fa-paper-plane"></i>
+                Publish Article
+                `;
+
+        }
+
+
+        /* =========================================
+           MOBILE SIDEBAR
+        ========================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const menuToggle =
+                    document.getElementById(
+                        "menuToggle"
+                    );
+
+                const sidebar =
+                    document.getElementById(
+                        "adminSidebar"
+                    );
+
+                const overlay =
+                    document.getElementById(
+                        "sidebarOverlay"
                     );
 
 
-                    message.textContent =
-                        "✅ Article published successfully!";
+                function closeSidebar() {
 
-                    message.className =
-                        "editor-message success";
-
-
-                    setTimeout(
-                        () => {
-
-                            window.location.href =
-                                "articles.html";
-
-                        },
-                        1000
+                    sidebar.classList.remove(
+                        "open"
                     );
 
-
-                } catch (error) {
-
-                    console.error(
-                        "Publishing error:",
-                        error
+                    overlay.classList.remove(
+                        "active"
                     );
-
-
-                    message.textContent =
-                        "❌ " +
-                        (error.message ||
-                         "Something went wrong.");
-
-                    message.className =
-                        "editor-message error";
-
-
-                    resetButton();
 
                 }
 
 
-                // ==========================================
-                // RESET BUTTON
-                // ==========================================
+                if (menuToggle) {
 
-                function resetButton() {
+                    menuToggle.addEventListener(
+                        "click",
+                        function () {
 
-                    button.disabled = false;
+                            sidebar.classList.toggle(
+                                "open"
+                            );
 
-                    button.innerHTML =
-                        `<i class="fa-solid fa-paper-plane"></i>
-                         Publish Article`;
+                            overlay.classList.toggle(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                if (overlay) {
+
+                    overlay.addEventListener(
+                        "click",
+                        closeSidebar
+                    );
+
+                }
+
+
+                /* DARK MODE */
+
+                const themeToggle =
+                    document.getElementById(
+                        "themeToggle"
+                    );
+
+
+                const savedTheme =
+                    localStorage.getItem(
+                        "admin-theme"
+                    );
+
+
+                if (
+                    savedTheme === "dark"
+                ) {
+
+                    document.body.classList.add(
+                        "dark-mode"
+                    );
+
+
+                    if (themeToggle) {
+
+                        themeToggle.innerHTML =
+                            `
+                            <i class="fa-solid fa-sun"></i>
+                            <span>Light Mode</span>
+                            `;
+
+                    }
+
+                }
+
+
+                if (themeToggle) {
+
+                    themeToggle.addEventListener(
+                        "click",
+                        function () {
+
+                            document.body.classList.toggle(
+                                "dark-mode"
+                            );
+
+
+                            const isDark =
+                                document.body.classList.contains(
+                                    "dark-mode"
+                                );
+
+
+                            localStorage.setItem(
+                                "admin-theme",
+                                isDark
+                                    ? "dark"
+                                    : "light"
+                            );
+
+
+                            themeToggle.innerHTML =
+                                isDark
+                                    ?
+                                    `
+                                    <i class="fa-solid fa-sun"></i>
+                                    <span>Light Mode</span>
+                                    `
+                                    :
+                                    `
+                                    <i class="fa-solid fa-moon"></i>
+                                    <span>Dark Mode</span>
+                                    `;
+
+                        }
+                    );
+
+                }
+
+
+                /* LOGOUT */
+
+                const logoutBtn =
+                    document.getElementById(
+                        "logoutBtn"
+                    );
+
+
+                if (logoutBtn) {
+
+                    logoutBtn.addEventListener(
+                        "click",
+                        async function () {
+
+                            if (
+                                window.supabaseClient
+                            ) {
+
+                                await window
+                                    .supabaseClient
+                                    .auth
+                                    .signOut();
+
+                            }
+
+
+                            window.location.href =
+                                "login.html";
+
+                        }
+                    );
 
                 }
 
             }
         );
 
-</script>
+
+        /* =========================================
+           INITIALIZE
+        ========================================= */
+
+        updateCounts();
+        updateChecklist();
+        updateSEOScore();
+        loadDuplicate();
+
+
+        (async function () {
+
+            await checkAuth();
+
+        })();
+
+    </script>
 
 </body>
 

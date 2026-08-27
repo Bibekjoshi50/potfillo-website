@@ -2,240 +2,683 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bibek Joshi Admin Dashboard">
 
     <title>Admin Dashboard | Bibek Joshi</title>
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-       
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
-    <link rel="stylesheet"
-          href="admin.css">
-             <script src="../supabase.js"></script>
-
+    <!-- IMPORTANT: admin.html and admin.css are in the same /admin/ folder -->
+    <link rel="stylesheet" href="./admin.css">
 </head>
-
 
 <body class="admin-page">
 
-<script src="admin-safety.js"></script>
+    <!-- ================================
+         SIDEBAR
+    ================================= -->
 
-<header class="admin-header">
+    <aside class="admin-sidebar" id="adminSidebar">
 
-    <div>
+        <div class="sidebar-brand">
 
-        <h1>
-            <i class="fa-solid fa-gauge-high"></i>
+            <div class="brand-logo">
+                BJ
+            </div>
 
-            Admin Dashboard
-        </h1>
+            <div class="brand-info">
+                <strong>Bibek Joshi</strong>
+                <span>Admin Panel</span>
+            </div>
 
-        <p>
-            Manage your website articles.
-        </p>
-
-    </div>
+        </div>
 
 
-    <div class="header-buttons">
+        <nav class="sidebar-nav">
 
-        <a
-            href="../blog.html"
-            target="_blank"
-            class="btn">
+            <a href="admin.html" class="sidebar-link active">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
 
-            <i class="fa-solid fa-globe"></i>
+            <a href="articles.html" class="sidebar-link">
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Articles</span>
+            </a>
 
-            View Website
+            <a href="create-article.html" class="sidebar-link">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Create Article</span>
+            </a>
 
-        </a>
+            <div class="sidebar-divider"></div>
 
+            <a
+                href="../blog.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-globe"></i>
+                <span>View Website</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                id="themeToggle"
+                class="sidebar-link sidebar-button"
+            >
+                <i class="fa-solid fa-moon"></i>
+                <span>Dark Mode</span>
+            </button>
+
+            <button
+                type="button"
+                id="logoutBtn"
+                class="sidebar-link sidebar-button logout-link"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================================
+         MOBILE HEADER
+    ================================= -->
+
+    <header class="mobile-header">
 
         <button
-            id="logoutBtn"
-            class="btn danger">
-
-            <i class="fa-solid fa-right-from-bracket"></i>
-
-            Logout
-
+            type="button"
+            id="menuToggle"
+            class="menu-toggle"
+        >
+            <i class="fa-solid fa-bars"></i>
         </button>
 
-    </div>
-
-</header>
-
-
-<main class="dashboard-container">
-
-
-    <section class="welcome-card">
-
-        <div>
-
-            <h2>
-                Welcome, Bibek 👋
-            </h2>
-
-            <p>
-                Manage your articles and publish new content.
-            </p>
-
+        <div class="mobile-brand">
+            <strong>Bibek Joshi</strong>
         </div>
 
-    </section>
+    </header>
 
 
-    <section class="dashboard-grid">
+    <!-- ================================
+         OVERLAY
+    ================================= -->
+
+    <div
+        id="sidebarOverlay"
+        class="sidebar-overlay"
+    ></div>
 
 
-        <!-- Create Article -->
+    <!-- ================================
+         MAIN
+    ================================= -->
 
-        <div class="dashboard-card">
+    <main class="admin-main">
 
-            <div class="dashboard-card-icon">
+        <!-- TOP BAR -->
 
-                <i class="fa-solid fa-pen-to-square"></i>
+        <header class="admin-topbar">
+
+            <div>
+
+                <span class="page-label">
+                    ADMINISTRATION
+                </span>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Manage your website content.
+                </p>
 
             </div>
 
-            <h3>
-                Create Article
-            </h3>
 
-            <p>
-                Write and publish a new article.
-            </p>
+            <div class="topbar-actions">
 
-            <a
-                href="create-article.html"
-                class="btn primary">
-
-                Create Article
-
-            </a>
-
-        </div>
-
-
-        <!-- Manage Articles -->
-
-        <div class="dashboard-card">
-
-            <div class="dashboard-card-icon">
-
-                <i class="fa-solid fa-newspaper"></i>
+                <a
+                    href="../blog.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="topbar-button"
+                >
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    View Website
+                </a>
 
             </div>
 
-            <h3>
-                Articles
-            </h3>
-
-            <p>
-                View, edit and delete your articles.
-            </p>
-
-            <a
-                href="articles.html"
-                class="btn primary">
-
-                View Articles
-
-            </a>
-
-        </div>
+        </header>
 
 
-        <!-- Website -->
+        <!-- ================================
+             WELCOME CARD
+        ================================= -->
 
-        <div class="dashboard-card">
+        <section class="welcome-card">
 
-            <div class="dashboard-card-icon">
+            <div class="welcome-content">
 
-                <i class="fa-solid fa-globe"></i>
+                <span class="welcome-badge">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Administrator
+                </span>
+
+                <h2>
+                    Welcome back, Bibek 👋
+                </h2>
+
+                <p>
+                    Create, manage and publish articles
+                    from your administration panel.
+                </p>
 
             </div>
 
-            <h3>
-                Website
-            </h3>
 
-            <p>
-                Visit your public portfolio and blog.
-            </p>
+            <div class="welcome-action">
 
-            <a
-                href="../index.html"
-                target="_blank"
-                class="btn">
+                <a
+                    href="create-article.html"
+                    class="primary-button"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    Create Article
+                </a>
 
-                Open Website
+            </div>
 
-            </a>
+        </section>
+
+
+        <!-- ================================
+             STATISTICS
+        ================================= -->
+
+        <section class="stats-grid">
+
+            <!-- Total -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-newspaper"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span>
+                        Total Articles
+                    </span>
+
+                    <strong id="totalArticles">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Published -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon published-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span>
+                        Published
+                    </span>
+
+                    <strong id="publishedArticles">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Draft -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon draft-icon">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span>
+                        Drafts
+                    </span>
+
+                    <strong id="draftArticles">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Monthly -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon month-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span>
+                        This Month
+                    </span>
+
+                    <strong id="monthlyArticles">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             QUICK ACTIONS
+        ================================= -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <!-- CREATE -->
+
+                <a
+                    href="create-article.html"
+                    class="quick-action-card primary-action"
+                >
+
+                    <div class="quick-action-icon">
+                        <i class="fa-solid fa-pen"></i>
+                    </div>
+
+                    <div class="quick-action-content">
+
+                        <h3>
+                            Write Article
+                        </h3>
+
+                        <p>
+                            Create and publish new content.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                </a>
+
+
+                <!-- ARTICLES -->
+
+                <a
+                    href="articles.html"
+                    class="quick-action-card"
+                >
+
+                    <div class="quick-action-icon">
+                        <i class="fa-solid fa-list"></i>
+                    </div>
+
+                    <div class="quick-action-content">
+
+                        <h3>
+                            Manage Articles
+                        </h3>
+
+                        <p>
+                            Edit, delete and manage articles.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                </a>
+
+
+                <!-- WEBSITE -->
+
+                <a
+                    href="../blog.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="quick-action-card"
+                >
+
+                    <div class="quick-action-icon">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+
+                    <div class="quick-action-content">
+
+                        <h3>
+                            Visit Website
+                        </h3>
+
+                        <p>
+                            Open your public website.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             RECENT ARTICLES
+        ================================= -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        CONTENT
+                    </span>
+
+                    <h2>
+                        Recent Articles
+                    </h2>
+
+                </div>
+
+                <a
+                    href="articles.html"
+                    class="view-all-link"
+                >
+                    View all
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <div
+                id="recentArticles"
+                class="recent-articles-container"
+            >
+
+                <div class="dashboard-loading">
+
+                    <div class="loading-spinner"></div>
+
+                    <p>
+                        Loading articles...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             ERROR
+        ================================= -->
+
+        <div
+            id="dashboardError"
+            class="dashboard-error"
+            hidden
+        >
+
+            <div class="error-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    Unable to load dashboard
+                </strong>
+
+                <p id="dashboardErrorMessage">
+                    Please try again.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="retryDashboard"
+                class="retry-button"
+            >
+                Try Again
+            </button>
 
         </div>
 
-
-    </section>
-
-</main>
+    </main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- ================================
+         TOAST
+    ================================= -->
 
-<script src="./supabase.js"></script>
+    <div
+        id="toastContainer"
+        class="toast-container"
+        aria-live="polite"
+    ></div>
 
 
-<script>
+    <!-- ================================
+         SCRIPTS
+    ================================= -->
 
-    async function checkLogin() {
+    <!-- Supabase library FIRST -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        const {
-            data: {
-                session
+    <!-- Main Supabase configuration -->
+    <script src="../supabase.js"></script>
+
+    <!-- Admin security -->
+    <script src="admin-safety.js"></script>
+
+    <!-- Dashboard JavaScript -->
+    <script src="admin.js"></script>
+
+
+    <!-- ================================
+         DASHBOARD CONTROLS
+    ================================= -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* MOBILE MENU */
+
+            const menuToggle =
+                document.getElementById("menuToggle");
+
+            const sidebar =
+                document.getElementById("adminSidebar");
+
+            const overlay =
+                document.getElementById("sidebarOverlay");
+
+
+            function closeSidebar() {
+
+                if (sidebar) {
+                    sidebar.classList.remove("open");
+                }
+
+                if (overlay) {
+                    overlay.classList.remove("active");
+                }
+
             }
-        } =
-            await window.supabaseClient
-                .auth
-                .getSession();
 
 
-        if (!session) {
+            if (menuToggle) {
 
-            window.location.href =
-                "login.html";
+                menuToggle.addEventListener(
+                    "click",
+                    function () {
 
-        }
+                        sidebar.classList.toggle("open");
 
-    }
+                        overlay.classList.toggle("active");
 
-
-    checkLogin();
-
-
-    document
-        .getElementById("logoutBtn")
-        .addEventListener(
-            "click",
-            async () => {
-
-                await window.supabaseClient
-                    .auth
-                    .signOut();
-
-                window.location.href =
-                    "login.html";
+                    }
+                );
 
             }
-        );
 
-</script>
+
+            if (overlay) {
+
+                overlay.addEventListener(
+                    "click",
+                    closeSidebar
+                );
+
+            }
+
+
+            /* CLOSE MOBILE MENU WHEN LINK CLICKED */
+
+            document
+                .querySelectorAll(".sidebar-link")
+                .forEach(function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        closeSidebar
+                    );
+
+                });
+
+
+            /* DARK MODE */
+
+            const themeToggle =
+                document.getElementById("themeToggle");
+
+
+            const savedTheme =
+                localStorage.getItem("admin-theme");
+
+
+            if (savedTheme === "dark") {
+
+                document.body.classList.add("dark-mode");
+
+                if (themeToggle) {
+
+                    themeToggle.innerHTML =
+                        '<i class="fa-solid fa-sun"></i><span>Light Mode</span>';
+
+                }
+
+            }
+
+
+            if (themeToggle) {
+
+                themeToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        document.body.classList.toggle(
+                            "dark-mode"
+                        );
+
+
+                        const isDark =
+                            document.body.classList.contains(
+                                "dark-mode"
+                            );
+
+
+                        localStorage.setItem(
+                            "admin-theme",
+                            isDark ? "dark" : "light"
+                        );
+
+
+                        themeToggle.innerHTML =
+                            isDark
+                                ? '<i class="fa-solid fa-sun"></i><span>Light Mode</span>'
+                                : '<i class="fa-solid fa-moon"></i><span>Dark Mode</span>';
+
+                    }
+                );
+
+            }
+
+        });
+
+    </script>
 
 </body>
 

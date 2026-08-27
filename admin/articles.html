@@ -1,50 +1,1504 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<meta name="description" content="Bibek Joshi Article Management">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<title>Manage Articles | Bibek Joshi</title>
 
-<<<<<<< HEAD
-    <title>Articles | Bibek Joshi</title>
-=======
-    <title>Manage Articles | Bibek Joshi</title>
->>>>>>> fcabb54eaec19c342d312a8c89e4b944101eead9
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
 
-    <link rel="stylesheet"
-<<<<<<< HEAD
-          href="admin.css">
+/* =========================================================
+   RESET
+========================================================= */
 
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #f6f7fb;
+    color: #111827;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.admin-layout {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    background: #111827;
+    color: white;
+
+    padding: 24px 16px;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 5px 10px 28px;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+
+    background: #fff;
+    color: #111827;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.brand-text strong {
+    display: block;
+    font-size: 15px;
+}
+
+.brand-text span {
+    display: block;
+    margin-top: 3px;
+
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.nav {
+    padding-top: 25px;
+}
+
+.nav-title {
+    padding: 0 12px 10px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #6b7280;
+    letter-spacing: 1px;
+}
+
+.nav a,
+.sidebar-button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px;
+
+    margin-bottom: 5px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #9ca3af;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.nav a i,
+.sidebar-button i {
+    width: 18px;
+    text-align: center;
+}
+
+.nav a:hover,
+.sidebar-button:hover {
+    background: rgba(255,255,255,.07);
+    color: white;
+}
+
+.nav a.active {
+    background: white;
+    color: #111827;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: rgba(255,255,255,.08);
+    margin: 18px 8px;
+}
+
+.logout {
+    color: #fca5a5 !important;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+
+    min-height: 100vh;
+
+    padding: 30px 35px 60px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+}
+
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
+
+.top-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 28px;
+}
+
+.page-label {
+    margin: 0 0 7px;
+
+    color: #6b7280;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.top-header h1 {
+    margin: 0;
+
+    font-size: 30px;
+    line-height: 1.2;
+
+    letter-spacing: -.7px;
+}
+
+.top-header p {
+    margin: 8px 0 0;
+
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+
+    padding: 0 16px;
+
+    border-radius: 9px;
+
+    border: 1px solid #e5e7eb;
+
+    background: white;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: .2s;
+}
+
+.btn:hover {
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: #111827;
+    color: white;
+    border-color: #111827;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: white;
+    border-color: #dc2626;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    padding: 19px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.stat-icon {
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background: #f3f4f6;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #374151;
+}
+
+.stat:nth-child(2) .stat-icon {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.stat:nth-child(3) .stat-icon {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.stat:nth-child(4) .stat-icon {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.stat span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.stat strong {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 25px;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.management-panel {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+}
+
+.toolbar {
+    padding: 18px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    gap: 12px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+}
+
+.search {
+    position: relative;
+
+    width: 320px;
+    max-width: 100%;
+}
+
+.search i {
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #9ca3af;
+}
+
+.search input {
+    width: 100%;
+
+    height: 42px;
+
+    padding: 0 14px 0 40px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #f9fafb;
+}
+
+.search input:focus {
+    background: white;
+    border-color: #9ca3af;
+}
+
+.toolbar-right {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+}
+
+.filter {
+    height: 42px;
+
+    padding: 0 12px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #374151;
+
+    outline: none;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.tabs {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    padding: 10px 18px 0;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+    position: relative;
+
+    border: 0;
+
+    background: transparent;
+
+    padding: 12px 14px;
+
+    color: #6b7280;
+
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.tab.active {
+    color: #111827;
+}
+
+.tab.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 10px;
+    right: 10px;
+    bottom: -1px;
+
+    height: 2px;
+
+    background: #111827;
+
+    border-radius: 5px;
+}
+
+.tab-count {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 21px;
+    height: 21px;
+
+    margin-left: 5px;
+
+    padding: 0 5px;
+
+    border-radius: 20px;
+
+    background: #f3f4f6;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ARTICLE LIST
+========================================================= */
+
+.article-list {
+    padding: 0;
+}
+
+.article-row {
+    display: grid;
+
+    grid-template-columns:
+        170px minmax(0, 1fr) auto;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #eef0f3;
+
+    transition: .2s;
+}
+
+.article-row:last-child {
+    border-bottom: 0;
+}
+
+.article-row:hover {
+    background: #fafafa;
+}
+
+
+/* IMAGE */
+
+.article-thumb {
+    width: 170px;
+    height: 115px;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    background: #f3f4f6;
+
+    flex-shrink: 0;
+}
+
+.article-thumb img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.article-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #9ca3af;
+
+    font-size: 30px;
+}
+
+
+/* ARTICLE INFO */
+
+.article-info {
+    min-width: 0;
+}
+
+.article-status-line {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 7px;
+
+    flex-wrap: wrap;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+
+.status.published {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.status.draft {
+    background: #fffbeb;
+    color: #b45309;
+}
+
+.category {
+    color: #6b7280;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.article-title {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 17px;
+    line-height: 1.4;
+
+    font-weight: 750;
+
+    cursor: default;
+}
+
+.article-excerpt {
+    margin: 6px 0 10px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+.article-meta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+.article-meta span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+/* ACTIONS */
+
+.article-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 6px;
+
+    align-self: center;
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    border: 1px solid #e5e7eb;
+
+    background: white;
+
+    color: #6b7280;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: .2s;
+}
+
+.icon-btn:hover {
+    background: #f9fafb;
+    color: #111827;
+}
+
+.icon-btn.view:hover {
+    color: #2563eb;
+}
+
+.icon-btn.edit:hover {
+    color: #d97706;
+}
+
+.icon-btn.delete:hover {
+    color: #dc2626;
+    border-color: #fecaca;
+    background: #fef2f2;
+}
+
+.icon-btn.duplicate:hover {
+    color: #7c3aed;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty {
+    text-align: center;
+
+    padding: 80px 20px;
+}
+
+.empty-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #f3f4f6;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #9ca3af;
+
+    font-size: 28px;
+}
+
+.empty h2 {
+    margin: 0 0 8px;
+
+    font-size: 20px;
+}
+
+.empty p {
+    margin: 0 auto 22px;
+
+    max-width: 420px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading {
+    padding: 70px 20px;
+
+    text-align: center;
+
+    color: #6b7280;
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+
+    margin: 0 auto 12px;
+
+    border: 3px solid #e5e7eb;
+    border-top-color: #111827;
+
+    border-radius: 50%;
+
+    animation: spin .7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error {
+    margin: 20px;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    background: #fef2f2;
+
+    color: #991b1b;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(17,24,39,.55);
+
+    backdrop-filter: blur(3px);
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal {
+    width: 100%;
+    max-width: 430px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-icon {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 15px;
+
+    border-radius: 50%;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.modal h2 {
+    margin: 0 0 8px;
+
+    font-size: 20px;
+}
+
+.modal p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 9px;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast-container {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    z-index: 5000;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.toast {
+    min-width: 260px;
+
+    padding: 13px 16px;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background: #111827;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.2);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    animation: toastIn .25s ease;
+}
+
+.toast.error {
+    background: #dc2626;
+}
+
+.toast.success {
+    background: #059669;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE HEADER
+========================================================= */
+
+.mobile-header {
+    display: none;
+
+    height: 64px;
+
+    padding: 0 16px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background: white;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-menu {
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+
+    background: #f3f4f6;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+}
+
+.mobile-brand {
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 900;
+
+    background: rgba(0,0,0,.45);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .article-row {
+        grid-template-columns:
+            140px minmax(0,1fr) auto;
+    }
+
+    .article-thumb {
+        width: 140px;
+        height: 100px;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+
+        transition: .25s;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.show {
+        display: block;
+    }
+
+    .mobile-header {
+        display: flex;
+    }
+
+    .main {
+        width: 100%;
+        margin-left: 0;
+
+        padding: 22px 15px 50px;
+    }
+
+    .top-header {
+        flex-direction: column;
+    }
+
+    .top-actions {
+        width: 100%;
+    }
+
+    .top-actions .btn {
+        flex: 1;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+        align-items: stretch;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .toolbar-right {
+        width: 100%;
+    }
+
+    .filter {
+        flex: 1;
+    }
+
+    .tabs {
+        overflow-x: auto;
+    }
+
+    .article-row {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+    .article-thumb {
+        width: 100%;
+        height: 190px;
+    }
+
+    .article-actions {
+        justify-content: flex-start;
+
+        padding-top: 4px;
+    }
+
+    .icon-btn {
+        width: 42px;
+        height: 38px;
+    }
+
+    .article-title {
+        font-size: 16px;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .modal-actions .btn {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark {
+    background: #0b1120;
+    color: #f3f4f6;
+}
+
+body.dark .main,
+body.dark .management-panel,
+body.dark .stat,
+body.dark .article-row,
+body.dark .btn,
+body.dark .filter,
+body.dark .icon-btn,
+body.dark .mobile-header,
+body.dark .modal {
+    background: #111827;
+}
+
+body.dark .management-panel,
+body.dark .stat,
+body.dark .article-row,
+body.dark .toolbar,
+body.dark .tabs,
+body.dark .btn,
+body.dark .filter,
+body.dark .icon-btn {
+    border-color: #1f2937;
+}
+
+body.dark .article-row:hover {
+    background: #151e2e;
+}
+
+body.dark .top-header h1,
+body.dark .article-title,
+body.dark .stat strong,
+body.dark .empty h2,
+body.dark .modal h2 {
+    color: #f9fafb;
+}
+
+body.dark .top-header p,
+body.dark .article-excerpt,
+body.dark .article-meta,
+body.dark .stat span,
+body.dark .empty p {
+    color: #9ca3af;
+}
+
+body.dark .search input {
+    background: #0f172a;
+    color: white;
+    border-color: #1f2937;
+}
+
+body.dark .search input:focus {
+    background: #111827;
+}
+
+body.dark .toolbar,
+body.dark .tabs {
+    border-color: #1f2937;
+}
+
+body.dark .tab {
+    color: #9ca3af;
+}
+
+body.dark .tab.active {
+    color: white;
+}
+
+body.dark .tab.active::after {
+    background: white;
+}
+
+body.dark .tab-count {
+    background: #1f2937;
+}
+
+body.dark .filter {
+    color: #d1d5db;
+}
+
+body.dark .btn {
+    color: #d1d5db;
+}
+
+body.dark .btn-primary {
+    background: white;
+    color: #111827;
+}
+
+body.dark .icon-btn {
+    color: #9ca3af;
+}
+
+body.dark .empty-icon {
+    background: #1f2937;
+}
+
+</style>
 </head>
 
-<body class="admin-page">
 
-<header class="admin-header">
+<body>
 
-    <div>
-        <h1>
-            <i class="fa-solid fa-newspaper"></i>
-            Articles
-        </h1>
-        <p>
-            View, edit and delete your articles.
-        </p>
+<!-- =====================================================
+     MOBILE HEADER
+===================================================== -->
+
+<header class="mobile-header">
+
+    <button
+        class="mobile-menu"
+        id="menuBtn"
+        aria-label="Open menu"
+    >
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="mobile-brand">
+        Bibek Joshi
     </div>
 
-    <div class="header-buttons">
+    <div style="width:40px;"></div>
 
-        <a href="admin.html" class="btn">
-            <i class="fa-solid fa-arrow-left"></i>
+</header>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            B
+        </div>
+
+        <div class="brand-text">
+            <strong>Bibek Joshi</strong>
+            <span>Admin Panel</span>
+        </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+        <div class="nav-title">
+            MANAGEMENT
+        </div>
+
+        <a href="admin.html">
+            <i class="fa-solid fa-gauge-high"></i>
             Dashboard
         </a>
 
-        <a href="create-article.html" class="btn primary">
+        <a href="articles.html" class="active">
+            <i class="fa-solid fa-newspaper"></i>
+            Articles
+        </a>
+
+        <a href="create-article.html">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Create Article
+        </a>
+
+
+        <div class="sidebar-divider"></div>
+
+
+        <div class="nav-title">
+            WEBSITE
+        </div>
+
+        <a
+            href="../blog.html"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="fa-solid fa-globe"></i>
+            View Website
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <button
+            type="button"
+            class="sidebar-button"
+            id="themeBtn"
+        >
+            <i class="fa-solid fa-moon"></i>
+            <span>Dark Mode</span>
+        </button>
+
+
+        <button
+            type="button"
+            class="sidebar-button logout"
+            id="logoutBtn"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+<div class="container">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="top-header">
+
+    <div>
+
+        <p class="page-label">
+            CONTENT MANAGEMENT
+        </p>
+
+        <h1>
+            Articles
+        </h1>
+
+        <p>
+            Manage, edit and publish your website articles.
+        </p>
+
+    </div>
+
+
+    <div class="top-actions">
+
+        <a
+            href="../blog.html"
+            target="_blank"
+            class="btn"
+        >
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Website
+        </a>
+
+        <a
+            href="create-article.html"
+            class="btn btn-primary"
+        >
             <i class="fa-solid fa-plus"></i>
             New Article
         </a>
@@ -54,467 +1508,1637 @@
 </header>
 
 
-<main class="articles-page">
+<!-- =====================================================
+     STATISTICS
+===================================================== -->
 
-    <div id="articlesRoot">
-        <div class="loading">
-            <i class="fa-solid fa-spinner fa-spin"></i>
-            Loading articles...
+<section class="stats">
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-newspaper"></i>
         </div>
+
+        <div>
+            <span>Total Articles</span>
+            <strong id="totalCount">0</strong>
+        </div>
+
     </div>
 
-</main>
 
+    <div class="stat">
 
-<!-- ==========================================
-     DELETE CONFIRMATION MODAL
-========================================== -->
-
-<div id="deleteModal" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(17,24,39,0.55); align-items:center; justify-content:center; padding:20px;">
-    <div style="background:#fff; border-radius:14px; max-width:420px; width:100%; padding:28px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,.3);">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size:34px; color:#dc2626; margin-bottom:14px;"></i>
-        <h2 style="margin:0 0 10px;">Delete Article?</h2>
-        <p style="color:#6b7280; margin:0 0 22px;" id="deleteModalText">
-            Are you sure you want to permanently delete this article? This action cannot be undone.
-        </p>
-        <div style="display:flex; gap:10px; justify-content:center;">
-            <button id="deleteCancelBtn" class="btn">Cancel</button>
-            <button id="deleteConfirmBtn" class="btn danger">
-                <i class="fa-solid fa-trash"></i>
-                Delete
-            </button>
+        <div class="stat-icon">
+            <i class="fa-solid fa-circle-check"></i>
         </div>
+
+        <div>
+            <span>Published</span>
+            <strong id="publishedCount">0</strong>
+        </div>
+
     </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-file-lines"></i>
+        </div>
+
+        <div>
+            <span>Drafts</span>
+            <strong id="draftCount">0</strong>
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-calendar-days"></i>
+        </div>
+
+        <div>
+            <span>This Month</span>
+            <strong id="monthCount">0</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MANAGEMENT PANEL
+===================================================== -->
+
+<section class="management-panel">
+
+
+<!-- TOOLBAR -->
+
+<div class="toolbar">
+
+    <div class="search">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search articles..."
+        >
+
+    </div>
+
+
+    <div class="toolbar-right">
+
+        <select
+            class="filter"
+            id="categoryFilter"
+        >
+            <option value="all">
+                All Categories
+            </option>
+        </select>
+
+
+        <select
+            class="filter"
+            id="sortFilter"
+        >
+
+            <option value="newest">
+                Newest First
+            </option>
+
+            <option value="oldest">
+                Oldest First
+            </option>
+
+            <option value="az">
+                Title A–Z
+            </option>
+
+            <option value="za">
+                Title Z–A
+            </option>
+
+        </select>
+
+    </div>
+
 </div>
 
 
-<!-- ==========================================
-     TOASTS
-========================================== -->
+<!-- TABS -->
 
-<div id="toastWrap" style="position:fixed; bottom:22px; right:22px; z-index:3000; display:flex; flex-direction:column; gap:10px;"></div>
-
-
-<script src="admin-safety.js"></script>
-
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- Shared Supabase configuration (same relative path as the other admin pages) -->
-<script src="../supabase.js"></script>
-
-
-<script>
-
-    // ==========================================
-    // STATE
-    // ==========================================
-
-    var allArticles = [];
-    var pendingDeleteId = null;
-
-    var root = document.getElementById("articlesRoot");
-
-
-    // ==========================================
-    // TOAST
-    // ==========================================
-
-    function showToast(message, isError) {
-        var wrap = document.getElementById("toastWrap");
-        var t = document.createElement("div");
-        t.style.cssText =
-            "background:" + (isError ? "#dc2626" : "#111827") + ";color:#fff;" +
-            "padding:12px 18px;border-radius:10px;font-size:14px;font-weight:600;" +
-            "box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transform:translateY(10px);" +
-            "transition:.25s;max-width:320px;";
-        t.textContent = (isError ? "✕ " : "✓ ") + message;
-        wrap.appendChild(t);
-        requestAnimationFrame(function () {
-            t.style.opacity = "1";
-            t.style.transform = "translateY(0)";
-        });
-        setTimeout(function () {
-            t.style.opacity = "0";
-            t.style.transform = "translateY(10px)";
-            setTimeout(function () { t.remove(); }, 250);
-        }, 2800);
-    }
-
-
-    // ==========================================
-    // ESCAPING HELPERS (never trust article content in HTML)
-    // ==========================================
-
-    function escapeHtml(str) {
-        return String(str == null ? "" : str).replace(/[&<>"']/g, function (c) {
-            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-        });
-    }
-
-    function escapeAttribute(str) {
-        return escapeHtml(str);
-    }
-
-
-    // ==========================================
-    // AUTH CHECK
-    // ==========================================
-
-    async function checkAuth() {
-        try {
-            if (!window.supabaseClient) {
-                console.error("Supabase client was not found.");
-                renderError("Unable to connect. Please refresh the page.");
-                return false;
-            }
-
-            var result = await window.supabaseClient.auth.getSession();
-            var session = result.data ? result.data.session : null;
-            var error = result.error;
-
-            if (error) {
-                console.error("Authentication error:", error);
-                window.location.href = "login.html";
-                return false;
-            }
-
-            if (!session) {
-                window.location.href = "login.html";
-                return false;
-            }
-
-            return true;
-
-        } catch (error) {
-            console.error("Auth check failed:", error);
-            window.location.href = "login.html";
-            return false;
-        }
-    }
-
-
-    // ==========================================
-    // LOAD ARTICLES
-    // ==========================================
-
-    async function loadArticles() {
-        root.innerHTML =
-            '<div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading articles...</div>';
-
-        try {
-            // Prefer newest-first by created_at. If that column doesn't
-            // exist on this table, fall back to unordered rather than
-            // showing an error for something cosmetic.
-            var response = await window.supabaseClient
-                .from("articles")
-                .select("*")
-                .order("created_at", { ascending: false });
-
-            if (response.error) {
-                console.warn("Ordered query failed, retrying without order():", response.error);
-                response = await window.supabaseClient.from("articles").select("*");
-            }
-
-            if (response.error) {
-                console.error("Failed to load articles:", response.error);
-                renderError("Unable to load articles.");
-                return;
-            }
-
-            allArticles = response.data || [];
-            renderArticles(allArticles);
-
-        } catch (error) {
-            console.error("Unexpected error loading articles:", error);
-            renderError("Please check your internet connection and try again.");
-        }
-    }
-
-
-    // ==========================================
-    // RENDER: ERROR STATE
-    // ==========================================
-
-    function renderError(message) {
-        root.innerHTML =
-            '<div class="error-box">' +
-            '<i class="fa-solid fa-triangle-exclamation"></i>&nbsp; ' +
-            escapeHtml(message) +
-            '</div>' +
-            '<button class="btn primary" id="retryBtn"><i class="fa-solid fa-rotate-right"></i> Try Again</button>';
-
-        var retryBtn = document.getElementById("retryBtn");
-        if (retryBtn) retryBtn.addEventListener("click", loadArticles);
-    }
-
-
-    // ==========================================
-    // RENDER: EMPTY STATE
-    // ==========================================
-
-    function renderEmpty() {
-        root.innerHTML =
-            '<div class="no-articles">' +
-            '<i class="fa-solid fa-inbox"></i>' +
-            '<h2>No articles yet</h2>' +
-            '<p>Create your first article and start publishing.</p>' +
-            '<a href="create-article.html" class="btn primary"><i class="fa-solid fa-plus"></i> Create Article</a>' +
-            '</div>';
-    }
-
-
-    // ==========================================
-    // RENDER: ARTICLE LIST
-    // ==========================================
-
-    function formatDate(value) {
-        if (!value) return "";
-        try {
-            var d = new Date(value);
-            if (isNaN(d.getTime())) return "";
-            return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-        } catch (e) {
-            return "";
-        }
-    }
-
-    function renderArticles(list) {
-        if (!list.length) {
-            renderEmpty();
-            return;
-        }
-
-        var html = '<div class="articles-container">';
-
-        list.forEach(function (article) {
-            var isPublished = article.published === true;
-            var statusLabel = isPublished ? "Published" : "Draft";
-            var statusClass = isPublished ? "published" : "draft";
-
-            var imageBlock = article.image_url
-                ? '<img src="' + escapeAttribute(article.image_url) + '" alt="' + escapeAttribute(article.title) + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<div class=&quot;no-image&quot;><i class=&quot;fa-solid fa-image&quot;></i></div>\'">'
-                : '<div class="no-image"><i class="fa-solid fa-image"></i></div>';
-
-            html +=
-                '<div class="article-admin-card" data-row-id="' + escapeAttribute(article.id) + '">' +
-
-                '<div class="article-image">' + imageBlock + '</div>' +
-
-                '<div class="article-info">' +
-
-                '<div class="article-top">' +
-                '<span class="status ' + statusClass + '">' + (isPublished ? "🟢" : "🟡") + ' ' + statusLabel + '</span>' +
-                (article.category ? '<span class="category">' + escapeHtml(article.category) + '</span>' : '') +
-                '</div>' +
-
-                '<h2>' + escapeHtml(article.title || "Untitled") + '</h2>' +
-
-                (article.excerpt ? '<p class="excerpt">' + escapeHtml(article.excerpt) + '</p>' : '') +
-
-                '<div class="article-meta">' +
-                (article.created_at ? '<span><i class="fa-regular fa-calendar"></i> ' + escapeHtml(formatDate(article.created_at)) + '</span>' : '') +
-                (article.author ? '<span><i class="fa-regular fa-user"></i> ' + escapeHtml(article.author) + '</span>' : '') +
-                '</div>' +
-
-                '<div class="article-actions">' +
-
-                '<a href="../blog.html" target="_blank" class="action-btn view">' +
-                '<i class="fa-solid fa-eye"></i> View' +
-                '</a>' +
-
-                '<a href="edit-article.html?id=' + encodeURIComponent(article.id) + '" class="action-btn edit">' +
-                '<i class="fa-solid fa-pen"></i> Edit' +
-                '</a>' +
-
-                '<button type="button" class="action-btn duplicate" data-duplicate-id="' + escapeAttribute(article.id) + '">' +
-                '<i class="fa-solid fa-copy"></i> Duplicate' +
-                '</button>' +
-
-                '<button type="button" class="action-btn delete" ' +
-                'data-id="' + escapeAttribute(article.id) + '" ' +
-                'data-title="' + escapeAttribute(article.title) + '">' +
-                '<i class="fa-solid fa-trash"></i> Delete' +
-                '</button>' +
-
-                '</div>' + // .article-actions
-                '</div>' + // .article-info
-                '</div>'; // .article-admin-card
-        });
-
-        html += '</div>';
-        root.innerHTML = html;
-
-        attachRowListeners();
-    }
-
-
-    // ==========================================
-    // ROW ACTION LISTENERS
-    // ==========================================
-
-    function attachRowListeners() {
-        document.querySelectorAll(".delete-btn, .action-btn.delete").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                openDeleteModal(btn.dataset.id, btn.dataset.title);
-            });
-        });
-
-        document.querySelectorAll(".action-btn.duplicate").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                duplicateArticle(btn.dataset.duplicateId);
-            });
-        });
-    }
-
-
-    // ==========================================
-    // DELETE FLOW (modal, never immediate)
-    // ==========================================
-
-    var deleteModal = document.getElementById("deleteModal");
-    var deleteModalText = document.getElementById("deleteModalText");
-
-    function openDeleteModal(id, title) {
-        pendingDeleteId = id;
-        deleteModalText.textContent =
-            'Are you sure you want to permanently delete "' + (title || "this article") + '"? This action cannot be undone.';
-        deleteModal.style.display = "flex";
-    }
-
-    function closeDeleteModal() {
-        deleteModal.style.display = "none";
-        pendingDeleteId = null;
-    }
-
-    document.getElementById("deleteCancelBtn").addEventListener("click", closeDeleteModal);
-    deleteModal.addEventListener("click", function (e) {
-        if (e.target === deleteModal) closeDeleteModal();
-    });
-
-    document.getElementById("deleteConfirmBtn").addEventListener("click", async function () {
-        if (!pendingDeleteId) return;
-
-        var confirmBtn = document.getElementById("deleteConfirmBtn");
-        confirmBtn.disabled = true;
-        confirmBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Deleting...';
-
-        try {
-            var response = await window.supabaseClient
-                .from("articles")
-                .delete()
-                .eq("id", pendingDeleteId);
-
-            if (response.error) {
-                console.error("Delete failed:", response.error);
-                showToast("Unable to delete article.", true);
-            } else {
-                showToast("Article deleted successfully.");
-                var row = document.querySelector('[data-row-id="' + CSS.escape(String(pendingDeleteId)) + '"]');
-                if (row) row.remove();
-                allArticles = allArticles.filter(function (a) { return String(a.id) !== String(pendingDeleteId); });
-                if (!allArticles.length) renderEmpty();
-            }
-
-        } catch (error) {
-            console.error("Unexpected delete error:", error);
-            showToast("Unable to delete article.", true);
-        }
-
-        confirmBtn.disabled = false;
-        confirmBtn.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
-        closeDeleteModal();
-    });
-
-
-    // ==========================================
-    // DUPLICATE (opens Create Article pre-filled
-    // via localStorage handoff — does not touch
-    // the original row, does not auto-publish)
-    // ==========================================
-
-    function duplicateArticle(id) {
-        var source = allArticles.find(function (a) { return String(a.id) === String(id); });
-        if (!source) {
-            showToast("Unable to duplicate article.", true);
-            return;
-        }
-
-        var copy = Object.assign({}, source);
-        delete copy.id;
-        delete copy.created_at;
-        copy.title = (copy.title || "Untitled") + " (Copy)";
-        copy.slug = (copy.slug || "") + "-copy";
-        copy.published = false;
-
-        try {
-            localStorage.setItem("bj_article_duplicate", JSON.stringify(copy));
-            window.location.href = "create-article.html?duplicate=1";
-        } catch (error) {
-            console.error("Could not stage duplicate:", error);
-            showToast("Unable to duplicate article.", true);
-        }
-    }
-
-
-    // ==========================================
-    // START
-    // ==========================================
-
-    (async function start() {
-        var ok = await checkAuth();
-        if (ok) loadArticles();
-    })();
-
-</script>
-
-</body>
-
-</html>
-=======
-          href="./admin.css">
-
-          <div class="article-actions">
-
-    <a
-        href="../blog.html"
-        target="_blank"
-        class="btn view-btn">
-
-        <i class="fa-solid fa-eye"></i>
-        View Website
-
-    </a>
-
-    <a
-        href="edit-article.html?id=${encodeURIComponent(article.id)}"
-        class="btn">
-
-        <i class="fa-solid fa-pen"></i>
-        Edit
-
-    </a>
+<div class="tabs">
 
     <button
-        type="button"
-        class="btn delete-btn"
-        data-id="${escapeAttribute(article.id)}"
-        data-title="${escapeAttribute(article.title)}">
+        class="tab active"
+        data-status="all"
+    >
+        All
 
-        <i class="fa-solid fa-trash"></i>
-        Delete
+        <span
+            class="tab-count"
+            id="allTabCount"
+        >
+            0
+        </span>
+
+    </button>
+
+
+    <button
+        class="tab"
+        data-status="published"
+    >
+        Published
+
+        <span
+            class="tab-count"
+            id="publishedTabCount"
+        >
+            0
+        </span>
+
+    </button>
+
+
+    <button
+        class="tab"
+        data-status="draft"
+    >
+        Drafts
+
+        <span
+            class="tab-count"
+            id="draftTabCount"
+        >
+            0
+        </span>
 
     </button>
 
 </div>
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- IMPORTANT: NO / AFTER supabase.js -->
-    <script src="supabase.js"></script>
+<!-- ARTICLE LIST -->
 
-</head>
+<div
+    class="article-list"
+    id="articleList"
+>
 
-<body>
->>>>>>> fcabb54eaec19c342d312a8c89e4b944101eead9
+    <div class="loading">
+
+        <div class="spinner"></div>
+
+        Loading articles...
+
+    </div>
+
+</div>
+
+
+</section>
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+     DELETE MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="deleteModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-icon">
+            <i class="fa-solid fa-trash"></i>
+        </div>
+
+        <h2>
+            Delete Article?
+        </h2>
+
+        <p id="deleteText">
+            Are you sure you want to permanently delete this article?
+            This action cannot be undone.
+        </p>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn"
+                id="cancelDelete"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="btn btn-danger"
+                id="confirmDelete"
+            >
+                <i class="fa-solid fa-trash"></i>
+                Delete Article
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    class="toast-container"
+    id="toastContainer"
+></div>
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../supabase.js"></script>
+
+<script src="admin-safety.js"></script>
+
+
+<script>
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let articles = [];
+
+let activeStatus = "all";
+
+let deleteId = null;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const articleList =
+    document.getElementById("articleList");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const categoryFilter =
+    document.getElementById("categoryFilter");
+
+const sortFilter =
+    document.getElementById("sortFilter");
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message, type = "success") {
+
+    const container =
+        document.getElementById("toastContainer");
+
+    const item =
+        document.createElement("div");
+
+    item.className =
+        "toast " + type;
+
+    item.textContent =
+        message;
+
+    container.appendChild(item);
+
+    setTimeout(() => {
+
+        item.style.opacity = "0";
+
+        setTimeout(() => {
+            item.remove();
+        }, 250);
+
+    }, 2800);
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(value) {
+
+    if (!value) {
+        return "No date";
+    }
+
+    const date =
+        new Date(value);
+
+    if (isNaN(date.getTime())) {
+        return "No date";
+    }
+
+    return date.toLocaleDateString(
+        undefined,
+        {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOAD ARTICLES
+========================================================= */
+
+async function loadArticles() {
+
+    if (!window.supabaseClient) {
+
+        articleList.innerHTML = `
+            <div class="error">
+                Supabase connection is unavailable.
+                Please reload the page.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    articleList.innerHTML = `
+        <div class="loading">
+            <div class="spinner"></div>
+            Loading articles...
+        </div>
+    `;
+
+
+    try {
+
+        let response =
+            await window.supabaseClient
+                .from("articles")
+                .select("*")
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        /*
+           If created_at doesn't exist,
+           load without ordering.
+        */
+
+        if (response.error) {
+
+            response =
+                await window.supabaseClient
+                    .from("articles")
+                    .select("*");
+
+        }
+
+
+        if (response.error) {
+
+            console.error(
+                response.error
+            );
+
+            articleList.innerHTML = `
+                <div class="error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Unable to load articles.
+                    <br><br>
+                    ${escapeHtml(response.error.message)}
+                </div>
+            `;
+
+            return;
+        }
+
+
+        articles =
+            response.data || [];
+
+
+        updateStatistics();
+
+        buildCategoryFilter();
+
+        renderArticles();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        articleList.innerHTML = `
+            <div class="error">
+                Unable to load articles.
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+function updateStatistics() {
+
+    const total =
+        articles.length;
+
+    const published =
+        articles.filter(
+            article =>
+                article.published === true
+        ).length;
+
+    const drafts =
+        total - published;
+
+
+    let month = 0;
+
+    const now =
+        new Date();
+
+
+    articles.forEach(article => {
+
+        if (!article.created_at) {
+            return;
+        }
+
+        const date =
+            new Date(article.created_at);
+
+        if (
+            date.getMonth() === now.getMonth() &&
+            date.getFullYear() === now.getFullYear()
+        ) {
+
+            month++;
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "totalCount"
+    ).textContent = total;
+
+
+    document.getElementById(
+        "publishedCount"
+    ).textContent = published;
+
+
+    document.getElementById(
+        "draftCount"
+    ).textContent = drafts;
+
+
+    document.getElementById(
+        "monthCount"
+    ).textContent = month;
+
+
+    document.getElementById(
+        "allTabCount"
+    ).textContent = total;
+
+
+    document.getElementById(
+        "publishedTabCount"
+    ).textContent = published;
+
+
+    document.getElementById(
+        "draftTabCount"
+    ).textContent = drafts;
+
+}
+
+
+/* =========================================================
+   CATEGORY FILTER
+========================================================= */
+
+function buildCategoryFilter() {
+
+    const categories =
+        [
+            ...new Set(
+                articles
+                    .map(
+                        article =>
+                            article.category
+                    )
+                    .filter(Boolean)
+            )
+        ]
+        .sort();
+
+
+    categoryFilter.innerHTML = `
+        <option value="all">
+            All Categories
+        </option>
+    `;
+
+
+    categories.forEach(category => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = category;
+
+        option.textContent = category;
+
+        categoryFilter.appendChild(option);
+
+    });
+
+}
+
+
+/* =========================================================
+   GET FILTERED ARTICLES
+========================================================= */
+
+function getFilteredArticles() {
+
+    let result =
+        [...articles];
+
+
+    /*
+       STATUS
+    */
+
+    if (activeStatus === "published") {
+
+        result =
+            result.filter(
+                article =>
+                    article.published === true
+            );
+
+    }
+
+
+    if (activeStatus === "draft") {
+
+        result =
+            result.filter(
+                article =>
+                    article.published !== true
+            );
+
+    }
+
+
+    /*
+       SEARCH
+    */
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    if (search) {
+
+        result =
+            result.filter(article => {
+
+                const text = [
+
+                    article.title,
+
+                    article.excerpt,
+
+                    article.category,
+
+                    article.author,
+
+                    article.slug
+
+                ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase();
+
+
+                return text.includes(search);
+
+            });
+
+    }
+
+
+    /*
+       CATEGORY
+    */
+
+    const category =
+        categoryFilter.value;
+
+
+    if (category !== "all") {
+
+        result =
+            result.filter(
+                article =>
+                    article.category === category
+            );
+
+    }
+
+
+    /*
+       SORT
+    */
+
+    const sort =
+        sortFilter.value;
+
+
+    if (sort === "newest") {
+
+        result.sort(
+            (a,b) =>
+                new Date(b.created_at || 0) -
+                new Date(a.created_at || 0)
+        );
+
+    }
+
+
+    if (sort === "oldest") {
+
+        result.sort(
+            (a,b) =>
+                new Date(a.created_at || 0) -
+                new Date(b.created_at || 0)
+        );
+
+    }
+
+
+    if (sort === "az") {
+
+        result.sort(
+            (a,b) =>
+                (a.title || "")
+                    .localeCompare(
+                        b.title || ""
+                    )
+        );
+
+    }
+
+
+    if (sort === "za") {
+
+        result.sort(
+            (a,b) =>
+                (b.title || "")
+                    .localeCompare(
+                        a.title || ""
+                    )
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderArticles() {
+
+    const list =
+        getFilteredArticles();
+
+
+    if (!list.length) {
+
+        articleList.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-file-circle-xmark"></i>
+                </div>
+
+                <h2>
+                    No articles found
+                </h2>
+
+                <p>
+                    There are no articles matching
+                    your current search or filters.
+                </p>
+
+                <a
+                    href="create-article.html"
+                    class="btn btn-primary"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    Create Article
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    articleList.innerHTML =
+        list.map(
+            createArticleRow
+        ).join("");
+
+}
+
+
+/* =========================================================
+   ARTICLE ROW
+========================================================= */
+
+function createArticleRow(article) {
+
+    const published =
+        article.published === true;
+
+
+    const statusClass =
+        published
+            ? "published"
+            : "draft";
+
+
+    const statusText =
+        published
+            ? "Published"
+            : "Draft";
+
+
+    const image =
+        article.image_url
+
+        ? `
+            <img
+                src="${escapeHtml(article.image_url)}"
+                alt="${escapeHtml(article.title || "Article")}"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div
+                class="article-thumb-placeholder"
+                style="display:none;"
+            >
+                <i class="fa-solid fa-image"></i>
+            </div>
+          `
+
+        : `
+            <div class="article-thumb-placeholder">
+                <i class="fa-solid fa-image"></i>
+            </div>
+          `;
+
+
+    return `
+
+        <article
+            class="article-row"
+            data-id="${escapeHtml(article.id)}"
+        >
+
+
+            <!-- IMAGE -->
+
+            <div class="article-thumb">
+
+                ${image}
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="article-info">
+
+                <div class="article-status-line">
+
+                    <span class="status ${statusClass}">
+
+                        <i class="fa-solid ${
+                            published
+                                ? "fa-circle-check"
+                                : "fa-file"
+                        }"></i>
+
+                        ${statusText}
+
+                    </span>
+
+
+                    ${
+                        article.category
+
+                        ? `
+                            <span class="category">
+                                ${escapeHtml(article.category)}
+                            </span>
+                          `
+
+                        : ""
+                    }
+
+                </div>
+
+
+                <h2 class="article-title">
+
+                    ${escapeHtml(
+                        article.title ||
+                        "Untitled Article"
+                    )}
+
+                </h2>
+
+
+                ${
+                    article.excerpt
+
+                    ? `
+                        <p class="article-excerpt">
+                            ${escapeHtml(
+                                article.excerpt
+                            )}
+                        </p>
+                      `
+
+                    : ""
+                }
+
+
+                <div class="article-meta">
+
+                    <span>
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        ${formatDate(
+                            article.created_at
+                        )}
+
+                    </span>
+
+
+                    ${
+                        article.author
+
+                        ? `
+                            <span>
+
+                                <i class="fa-regular fa-user"></i>
+
+                                ${escapeHtml(
+                                    article.author
+                                )}
+
+                            </span>
+                          `
+
+                        : ""
+                    }
+
+
+                    ${
+                        article.slug
+
+                        ? `
+                            <span>
+
+                                <i class="fa-solid fa-link"></i>
+
+                                /${escapeHtml(
+                                    article.slug
+                                )}
+
+                            </span>
+                          `
+
+                        : ""
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="article-actions">
+
+
+                <!-- VIEW -->
+
+                <a
+                    href="../blog.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="icon-btn view"
+                    title="View Website"
+                >
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </a>
+
+
+                <!-- EDIT -->
+
+                <a
+                    href="edit-article.html?id=${encodeURIComponent(article.id)}"
+                    class="icon-btn edit"
+                    title="Edit Article"
+                >
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </a>
+
+
+                <!-- DUPLICATE -->
+
+                <button
+                    type="button"
+                    class="icon-btn duplicate"
+                    title="Duplicate Article"
+                    onclick="duplicateArticle('${escapeHtml(article.id)}')"
+                >
+
+                    <i class="fa-solid fa-copy"></i>
+
+                </button>
+
+
+                <!-- DELETE -->
+
+                <button
+                    type="button"
+                    class="icon-btn delete"
+                    title="Delete Article"
+                    onclick="openDeleteModal('${escapeHtml(article.id)}')"
+                >
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </div>
+
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   DUPLICATE ARTICLE
+========================================================= */
+
+function duplicateArticle(id) {
+
+    const article =
+        articles.find(
+            item =>
+                String(item.id) === String(id)
+        );
+
+
+    if (!article) {
+
+        toast(
+            "Article not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const copy =
+        {
+            ...article
+        };
+
+
+    delete copy.id;
+
+    delete copy.created_at;
+
+    delete copy.updated_at;
+
+
+    copy.title =
+        (copy.title || "Untitled") +
+        " (Copy)";
+
+
+    copy.slug =
+        (copy.slug || "article") +
+        "-copy";
+
+
+    copy.published =
+        false;
+
+
+    try {
+
+        localStorage.setItem(
+            "bj_article_duplicate",
+            JSON.stringify(copy)
+        );
+
+
+        window.location.href =
+            "create-article.html?duplicate=1";
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        toast(
+            "Unable to duplicate article.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE MODAL
+========================================================= */
+
+function openDeleteModal(id) {
+
+    deleteId = id;
+
+
+    const article =
+        articles.find(
+            item =>
+                String(item.id) === String(id)
+        );
+
+
+    const title =
+        article?.title ||
+        "this article";
+
+
+    document.getElementById(
+        "deleteText"
+    ).textContent =
+
+        `Are you sure you want to permanently delete "${title}"? This action cannot be undone.`;
+
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.add("show");
+
+}
+
+
+function closeDeleteModal() {
+
+    deleteId = null;
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.remove("show");
+
+}
+
+
+/* =========================================================
+   DELETE ARTICLE
+========================================================= */
+
+async function deleteArticle() {
+
+    if (!deleteId) {
+        return;
+    }
+
+
+    const button =
+        document.getElementById(
+            "confirmDelete"
+        );
+
+
+    button.disabled = true;
+
+    button.innerHTML = `
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Deleting...
+    `;
+
+
+    try {
+
+        const response =
+            await window.supabaseClient
+                .from("articles")
+                .delete()
+                .eq("id", deleteId);
+
+
+        if (response.error) {
+
+            console.error(
+                response.error
+            );
+
+            toast(
+                response.error.message ||
+                "Unable to delete article.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        articles =
+            articles.filter(
+                article =>
+                    String(article.id) !==
+                    String(deleteId)
+            );
+
+
+        updateStatistics();
+
+        buildCategoryFilter();
+
+        renderArticles();
+
+
+        toast(
+            "Article deleted successfully."
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        toast(
+            "Unable to delete article.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.innerHTML = `
+            <i class="fa-solid fa-trash"></i>
+            Delete Article
+        `;
+
+        closeDeleteModal();
+
+    }
+
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    renderArticles
+);
+
+
+categoryFilter.addEventListener(
+    "change",
+    renderArticles
+);
+
+
+sortFilter.addEventListener(
+    "change",
+    renderArticles
+);
+
+
+/* TABS */
+
+document
+    .querySelectorAll(".tab")
+    .forEach(tab => {
+
+        tab.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(".tab")
+                    .forEach(item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                    );
+
+
+                tab.classList.add(
+                    "active"
+                );
+
+
+                activeStatus =
+                    tab.dataset.status;
+
+
+                renderArticles();
+
+            }
+        );
+
+    });
+
+
+/* DELETE */
+
+document
+    .getElementById("cancelDelete")
+    .addEventListener(
+        "click",
+        closeDeleteModal
+    );
+
+
+document
+    .getElementById("confirmDelete")
+    .addEventListener(
+        "click",
+        deleteArticle
+    );
+
+
+document
+    .getElementById("deleteModal")
+    .addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target.id ===
+                "deleteModal"
+            ) {
+
+                closeDeleteModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+const overlay =
+    document.getElementById(
+        "sidebarOverlay"
+    );
+
+
+document
+    .getElementById("menuBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            sidebar.classList.add(
+                "open"
+            );
+
+            overlay.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
+overlay.addEventListener(
+    "click",
+    () => {
+
+        sidebar.classList.remove(
+            "open"
+        );
+
+        overlay.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+const themeBtn =
+    document.getElementById(
+        "themeBtn"
+    );
+
+
+function updateThemeButton() {
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    themeBtn.innerHTML =
+        dark
+
+        ? `
+            <i class="fa-solid fa-sun"></i>
+            <span>Light Mode</span>
+          `
+
+        : `
+            <i class="fa-solid fa-moon"></i>
+            <span>Dark Mode</span>
+          `;
+
+}
+
+
+if (
+    localStorage.getItem(
+        "admin-theme"
+    ) === "dark"
+) {
+
+    document.body.classList.add(
+        "dark"
+    );
+
+}
+
+
+updateThemeButton();
+
+
+themeBtn.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "dark"
+        );
+
+
+        const dark =
+            document.body.classList.contains(
+                "dark"
+            );
+
+
+        localStorage.setItem(
+            "admin-theme",
+            dark
+                ? "dark"
+                : "light"
+        );
+
+
+        updateThemeButton();
+
+    }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+    .getElementById("logoutBtn")
+    .addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                if (
+                    window.supabaseClient
+                ) {
+
+                    await window
+                        .supabaseClient
+                        .auth
+                        .signOut();
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+            }
+
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+
+/* =========================================================
+   AUTH + START
+========================================================= */
+
+async function start() {
+
+    try {
+
+        if (
+            !window.supabaseClient
+        ) {
+
+            articleList.innerHTML = `
+                <div class="error">
+                    Supabase is not connected.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await window
+                .supabaseClient
+                .auth
+                .getSession();
+
+
+        if (error) {
+
+            console.error(error);
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        if (!data.session) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        await loadArticles();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+start();
+
+</script>
+
+</body>
+</html>

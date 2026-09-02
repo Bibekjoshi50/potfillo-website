@@ -2190,20 +2190,15 @@ async function loadArticle() {
 
         if (error) {
 
-            console.error("Update error:", error);
+            console.error(error);
 
             throw error;
 
         }
 
-        if (!data || data.length === 0) {
-            throw new Error(
-                "Article was not updated. Please check the article ID or your Supabase permissions."
-            );
-        }
 
         currentArticle =
-            data[0];
+            data;
 
 
         fillForm(data);
@@ -3112,7 +3107,8 @@ async function saveArticle(
                     "id",
                     articleId
                 )
-                .select();
+                .select()
+                .single();
 
 
         if (error) {

@@ -424,6 +424,12 @@ main hr{
     right:0%;
     animation-delay:3s;
 }
+.supabase {
+    top: 1%;
+    left: 35%;
+    right: 12%;
+    animation-delay: 4s;
+}
 
 /* ================= Animations ================= */
 

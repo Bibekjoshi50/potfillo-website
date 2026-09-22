@@ -313,19 +313,22 @@ main hr{
 /* ================= Ring ================= */
 
 .ring{
+  
+  position: absolute;
+  width: calc(var(--size) * 0.94);
+  height: calc(var(--size) * 0.94);
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.08);
+  border-top: 3px solid #4f46e5;
+  box-shadow: 0 0 12px rgba(79, 70, 229, 0.4);
+  animation: rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite,
+             pulse-glow 1.5s ease-in-out infinite;
+}
 
-    position:absolute;
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(79, 70, 229, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.7); }
 
-    width:calc(var(--size) * 0.94);
-    height:calc(var(--size) * 0.94);
-
-    border-radius:50%;
-
-    border:2px solid rgba(255,255,255,.08);
-
-    border-top:3px solid #4f46e5;
-
-    animation:rotate 12s linear infinite;
 }
 
 /* ================= Image ================= */

@@ -36,35 +36,63 @@
     <!-- Structured Data: tells Google this page IS the person "Bibek Joshi",
          which is what fixes Google showing the wrong name/title in search results -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.bibekjoshi50.com.np/#website",
+      "url": "https://www.bibekjoshi50.com.np/",
+      "name": "Bibek Joshi",
+      "alternateName": "Bibek Joshi Portfolio",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://www.bibekjoshi50.com.np/#person" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://www.bibekjoshi50.com.np/#webpage",
+      "url": "https://www.bibekjoshi50.com.np/",
+      "name": "Bibek Joshi | Front-End Developer & BSc CSIT Student, Nepal",
+      "isPartOf": { "@id": "https://www.bibekjoshi50.com.np/#website" },
+      "about": { "@id": "https://www.bibekjoshi50.com.np/#person" },
+      "mainEntity": { "@id": "https://www.bibekjoshi50.com.np/#person" }
+    },
+    {
       "@type": "Person",
+      "@id": "https://www.bibekjoshi50.com.np/#person",
       "name": "Bibek Joshi",
       "url": "https://www.bibekjoshi50.com.np/",
       "image": "https://www.bibekjoshi50.com.np/bj1.png",
       "jobTitle": "Front-End Developer",
-      "description": "BSc CSIT student at Siddhanath Science Campus, Tribhuvan University, and front-end developer.",
+      "description": "Bibek Joshi is a BSc CSIT student at Siddhanath Science Campus, Tribhuvan University, and a front-end developer and UI/UX designer from Mahendranagar, Nepal.",
+      "nationality": "Nepali",
+      "homeLocation": { "@type": "Place", "name": "Mahendranagar, Kanchanpur, Nepal" },
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Mahendranagar, Kanchanpur",
-        "addressCountry": "Nepal"
+        "addressLocality": "Mahendranagar",
+        "addressRegion": "Kanchanpur",
+        "addressCountry": "NP"
       },
-      "alumniOf": {
-        "@type": "CollegeOrUniversity",
-        "name": "Siddhanath Science Campus, Tribhuvan University"
-      },
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "Siddhanath Science Campus, Tribhuvan University" },
+        { "@type": "EducationalOrganization", "name": "Radiant Secondary School" }
+      ],
+      "knowsAbout": ["Front-End Development","HTML","CSS","JavaScript","UI/UX Design","Cybersecurity","Artificial Intelligence","Internet Governance","Research"],
       "sameAs": [
         "https://www.facebook.com/itsbibekjoshi50/",
-        "https://linkedin.com/in/bibekjoshi50",
+        "https://www.linkedin.com/in/bibekjoshi50/",
         "https://github.com/Bibekjoshi50",
         "https://x.com/bibekjoshi50",
         "https://instagram.com/bibekjoshi50",
         "https://www.youtube.com/@bibekjoshi50",
         "https://www.tiktok.com/@bibekjoshi.50",
-        "https://www.threads.com/@bibekjoshi50"
+        "https://www.threads.com/@bibekjoshi50",
+        "https://medium.com/@bibekjoshi50"
       ]
     }
-    </script>
+  ]
+}
+</script>
 </head>
 <body>
         <nav class="navbar">
